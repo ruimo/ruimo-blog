@@ -1,3 +1,2 @@
 #!/bin/sh
-docker build -t ruimo/mkdocs .
-
+docker build -t ruimo/mkdocs . &&:
