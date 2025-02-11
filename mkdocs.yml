@@ -30,4 +30,4 @@ markdown_extensions:
   - mdx_math:
       enable_dollar_delimiter: true
 extra_javascript: 
-  - http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+  - https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
