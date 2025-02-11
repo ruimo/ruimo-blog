@@ -20,5 +20,4 @@ jobs:
         run: |
           git fetch
           git branch -a
-          ./prepare.sh
           ./deploy.sh

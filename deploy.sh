@@ -1,4 +1,5 @@
 #!/bin/sh
+./prepare.sh
 export U_ID=$(id -u)
 export G_ID=$(id -g)
 docker run -it --rm \
