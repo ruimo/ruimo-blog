@@ -8,6 +8,17 @@ nav:
   - others.md
 plugins:
   - blog
+  - rss:
+      abstract_chars_count: 160  # 概要の文字数
+      date_from_meta:
+        as_creation: date        # 作成日としてmeta情報の'date'を使用
+        as_update: lastmod       # 更新日としてmeta情報の'lastmod'を使用
+      image: https://example.com/image.png  # デフォルトアイキャッチ画像
+      categories:
+        - categories
+        - tags
+      comments_path: "#__comments"  # コメントセクションへのリンク（オプション）
+      use_directory_url: true
 theme:
   custom_dir: 'docs/templates'
   language: ja
