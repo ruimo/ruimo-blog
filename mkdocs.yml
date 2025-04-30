@@ -2,10 +2,14 @@ site_name: るいもの戯れ言
 site_url: https://ruimo.github.io/ruimo-blog/
 
 nav:
-  - index.md
+  - Top: index.md
   - Blog:
     - blog/index.md
-  - others.md
+  - DIY:
+    - UV-211 アンプ製作記: https://www.ruimo.com/static/diy/tube/211/index.html
+    - ジョイスティックを作ろう: https://www.ruimo.com/static/diy/joystick/index.html
+  - Tools:
+    - tools/genbar.md
 plugins:
   - blog
   - rss:
@@ -20,6 +24,7 @@ plugins:
       comments_path: "#__comments"  # コメントセクションへのリンク（オプション）
       use_directory_url: true
 theme:
+  favicon: assets/images/favicon.ico
   custom_dir: 'docs/templates'
   language: ja
   name: material
