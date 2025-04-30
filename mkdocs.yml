@@ -8,11 +8,11 @@ nav:
   - others.md
 plugins:
   - blog
-  - social
 theme:
   custom_dir: 'docs/templates'
   language: ja
   name: material
+  custom_dir: overrides
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -28,7 +28,6 @@ theme:
     - navigation.footer
     - content.code.copy
     - navigation.indexes
-    - social
 markdown_extensions:
   - md_in_html
   - admonition
