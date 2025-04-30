@@ -1,4 +1,5 @@
 site_name: るいもの戯れ言
+site_url: https://ruimo.github.io/ruimo-blog/
 
 nav:
   - index.md
