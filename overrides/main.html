@@ -27,3 +27,17 @@
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
 {% endblock %}
+
+{% block content %}
+  <div class="md-content">
+    <div class="md-content__inner">
+      <header class="md-typeset">
+        <h1>
+          {{ page.title }}
+          <img src="assets/images/logo.gif" width="100px" style="vertical-align: bottom; float: right;">
+        </h1>
+      </header>
+      {{ page.content }}
+    </div>
+  </div>
+{% endblock %}
