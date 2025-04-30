@@ -2,7 +2,6 @@ site_name: るいもの戯れ言
 site_url: https://ruimo.github.io/ruimo-blog/
 
 nav:
-  - Top: index.md
   - Blog:
     - blog/index.md
   - DIY:
@@ -57,3 +56,5 @@ markdown_extensions:
       enable_dollar_delimiter: true
 extra_javascript: 
   - https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+extra_css:
+  - stylesheets/extra.css
