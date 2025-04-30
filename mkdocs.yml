@@ -7,6 +7,7 @@ nav:
   - others.md
 plugins:
   - blog
+  - social
 theme:
   custom_dir: 'docs/templates'
   language: ja
@@ -26,6 +27,7 @@ theme:
     - navigation.footer
     - content.code.copy
     - navigation.indexes
+    - social
 markdown_extensions:
   - md_in_html
   - admonition
