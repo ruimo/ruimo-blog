@@ -211,3 +211,61 @@ pluginがあるものの、どうもうまく動かなかったのでテンプ�
     comments: true
     image: https://ae-pic-a1.aliexpress-media.com/kf/S5b498f7963384bc3bcaa21c100f2a8faS.jpg_220x220q75.jpg_.avif
     ---
+
+## GitHub Pagesに載せる
+
+自分はGitHub Actionsでやった。このあたりは記事が沢山あるし生成AIに聞けば詳しく教えてくれる。.github/workflows/build.ymlを作成
+
+    name: ci 
+    on:
+      push:
+        branches:
+          - main
+    permissions:
+      contents: write
+    jobs:
+      deploy:
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v4
+            with:
+              fetch-depth: 0
+          - name: Configure Git Credentials
+            run: |
+              git config user.name github-actions-bot
+              git config user.email github-actions-bot@users.noreply.github.com
+          - name: gh-deploy
+            run: |
+              git fetch
+              git branch -a
+              ./prepare.sh
+              ./deploy.sh
+
+中で使っているprepare.sh:
+
+    #!/bin/sh
+    docker build -t ruimo/mkdocs .
+
+Dockerfile:
+
+    FROM squidfunk/mkdocs-material
+    RUN pip install python-markdown-math
+
+deploy.sh:
+
+    #!/bin/sh
+    export U_ID=$(id -u)
+    export G_ID=$(id -g)
+    docker run -i --rm \
+        -p 8040:8040 \
+        --user $U_ID:$G_ID \
+        --workdir="/var/home" \
+        --env HOME="/var/home" \
+        --volume="$PWD:/var/home" \
+        --volume="/etc/group:/etc/group:ro" \
+        --volume="/etc/passwd:/etc/passwd:ro" \
+        --volume="/etc/shadow:/etc/shadow:ro" ruimo/mkdocs gh-deploy
+
+[全てのファイルはこちら](https://github.com/ruimo/ruimo-blog)
+
+拡張機能として、数式を書けるようにするやつとかdark mode用の設定とかを入れてある。
