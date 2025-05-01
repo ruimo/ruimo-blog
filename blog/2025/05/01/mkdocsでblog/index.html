@@ -633,6 +633,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#github-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      GitHub Pagesに載せる
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -705,7 +714,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              このページは約2分で読めます
+                              このページは約3分で読めます
                             
                           </span>
                         </div>
@@ -916,6 +925,57 @@ comments: true
 image: https://ae-pic-a1.aliexpress-media.com/kf/S5b498f7963384bc3bcaa21c100f2a8faS.jpg_220x220q75.jpg_.avif
 ---
 </code></pre></div>
+<h2 id="github-pages">GitHub Pagesに載せる</h2>
+<p>自分はGitHub Actionsでやった。このあたりは記事が沢山あるし生成AIに聞けば詳しく教えてくれる。.github/workflows/build.ymlを作成</p>
+<div class="language-text highlight"><pre><span></span><code>name: ci 
+on:
+  push:
+    branches:
+      - main
+permissions:
+  contents: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Configure Git Credentials
+        run: |
+          git config user.name github-actions-bot
+          git config user.email github-actions-bot@users.noreply.github.com
+      - name: gh-deploy
+        run: |
+          git fetch
+          git branch -a
+          ./prepare.sh
+          ./deploy.sh
+</code></pre></div>
+<p>中で使っているprepare.sh:</p>
+<div class="language-text highlight"><pre><span></span><code>#!/bin/sh
+docker build -t ruimo/mkdocs .
+</code></pre></div>
+<p>Dockerfile:</p>
+<div class="language-text highlight"><pre><span></span><code>FROM squidfunk/mkdocs-material
+RUN pip install python-markdown-math
+</code></pre></div>
+<p>deploy.sh:</p>
+<div class="language-text highlight"><pre><span></span><code>#!/bin/sh
+export U_ID=$(id -u)
+export G_ID=$(id -g)
+docker run -i --rm \
+    -p 8040:8040 \
+    --user $U_ID:$G_ID \
+    --workdir=&quot;/var/home&quot; \
+    --env HOME=&quot;/var/home&quot; \
+    --volume=&quot;$PWD:/var/home&quot; \
+    --volume=&quot;/etc/group:/etc/group:ro&quot; \
+    --volume=&quot;/etc/passwd:/etc/passwd:ro&quot; \
+    --volume=&quot;/etc/shadow:/etc/shadow:ro&quot; ruimo/mkdocs gh-deploy
+</code></pre></div>
+<p><a href="https://github.com/ruimo/ruimo-blog">全てのファイルはこちら</a></p>
+<p>拡張機能として、数式を書けるようにするやつとかdark mode用の設定とかを入れてある。</p>
 
 
 
