@@ -568,6 +568,212 @@
     <div class="md-post__meta md-meta">
       <ul class="md-meta__list">
         <li class="md-meta__item">
+          <time datetime="2025-05-01 00:00:00+00:00">2025年5月1日</time></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              このページは約2分で読めます
+            
+          </li>
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="mkdocsblog"><a class="toclink" href="2025/05/01/mkdocs%E3%81%A7blog/">MkDocsでBlog</a></h2>
+<p>これまでのBlogは家のサーバで動かしていたのだが、そろそろGitHub Pagesで何とかできないものかと思っていた。静的コンテンツの配信だけなら何も問題無いのだが、それ以外にも以下が欲しい。</p>
+<ul>
+<li>コメント機能</li>
+<li>RSS配信</li>
+<li>OGP機能</li>
+<li>Blog以外のコンテンツも一緒に置きたい</li>
+</ul>
+<p>色々と調べてみたところ、pluginを入れれば何とかなりそうなので移行してみた。</p>
+<h3 id="material-plugin"><a class="toclink" href="2025/05/01/mkdocs%E3%81%A7blog/#material-plugin">Material Plugin</a></h3>
+<p>まずは<a href="https://squidfunk.github.io/mkdocs-material/plugins/blog/">Material Plugin</a>。mkdocsはpipでインストールしておき、以下を実行。</p>
+<div class="language-text highlight"><pre><span></span><code>mkdir blog
+mkdocs new blog
+</code></pre></div>
+<p>こんな感じのディレクトリ構成になる。</p>
+<div class="language-text highlight"><pre><span></span><code>.
+├─ docs/
+│  └─ blog/
+│     ├─ posts/
+│     └─ index.md
+└─ mkdocs.yml
+</code></pre></div>
+<p>まずは、こんな感じのmkdocs.yml</p>
+<div class="language-text highlight"><pre><span></span><code>plugins:
+  - blog
+      blog_dir: blog
+theme:
+  name: material
+  features:
+    - navigation.indexes
+nav:
+  - ...
+  - Blog:
+    - blog/index.md
+</code></pre></div>
+<p>あとはpostsの下に記事を書くと勝手に拾い上げてくれる。docs/blog/postsの下にhello-world.mdを作る。</p>
+<div class="language-text highlight"><pre><span></span><code>---
+draft: true 
+date: 2024-01-31 
+categories:
+  - Hello
+  - World
+---
+
+# Hello world!
+</code></pre></div>
+<h3 id="blog"><a class="toclink" href="2025/05/01/mkdocs%E3%81%A7blog/#blog">Blog以外のコンテンツを置く</a></h3>
+<p>docs/others.mdを作り以下のようにすると見える</p>
+<div class="language-text highlight"><pre><span></span><code>nav:
+  - Blog:
+    - blog/index.md
+  - others.md
+</code></pre></div>
+<h3 id="_1"><a class="toclink" href="2025/05/01/mkdocs%E3%81%A7blog/#_1">テンプレート</a></h3>
+<p>docs/templatesを作って、mkdocs.ymlで以下のように指定する。</p>
+<div class="language-text highlight"><pre><span></span><code>theme:
+  name: &#39;material&#39;
+  custom_dir: &#39;docs/templates&#39;
+</code></pre></div>
+<p>この下にblog-post.htmlを作っておく。とりあえず<a href="https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/blog-post.html">公式のもの</a>を拝借。</p>
+<h3 id="_2"><a class="toclink" href="2025/05/01/mkdocs%E3%81%A7blog/#_2">コメント</a></h3>
+<p><a href="https://squidfunk.github.io/mkdocs-material/setup/adding-a-comment-system/">Giscusを使ったコメント機能がある</a></p>
+<p>コメントはGitHubアカウントが必要なので、これによってコメント荒しの予防になるようだ。</p>
+<p>まず<a href="https://github.com/apps/giscus">Giscus</a>をGitHubにインストール。</p>
+<p>Blogを格納するレポジトリをGitHubに作る。今回はhttps://github.com/ruimo/ruimo-blog</p>
+<p>SettingsでFeaturesでDiscussionsをチェックして、Set up discussionsをクリック</p>
+<p><a href="https://giscus.app/ja#repository">Giscus</a>のページに行き、レポジトリを設定(ruimo/ruimo-blog)</p>
+<p>カテゴリにAnnouncementsを選択。</p>
+<p>「giscusを有効にする」にあるsnippetをコピーする。内容はこんな感じのもの。</p>
+<div class="language-text highlight"><pre><span></span><code>&lt;script src=&quot;https://giscus.app/client.js&quot;
+        data-repo=&quot;ruimo/ruimo-blog&quot;
+...
+        data-lang=&quot;ja&quot;
+        crossorigin=&quot;anonymous&quot;
+        async&gt;
+&lt;/script&gt;
+</code></pre></div>
+<p>docs/templates/partials/comments.htmlを作る。この時、<code>&lt;!-- Insert generated snippet here --&gt;</code>の部分に上記のsnippetをペーストする</p>
+<div class="language-text highlight"><pre><span></span><code>{% if page.meta.comments %}
+  &lt;h2 id=&quot;__comments&quot;&gt;{{ lang.t(&quot;meta.comments&quot;) }}&lt;/h2&gt;
+&lt;script src=&quot;https://giscus.app/client.js&quot;
+        data-repo=&quot;ruimo/ruimo-blog&quot;
+...
+        data-lang=&quot;ja&quot;
+        crossorigin=&quot;anonymous&quot;
+        async&gt;
+&lt;/script&gt;
+
+  &lt;!-- Synchronize Giscus theme with palette --&gt;
+  &lt;script&gt;
+    var giscus = document.querySelector(&quot;script[src*=giscus]&quot;)
+
+    // Set palette on initial load
+    var palette = __md_get(&quot;__palette&quot;)
+    if (palette &amp;&amp; typeof palette.color === &quot;object&quot;) {
+      var theme = palette.color.scheme === &quot;slate&quot;
+        ? &quot;transparent_dark&quot;
+        : &quot;light&quot;
+
+      // Instruct Giscus to set theme
+      giscus.setAttribute(&quot;data-theme&quot;, theme) 
+    }
+
+    // Register event handlers after documented loaded
+    document.addEventListener(&quot;DOMContentLoaded&quot;, function() {
+      var ref = document.querySelector(&quot;[data-md-component=palette]&quot;)
+      ref.addEventListener(&quot;change&quot;, function() {
+        var palette = __md_get(&quot;__palette&quot;)
+        if (palette &amp;&amp; typeof palette.color === &quot;object&quot;) {
+          var theme = palette.color.scheme === &quot;slate&quot;
+            ? &quot;transparent_dark&quot;
+            : &quot;light&quot;
+
+          // Instruct Giscus to change theme
+          var frame = document.querySelector(&quot;.giscus-frame&quot;)
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            &quot;https://giscus.app&quot;
+          )
+        }
+      })
+    })
+  &lt;/script&gt;
+{% endif %}
+</code></pre></div>
+<p>これでコメント入力欄が付く。</p>
+<h3 id="rss"><a class="toclink" href="2025/05/01/mkdocs%E3%81%A7blog/#rss">RSS</a></h3>
+<p>pluginがあるのでmkdocsに以下のように指定するだけ。</p>
+<div class="language-text highlight"><pre><span></span><code>plugins:
+  - blog
+  - rss:
+      abstract_chars_count: 160  # 概要の文字数
+      date_from_meta:
+        as_creation: date        # 作成日としてmeta情報の&#39;date&#39;を使用
+        as_update: lastmod       # 更新日としてmeta情報の&#39;lastmod&#39;を使用
+      image: https://example.com/image.png  # デフォルトアイキャッチ画像
+      categories:
+        - categories
+        - tags
+      comments_path: &quot;#__comments&quot;  # コメントセクションへのリンク（オプション）
+      use_directory_url: true
+</code></pre></div>
+<h3 id="ogp"><a class="toclink" href="2025/05/01/mkdocs%E3%81%A7blog/#ogp">OGP</a></h3>
+<p>pluginがあるものの、どうもうまく動かなかったのでテンプレートで作ってしまった。docs/templates/main.htmlを作る(生成AIに聞きながらコピペしただけなので、細かいところ間違っているかも)。</p>
+<div class="language-text highlight"><pre><span></span><code>{% extends &quot;base.html&quot; %}
+
+{% block extrahead %}
+  {{ super() }}
+  {% if page and page.meta and page.meta.image %}
+    {% set image_path = page.meta.image %}
+
+    {# URLからblogディレクトリだけを抽出 #}
+    {% set content_type = page.url.split(&#39;/&#39;)[0] if page.url.split(&#39;/&#39;)[0] else &#39;&#39; %}
+
+    {# 画像パスから不要な相対パス表記（./）を削除 #}
+    {% set clean_image_path = image_path | replace(&#39;./&#39;, &#39;&#39;) %}
+
+    {% if not image_path.startswith(&#39;/&#39;) and not image_path.startswith(&#39;http&#39;) %}
+      &lt;meta property=&quot;og:image&quot; content=&quot;{{ config.site_url }}{{ content_type }}/{{ clean_image_path }}&quot; /&gt;
+      &lt;meta name=&quot;twitter:image&quot; content=&quot;{{ config.site_url }}{{ content_type }}/{{ clean_image_path }}&quot; /&gt;
+    {% else %}
+      {# 絶対パスまたはHTTPで始まる完全なURLの場合はそのまま使用 #}
+      &lt;meta property=&quot;og:image&quot; content=&quot;{% if image_path.startswith(&#39;/&#39;) %}{{ config.site_url | replace(&#39;/&#39;, &#39;&#39;, 1) }}{% endif %}{{ image_path }}&quot; /&gt;
+      &lt;meta name=&quot;twitter:image&quot; content=&quot;{% if image_path.startswith(&#39;/&#39;) %}{{ config.site_url | replace(&#39;/&#39;, &#39;&#39;, 1) }}{% endif %}{{ image_path }}&quot; /&gt;
+    {% endif %}
+  {% else %}
+    &lt;meta property=&quot;og:image&quot; content=&quot;{{ config.site_url }}assets/images/default-ogp.png&quot; /&gt;
+    &lt;meta name=&quot;twitter:image&quot; content=&quot;{{ config.site_url }}assets/images/default-ogp.png&quot; /&gt;
+  {% endif %}
+  &lt;meta property=&quot;og:title&quot; content=&quot;{% if page.title %}{{ page.title }}{% else %}{{ config.site_name }}{% endif %}&quot; /&gt;
+  &lt;meta property=&quot;og:type&quot; content=&quot;website&quot; /&gt;
+  &lt;meta name=&quot;twitter:card&quot; content=&quot;summary_large_image&quot; /&gt;
+{% endblock %}
+</code></pre></div>
+<p>あとは記事の中で以下のようにimage:を付ければ、それをOGPとして拾ってくれる。外部イメージならこのようにURLで、内部画像ならパスを書けば良い。</p>
+<div class="language-text highlight"><pre><span></span><code>---
+date: 2025-04-30
+comments: true
+image: https://ae-pic-a1.aliexpress-media.com/kf/S5b498f7963384bc3bcaa21c100f2a8faS.jpg_220x220q75.jpg_.avif
+---
+</code></pre></div>
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
           <time datetime="2025-04-30 00:00:00+00:00">2025年4月30日</time></li>
         
         
