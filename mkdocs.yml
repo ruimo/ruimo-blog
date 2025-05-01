@@ -17,7 +17,7 @@ plugins:
       date_from_meta:
         as_creation: date        # 作成日としてmeta情報の'date'を使用
         as_update: lastmod       # 更新日としてmeta情報の'lastmod'を使用
-      image: https://example.com/image.png  # デフォルトアイキャッチ画像
+      image: https://ruimo.github.io/ruimo-blog/assets/images/logo.gif
       categories:
         - categories
         - tags
