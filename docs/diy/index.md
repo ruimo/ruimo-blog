@@ -1,5 +1,16 @@
 # DIY
 
+
+[自動電源offスイッチ](https://ruimo.github.io/auto_power_off/)
+
+[ATtiny10マイコン](https://ruimo.github.io/attiny10-blink/)
+
+[CH32V003マイコン](https://ruimo.github.io/ch32v003try/)
+
+[万能導通テスター](https://ruimo.github.io/auto_power_off/)
+
+[オーディオスイッチャー](https://ruimo.github.io/audioswitcher/)
+
 <a href="https://www.ruimo.com/static/diy/tube/211/index.html">
 <img src="https://www.ruimo.com/static/diy/tube/211/211idx.jpg">
 <br>
