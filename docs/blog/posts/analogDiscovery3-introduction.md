@@ -10,7 +10,7 @@ categories:
 
 ![Analog Discovery 3](https://f.media-amazon.com/images/I/515ardNwW4L._SL1000_.jpg)
 
-Analog Discovery 3を買ってみた。日本でも購入可能だが、最近少し円高に振れているので[本家](https://digilent.com/shop/analog-discovery-3/)で購入した。一緒に[BNC Adapter](https://digilent.com/shop/bnc-adapter-for-analog-discovery/)と[Impedance Analyzer](https://digilent.com/shop/impedance-analyzer-for-analog-discovery/)も購入。FedExなので数日で届いた。FedExの送料は$10ほど(昔は$20以上した記憶なのだが、最近安くなったのだろうか)。
+Analog Discovery 3を買ってみた。日本でも購入可能だが、最近少し円高に振れているので[本家](https://digilent.com/shop/analog-discovery-3/)で購入した。一緒に[BNC Adapter](https://digilent.com/shop/bnc-adapter-for-analog-discovery/)と[Impedance Analyzer](https://digilent.com/shop/impedance-analyzer-for-analog-discovery/)も購入。FedExなので数日で届いた。FedExの送料は```$10```ほど(昔は```$20```以上した記憶なのだが、最近安くなったのだろうか)。
 
 ## セットアップ
 
@@ -34,6 +34,6 @@ Analog Discovery 3を買ってみた。日本でも購入可能だが、最近�
      digilent.waveforms : 依存: digilent.adept.runtime (>= 2.27.9) しかし、インストールすることができません
     E: 問題を解決することができません。壊れた変更禁止パッケージがあります。
 
-```digilent.adept.runtime```というパッケージが必要みたいだが自動ではインストールされないらしい。このモジュールは[別のページ](https://lp.digilent.com/complete-adept-runtime-download)にあるので、これを先にインストールすること、WaveFormsもインストールできた。
+```digilent.adept.runtime```というパッケージが必要みたいだが自動ではインストールされないらしい。このモジュールは[別のページ](https://lp.digilent.com/complete-adept-runtime-download)にあるので、これを先にインストールすると、WaveFormsもインストールできた。
 
 [Analog Discovery 3記事一覧](/ruimo-blog/blog/category/analog-discovery-3)
