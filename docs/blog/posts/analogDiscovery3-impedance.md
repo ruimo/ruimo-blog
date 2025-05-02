@@ -1,7 +1,7 @@
 ---
 date: 2025-05-02 02:00:00
 comments: true
-image: https://f.media-amazon.com/images/I/515ardNwW4L._SL1000_.jpg
+image: https://ruimo.github.io/ruimo-blog/blog/analogDiscovery3-impedance/impedanceAnalyzer.jpg
 categories:
   - Analog Discovery 3
 ---
