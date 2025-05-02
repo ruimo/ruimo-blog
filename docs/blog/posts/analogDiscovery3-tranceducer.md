@@ -21,9 +21,9 @@ categories:
   <img src="/ruimo-blog/blog/analogDiscovery3-tranceducer/impedance.jpg" width="800" alt="クリックで拡大">
 </a>
 
-75kHzと書かれているので、このあたりでインピーダンスが最低になるのだろうと思っていたが、やはり測定器があるのはありがたい。900kHzあたりで最低になるようだ(室温25℃くらい)。多分温度がある程度上がると75kHzに近付いていくのだろう。
+75kHzと書かれているので、このあたりでインピーダンスが最低になるのだろうと思っていたが、やはり測定器があるのはありがたい。900kHzあたりで最低になるようだ(室温25℃くらい)。多分温度がある程度上がると75kHzに近付いていくのだろうか。
 
-そこで50℃に加熱してみる。
+仮定を確かめるため50℃に加熱してみる。
 
 ![50℃](analogDiscovery3-tranceducer/50.jpg)
 
@@ -33,7 +33,7 @@ categories:
   <img src="/ruimo-blog/blog/analogDiscovery3-tranceducer/impedance-50.jpg" width="800" alt="クリックで拡大">
 </a>
 
-変わらない。もしかして壊れているのかな、これ。
+変わらない。もしかして壊れているのかな、ただ、筐体の内部の方にまで温度が伝わっていないのかもしれない。通電して内部の温度を上昇させて調べてみる必要がありそうだ。
 
 [Analog Discovery 3記事一覧](/ruimo-blog/blog/category/analog-discovery-3)
 
