@@ -21,6 +21,55 @@ nav:
      - Beethoven:
        - Piano Sonata:
           - piano/Beethoven/PianoSonata/index.md
+          - piano/Beethoven/PianoSonata/no01-1/index.md
+          - piano/Beethoven/PianoSonata/no01-2/index.md
+          - piano/Beethoven/PianoSonata/no01-3/index.md
+          - piano/Beethoven/PianoSonata/no01-4/index.md
+          - piano/Beethoven/PianoSonata/no02-1/index.md
+          - piano/Beethoven/PianoSonata/no02-2/index.md
+          - piano/Beethoven/PianoSonata/no02-3/index.md
+          - piano/Beethoven/PianoSonata/no02-4/index.md
+          - piano/Beethoven/PianoSonata/no03-1/index.md
+          - piano/Beethoven/PianoSonata/no03-2/index.md
+          - piano/Beethoven/PianoSonata/no03-3/index.md
+          - piano/Beethoven/PianoSonata/no03-4/index.md
+          - piano/Beethoven/PianoSonata/no04-1/index.md
+          - piano/Beethoven/PianoSonata/no04-2/index.md
+          - piano/Beethoven/PianoSonata/no04-3/index.md
+          - piano/Beethoven/PianoSonata/no04-4/index.md
+          - piano/Beethoven/PianoSonata/no05-1/index.md
+          - piano/Beethoven/PianoSonata/no05-2/index.md
+          - piano/Beethoven/PianoSonata/no05-3/index.md
+          - piano/Beethoven/PianoSonata/no06-1/index.md
+          - piano/Beethoven/PianoSonata/no06-2/index.md
+          - piano/Beethoven/PianoSonata/no06-3/index.md
+          - piano/Beethoven/PianoSonata/no07-1/index.md
+          - piano/Beethoven/PianoSonata/no07-2/index.md
+          - piano/Beethoven/PianoSonata/no07-3/index.md
+          - piano/Beethoven/PianoSonata/no07-4/index.md
+          - piano/Beethoven/PianoSonata/no08-1/index.md
+          - piano/Beethoven/PianoSonata/no08-2/index.md
+          - piano/Beethoven/PianoSonata/no08-3/index.md
+          - piano/Beethoven/PianoSonata/no09-1/index.md
+          - piano/Beethoven/PianoSonata/no09-2/index.md
+          - piano/Beethoven/PianoSonata/no09-3/index.md
+          - piano/Beethoven/PianoSonata/no10-1/index.md
+          - piano/Beethoven/PianoSonata/no10-2/index.md
+          - piano/Beethoven/PianoSonata/no10-3/index.md
+          - piano/Beethoven/PianoSonata/no11-1/index.md
+          - piano/Beethoven/PianoSonata/no11-2/index.md
+          - piano/Beethoven/PianoSonata/no11-3/index.md
+          - piano/Beethoven/PianoSonata/no11-4/index.md
+          - piano/Beethoven/PianoSonata/no12-1/index.md
+          - piano/Beethoven/PianoSonata/no12-2/index.md
+          - piano/Beethoven/PianoSonata/no12-3/index.md
+          - piano/Beethoven/PianoSonata/no12-4/index.md
+          - piano/Beethoven/PianoSonata/no13-1/index.md
+          - piano/Beethoven/PianoSonata/no13-2/index.md
+          - piano/Beethoven/PianoSonata/no13-3/index.md
+          - piano/Beethoven/PianoSonata/no14-1/index.md
+          - piano/Beethoven/PianoSonata/no14-2/index.md
+          - piano/Beethoven/PianoSonata/no14-3/index.md
           - piano/Beethoven/PianoSonata/no15-1/index.md
           - piano/Beethoven/PianoSonata/no15-2/index.md
           - piano/Beethoven/PianoSonata/no15-3/index.md
@@ -61,6 +110,13 @@ nav:
           - piano/Beethoven/PianoSonata/no29-2/index.md
           - piano/Beethoven/PianoSonata/no29-3/index.md
           - piano/Beethoven/PianoSonata/no29-4/index.md
+     - Chopin:
+       - Nocturne:
+          - piano/Chopin/Nocturne/index.md
+       - Prelude:
+          - piano/Chopin/Prelude/index.md
+       - Piano Misc:
+          - piano/Chopin/PianoMisc/index.md
 plugins:
   - blog:
       categories: true
