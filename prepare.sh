@@ -1,2 +1,2 @@
 #!/bin/sh
-docker build -t ruimo/mkdocs .
+docker build --no-cache -t ruimo/mkdocs .

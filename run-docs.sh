@@ -9,4 +9,4 @@ docker run -it --rm \
     --volume="$PWD:/var/home" \
     --volume="/etc/group:/etc/group:ro" \
     --volume="/etc/passwd:/etc/passwd:ro" \
-    --volume="/etc/shadow:/etc/shadow:ro" ruimo/mkdocs serve -a 0.0.0.0:8040
+    --volume="/etc/shadow:/etc/shadow:ro" ruimo/mkdocs serve --verbose -a 0.0.0.0:8040
