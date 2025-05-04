@@ -73,7 +73,7 @@ plugins:
       comments_path: "#__comments"  # コメントセクションへのリンク（オプション）
 theme:
   favicon: assets/images/favicon.ico
-  custom_dir: 'docs/templates'
+  custom_dir: docs/templates
   language: ja
   name: material
   palette:
@@ -106,6 +106,5 @@ markdown_extensions:
       enable_dollar_delimiter: true
 extra_javascript: 
   - https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
-  - javascripts/extra.js
 extra_css:
   - stylesheets/extra.css
