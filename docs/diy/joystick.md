@@ -1,3 +1,7 @@
+---
+comments: true
+---
+
 # ジョイスティックを作ろう
 
 <a href="https://www.ruimo.com/static/diy/joystick/index.html">
