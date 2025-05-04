@@ -1,0 +1,12 @@
+.md-header-translate {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+#language-select {
+  background-color: transparent;
+  color: var(--md-primary-fg-color--light);
+  border: 1px solid var(--md-primary-fg-color--light);
+  border-radius: 4px;
+  padding: 4px 8px;
+}

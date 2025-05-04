@@ -2,6 +2,9 @@
 
 {% block extrahead %}
   {{ super() }}
+  <div id="google_translate_element"></div>
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script type="text/javascript" src="{{ 'javascripts/translate.js' | url }}"></script>
   {% if page and page.meta and page.meta.image %}
     {% set image_path = page.meta.image %}
     
