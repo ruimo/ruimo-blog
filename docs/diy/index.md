@@ -1,10 +1,8 @@
 # DIY
 
+[マイコン](micro-controller/index.md)
+
 [自動電源offスイッチ](https://ruimo.github.io/auto_power_off/)
-
-[ATtiny10マイコン](https://ruimo.github.io/attiny10-blink/)
-
-[CH32V003マイコン](https://ruimo.github.io/ch32v003try/)
 
 [万能導通テスター](https://ruimo.github.io/auto_power_off/)
 
