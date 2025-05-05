@@ -14,6 +14,9 @@ nav:
     - CH32V003マイコン: https://ruimo.github.io/ch32v003try/
     - 万能導通テスター: https://r8c-m1x0a.github.io/univ_tester/
     - オーディオスイッチャー: https://ruimo.github.io/audioswitcher/
+    - マイコン:
+        - diy/micro-controller/index.md
+        - diy/micro-controller/esp32/index.md
   - Tools:
     - tools/index.md
     - tools/genbar.md
