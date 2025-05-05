@@ -526,10 +526,6 @@
       
         
       
-        
-      
-        
-      
     
     
     
@@ -568,6 +564,142 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    マイコン
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            マイコン
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ESP32
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://ruimo.github.io/attiny10-blink/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Attiny10
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://ruimo.github.io/ch32v003try/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CH32V003
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
               
             
               
@@ -646,52 +778,6 @@
   
   
     <li class="md-nav__item">
-      <a href="https://ruimo.github.io/attiny10-blink/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    ATtiny10マイコン
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="https://ruimo.github.io/ch32v003try/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    CH32V003マイコン
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="https://r8c-m1x0a.github.io/univ_tester/" class="md-nav__link">
         
   
@@ -726,92 +812,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
-              
-  
-  
-  <span class="md-ellipsis">
-    マイコン
-    
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_9">
-            <span class="md-nav__icon md-icon"></span>
-            マイコン
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    ESP32
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -2156,6 +2156,16 @@ void loop() {
 </code></pre></div>
 <h3 id="usb">USBを接続</h3>
 <p>今回は<a href="https://akizukidenshi.com/catalog/g/g115673/">ESP32のDev Board</a>を使用した。これはUSBシリアルと、ダウンローダ用の回路が載っている(同等の回路を用意すれば自作も可能)。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>自作する場合は、上記の<a href="https://akizukidenshi.com/goodsaffix/esp32_devkitc_v4-sch.pdf">ESP32のDev Boardの回路図</a>を参考にすると良い。</p>
+<ul>
+<li>USBシリアルの信号線は3.3Vであること</li>
+<li>USBシリアルのTXDをESP32のRXD0に接続</li>
+<li>USBシリアルのRXDをESP32のTXD0に接続</li>
+<li>USBシリアルのDTR/RTSをトランジスタのスイッチを介してESP3のEN/IO0に接続</li>
+</ul>
+</div>
 <p>以下はLinuxの場合のUSB Serialの設定。</p>
 <p>自分のユーザをdialoutグループに追加しておく。</p>
 <div class="language-text highlight"><pre><span></span><code>sudo usermod -a -G dialout $USER
