@@ -8,31 +8,31 @@
       
       
       
-        <link rel="canonical" href="https://ruimo.github.io/ruimo-blog/blog/2025/05/02/analog-discovery-3---%E3%82%A4%E3%83%B3%E3%83%94%E3%83%BC%E3%83%80%E3%83%B3%E3%82%B9%E3%82%A2%E3%83%8A%E3%83%A9%E3%82%A4%E3%82%B6/">
+        <link rel="canonical" href="https://ruimo.github.io/ruimo-blog/diy/micro-controller/">
       
       
-        <link rel="prev" href="../analog-discovery-3/">
+        <link rel="prev" href="../joystick/">
       
       
-        <link rel="next" href="../%E8%B6%85%E9%9F%B3%E6%B3%A2%E6%8C%AF%E5%8B%95%E5%AD%90%E3%81%AE%E6%B8%AC%E5%AE%9A/">
+        <link rel="next" href="esp32/">
       
       
-        <link rel="alternate" type="application/rss+xml" title="新しいページのRSSフィード" href="../../../../../feed_rss_created.xml">
-        <link rel="alternate" type="application/rss+xml" title="更新されたページのRSSフィード" href="../../../../../feed_rss_updated.xml">
+        <link rel="alternate" type="application/rss+xml" title="新しいページのRSSフィード" href="../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="更新されたページのRSSフィード" href="../../feed_rss_updated.xml">
       
-      <link rel="icon" href="../../../../../assets/images/favicon.ico">
+      <link rel="icon" href="../../assets/images/favicon.ico">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
     
     
       
-        <title>Analog Discovery 3 - インピーダンスアナライザ - るいもの戯れ言</title>
+        <title>マイコン - るいもの戯れ言</title>
       
     
     
-      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.2afb09e1.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
       
         
-        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -51,9 +51,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -63,23 +63,12 @@
   
   <div id="google_translate_element"></div>
   <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <script type="text/javascript" src="../../../../../javascripts/translate.js"></script>
+  <script type="text/javascript" src="../../javascripts/translate.js"></script>
   
-    
-    
-    
-    
-    
-    
-    
-    
-    
-      
-      <meta property="og:image" content="https://ruimo.github.io/ruimo-blog/blog/analogDiscovery3-impedance/impedanceAnalyzer.jpg" />
-      <meta name="twitter:image" content="https://ruimo.github.io/ruimo-blog/blog/analogDiscovery3-impedance/impedanceAnalyzer.jpg" />
-    
+    <meta property="og:image" content="https://ruimo.github.io/ruimo-blog/assets/images/default-ogp.png" />
+    <meta name="twitter:image" content="https://ruimo.github.io/ruimo-blog/assets/images/default-ogp.png" />
   
-  <meta property="og:title" content="Analog Discovery 3 - インピーダンスアナライザ" />
+  <meta property="og:title" content="マイコン" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
 
@@ -102,7 +91,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#analog-discovery-3-" class="md-skip">
+        <a href="#_1" class="md-skip">
           コンテンツにスキップ
         </a>
       
@@ -118,9 +107,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="ヘッダー">
-    <a href="../../../../.." title="るいもの戯れ言" class="md-header__button md-logo" aria-label="るいもの戯れ言" data-md-component="logo">
+    <a href="../.." title="るいもの戯れ言" class="md-header__button md-logo" aria-label="るいもの戯れ言" data-md-component="logo">
       
-  <img src="../../../../../assets/images/logo.gif" alt="logo">
+  <img src="../../assets/images/logo.gif" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -131,7 +120,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            <a href="../../../../.." title="るいもの戯れ言" class="md-header__button md-logo" aria-label="るいもの戯れ言" data-md-component="logo">
+            <a href="../.." title="るいもの戯れ言" class="md-header__button md-logo" aria-label="るいもの戯れ言" data-md-component="logo">
               るいもの戯れ言
             </a>
           </span>
@@ -139,7 +128,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Analog Discovery 3 - インピーダンスアナライザ
+              マイコン
             
           </span>
         </div>
@@ -234,9 +223,7 @@
           
             
               
-                
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -245,9 +232,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="ナビゲーション" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../../.." title="るいもの戯れ言" class="md-nav__button md-logo" aria-label="るいもの戯れ言" data-md-component="logo">
+    <a href="../.." title="るいもの戯れ言" class="md-nav__button md-logo" aria-label="るいもの戯れ言" data-md-component="logo">
       
-  <img src="../../../../../assets/images/logo.gif" alt="logo">
+  <img src="../../assets/images/logo.gif" alt="logo">
 
     </a>
     るいもの戯れ言
@@ -262,7 +249,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -281,8 +268,6 @@
       
   
   
-    
-  
   
   
     
@@ -300,15 +285,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../" class="md-nav__link ">
+            <a href="../../blog/" class="md-nav__link ">
               
   
   
@@ -327,7 +312,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Blog
@@ -387,7 +372,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../archive/2025/" class="md-nav__link">
+      <a href="../../blog/archive/2025/" class="md-nav__link">
         
   
   
@@ -464,7 +449,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../category/analog-discovery-3/" class="md-nav__link">
+      <a href="../../blog/category/analog-discovery-3/" class="md-nav__link">
         
   
   
@@ -489,7 +474,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../category/%E8%B6%85%E9%9F%B3%E6%B3%A2%E6%B4%97%E6%B5%84%E5%99%A8/" class="md-nav__link">
+      <a href="../../blog/category/%E8%B6%85%E9%9F%B3%E6%B3%A2%E6%B4%97%E6%B5%84%E5%99%A8/" class="md-nav__link">
         
   
   
@@ -524,6 +509,8 @@
       
   
   
+    
+  
   
   
     
@@ -553,15 +540,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../../diy/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -580,7 +567,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             DIY
@@ -596,7 +583,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../diy/uv211/" class="md-nav__link">
+      <a href="../uv211/" class="md-nav__link">
         
   
   
@@ -619,7 +606,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../diy/joystick/" class="md-nav__link">
+      <a href="../joystick/" class="md-nav__link">
         
   
   
@@ -754,6 +741,8 @@
                 
   
   
+    
+  
   
   
     
@@ -769,15 +758,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../../diy/micro-controller/" class="md-nav__link ">
+            <a href="./" class="md-nav__link md-nav__link--active">
               
   
   
@@ -790,13 +779,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+              <label class="md-nav__link md-nav__link--active" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3_9">
             <span class="md-nav__icon md-icon"></span>
             マイコン
@@ -812,7 +801,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../diy/micro-controller/esp32/" class="md-nav__link">
+      <a href="esp32/" class="md-nav__link">
         
   
   
@@ -870,7 +859,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../../tools/" class="md-nav__link ">
+            <a href="../../tools/" class="md-nav__link ">
               
   
   
@@ -905,7 +894,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../tools/genbar/" class="md-nav__link">
+      <a href="../../tools/genbar/" class="md-nav__link">
         
   
   
@@ -1097,7 +1086,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../../piano/Beethoven/PianoSonata/" class="md-nav__link ">
+            <a href="../../piano/Beethoven/PianoSonata/" class="md-nav__link ">
               
   
   
@@ -1132,7 +1121,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no01/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no01/" class="md-nav__link">
         
   
   
@@ -1155,7 +1144,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no02/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no02/" class="md-nav__link">
         
   
   
@@ -1178,7 +1167,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no03/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no03/" class="md-nav__link">
         
   
   
@@ -1201,7 +1190,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no04/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no04/" class="md-nav__link">
         
   
   
@@ -1224,7 +1213,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no05/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no05/" class="md-nav__link">
         
   
   
@@ -1247,7 +1236,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no06/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no06/" class="md-nav__link">
         
   
   
@@ -1270,7 +1259,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no07/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no07/" class="md-nav__link">
         
   
   
@@ -1293,7 +1282,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no08/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no08/" class="md-nav__link">
         
   
   
@@ -1316,7 +1305,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no09/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no09/" class="md-nav__link">
         
   
   
@@ -1339,7 +1328,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no10/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no10/" class="md-nav__link">
         
   
   
@@ -1362,7 +1351,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no11/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no11/" class="md-nav__link">
         
   
   
@@ -1385,7 +1374,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no12/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no12/" class="md-nav__link">
         
   
   
@@ -1408,7 +1397,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no13/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no13/" class="md-nav__link">
         
   
   
@@ -1431,7 +1420,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no14/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no14/" class="md-nav__link">
         
   
   
@@ -1454,7 +1443,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no15/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no15/" class="md-nav__link">
         
   
   
@@ -1477,7 +1466,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no16/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no16/" class="md-nav__link">
         
   
   
@@ -1500,7 +1489,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no17/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no17/" class="md-nav__link">
         
   
   
@@ -1523,7 +1512,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no18/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no18/" class="md-nav__link">
         
   
   
@@ -1546,7 +1535,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no19/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no19/" class="md-nav__link">
         
   
   
@@ -1569,7 +1558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no20/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no20/" class="md-nav__link">
         
   
   
@@ -1592,7 +1581,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no21/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no21/" class="md-nav__link">
         
   
   
@@ -1615,7 +1604,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no22/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no22/" class="md-nav__link">
         
   
   
@@ -1638,7 +1627,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no23/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no23/" class="md-nav__link">
         
   
   
@@ -1661,7 +1650,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no24/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no24/" class="md-nav__link">
         
   
   
@@ -1684,7 +1673,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no25/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no25/" class="md-nav__link">
         
   
   
@@ -1707,7 +1696,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no26/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no26/" class="md-nav__link">
         
   
   
@@ -1730,7 +1719,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no27/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no27/" class="md-nav__link">
         
   
   
@@ -1753,7 +1742,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no28/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no28/" class="md-nav__link">
         
   
   
@@ -1776,7 +1765,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../piano/Beethoven/PianoSonata/no29/" class="md-nav__link">
+      <a href="../../piano/Beethoven/PianoSonata/no29/" class="md-nav__link">
         
   
   
@@ -1879,7 +1868,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../../piano/Chopin/Nocturne/" class="md-nav__link ">
+            <a href="../../piano/Chopin/Nocturne/" class="md-nav__link ">
               
   
   
@@ -1935,7 +1924,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../../piano/Chopin/Prelude/" class="md-nav__link ">
+            <a href="../../piano/Chopin/Prelude/" class="md-nav__link ">
               
   
   
@@ -1991,7 +1980,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../../piano/Chopin/PianoMisc/" class="md-nav__link ">
+            <a href="../../piano/Chopin/PianoMisc/" class="md-nav__link ">
               
   
   
@@ -2045,8 +2034,6 @@
             
             
               
-                
-              
               <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
@@ -2059,23 +2046,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目次
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      測定
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -2083,112 +2053,17 @@
             
           
           
-  <div class="md-content md-content--post" data-md-component="content">
-    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
-      <div class="md-sidebar__scrollwrap">
-        <div class="md-sidebar__inner md-post">
-          <nav class="md-nav md-nav--primary">
-            <div class="md-post__back">
-              <div class="md-nav__title md-nav__container">
-                <a href="../../../../" class="md-nav__link">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-                  <span class="md-ellipsis">
-                    ブログトップへ戻る
-                  </span>
-                </a>
-              </div>
-            </div>
-            
-            <ul class="md-post__meta md-nav__list">
-              <li class="md-nav__item md-nav__item--section">
-                <div class="md-post__title">
-                  <span class="md-ellipsis">
-                    メタデータ
-                  </span>
-                </div>
-                <nav class="md-nav">
-                  <ul class="md-nav__list">
-                    <li class="md-nav__item">
-                      <div class="md-nav__link">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2025-05-02 02:00:00+00:00" class="md-ellipsis">2025年5月2日</time>
-                      </div>
-                    </li>
-                    
-                    
-                      <li class="md-nav__item">
-                        <div class="md-nav__link">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
-                          <span class="md-ellipsis">
-                            in
-                            
-                              <a href="../../../../category/analog-discovery-3/">Analog Discovery 3</a></span>
-                        </div>
-                      </li>
-                    
-                    
-                      
-                      <li class="md-nav__item">
-                        <div class="md-nav__link">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
-                          <span class="md-ellipsis">
-                            
-                              このページは約2分で読めます
-                            
-                          </span>
-                        </div>
-                      </li>
-                    
-                  </ul>
-                </nav>
-              </li>
-            </ul>
-            
-          </nav>
-          
-        </div>
-      </div>
-    </div>
-    <article class="md-content__inner md-typeset">
-      
-        
-  
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
 
 
 
-
-<h1 id="analog-discovery-3-">Analog Discovery 3 - インピーダンスアナライザ</h1>
-<p><a href="../analog-discovery-3/">Analog Discovery 3の基本的なセットアップはこちら</a></p>
-<p>次にインピーダンスアナライザを接続する。この向きで良いようだ。</p>
-<p><img alt="インピーダンスアナライザ" src="../../../../analogDiscovery3-impedance/impedanceAnalyzer.jpg" /></p>
-<p>左側にリード線を差し込む箇所があるが、かなり深いので1cm以上被覆を剥く必要があるので注意。</p>
-<p><img alt="プローブ" src="../../../../analogDiscovery3-impedance/probe.jpg" /></p>
-<p>今回はミノ虫クリップを付けて、22pFの積層セラミックコンデンサをつないでみた。</p>
-<p><img alt="22pF" src="../../../../analogDiscovery3-impedance/c.jpg" /></p>
-<p>1MHzの時に22pFのインピーダンスをPerplexityに計算してもらうと、7kΩくらい。</p>
-<p><img alt="インピーダンス" src="../../../../analogDiscovery3-impedance/impedance.jpg" /></p>
-<p>測定値と計算値が一致するか調べてみる。</p>
-<h2 id="_1">測定</h2>
-<p>インストールしたWaveFormsを起動し、Impedanceメニューを選択。</p>
-<p><img alt="Impedance Menu" src="../../../../analogDiscovery3-impedance/menu.jpg" /></p>
-<p>測定条件の設定を行う。</p>
-<p><img alt="測定設定" src="../../../../analogDiscovery3-impedance/settings.jpg" /></p>
+<h1 id="_1">マイコン</h1>
 <ul>
-<li>(1) 測定する周波数範囲</li>
-<li>(2) 今回は純正のインピーダンス測定ボードを使っているのでAdapterを選択</li>
-<li>(3) インピーダンス測定で使用する抵抗値。この抵抗は測定する対象に直列に接続される。今回は計算値が7kΩほどなので、十分に大きい100kΩを選択(不適切だと、測定時に赤文字で表示されるので、それに従えば良い)</li>
-<li>(4) Singleボタンを押すと測定が開始される。</li>
+<li><a href="esp32/">ESP32</a></li>
 </ul>
-<p><a href="/ruimo-blog/blog/analogDiscovery3-impedance/mesured.jpg" target="_blank">
-  <img src="/ruimo-blog/blog/analogDiscovery3-impedance/mesured.jpg" width="800" alt="クリックで拡大">
-</a></p>
-<p>グラフの上がインピーダンス。下が位相。グラフ上でダブルクリックすると、カーソル位置のX, Y軸が表示されるようになる。これを利用して1Mhzあたりのインピーダンスを見ると計算値とほぼ一致していることが分かる。さすがに積層セラミックコンデンサなので周波数特性は良好で、位相は測定周波数範囲で-90°になっている。</p>
-<p>電解コンデンサならどうか。試しに手元にあった1000μFを測定。</p>
-<p><a href="/ruimo-blog/blog/analogDiscovery3-impedance/capacitor.jpg" target="_blank">
-  <img src="/ruimo-blog/blog/analogDiscovery3-impedance/capacitor.jpg" width="800" alt="クリックで拡大">
-</a></p>
-<p>1kHz以降から位相が-90°から離れていくことが分かる。</p>
-<p><a href="/ruimo-blog/blog/category/analog-discovery-3">Analog Discovery 3記事一覧</a></p>
 
 
 
@@ -2196,73 +2071,15 @@
 
 
 
-  
-  
 
 
 
 
-  
 
-
-
-  <h2 id="__comments">コメント</h2>
-<script src="https://giscus.app/client.js"
-        data-repo="ruimo/ruimo-blog"
-        data-repo-id="R_kgDON3pwEQ"
-        data-category="Announcements"
-        data-category-id="DIC_kwDON3pwEc4Cm2vv"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="preferred_color_scheme"
-        data-lang="ja"
-        crossorigin="anonymous"
-        async>
-</script>
-
-  <!-- Synchronize Giscus theme with palette -->
-  <script>
-    var giscus = document.querySelector("script[src*=giscus]")
-
-    // Set palette on initial load
-    var palette = __md_get("__palette")
-    if (palette && typeof palette.color === "object") {
-      var theme = palette.color.scheme === "slate"
-        ? "transparent_dark"
-        : "light"
-
-      // Instruct Giscus to set theme
-      giscus.setAttribute("data-theme", theme) 
-    }
-
-    // Register event handlers after documented loaded
-    document.addEventListener("DOMContentLoaded", function() {
-      var ref = document.querySelector("[data-md-component=palette]")
-      ref.addEventListener("change", function() {
-        var palette = __md_get("__palette")
-        if (palette && typeof palette.color === "object") {
-          var theme = palette.color.scheme === "slate"
-            ? "transparent_dark"
-            : "light"
-
-          // Instruct Giscus to change theme
-          var frame = document.querySelector(".giscus-frame")
-          frame.contentWindow.postMessage(
-            { giscus: { setConfig: { theme } } },
-            "https://giscus.app"
-          )
-        }
-      })
-    })
-  </script>
-
-      
-    </article>
-  </div>
-
+                
+              </article>
+            </div>
+          
           
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
@@ -2273,12 +2090,10 @@
   
     
       
-        
-      
       <nav class="md-footer__inner md-grid" aria-label="フッター" >
         
           
-          <a href="../analog-discovery-3/" class="md-footer__link md-footer__link--prev" aria-label="前: Analog Discovery 3">
+          <a href="../joystick/" class="md-footer__link md-footer__link--prev" aria-label="前: ジョイスティックを作ろう">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2288,20 +2103,20 @@
                 前
               </span>
               <div class="md-ellipsis">
-                Analog Discovery 3
+                ジョイスティックを作ろう
               </div>
             </div>
           </a>
         
         
           
-          <a href="../%E8%B6%85%E9%9F%B3%E6%B3%A2%E6%8C%AF%E5%8B%95%E5%AD%90%E3%81%AE%E6%B8%AC%E5%AE%9A/" class="md-footer__link md-footer__link--next" aria-label="次: 超音波振動子の測定">
+          <a href="esp32/" class="md-footer__link md-footer__link--next" aria-label="次: ESP32">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 次
               </span>
               <div class="md-ellipsis">
-                超音波振動子の測定
+                ESP32
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -2337,10 +2152,10 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../../../../..", "features": ["navigation.footer", "content.code.copy", "navigation.indexes"], "search": "../../../../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "content.code.copy", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script>
     
     
-      <script src="../../../../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
       
         <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
       
