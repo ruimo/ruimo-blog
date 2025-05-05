@@ -7,16 +7,16 @@ nav:
     - blog/index.md
   - DIY:
     - diy/index.md
-    - UV-211 アンプ製作記: diy/uv211.md
-    - ジョイスティックを作ろう: diy/joystick.md
-    - 自動電源offスイッチ: https://ruimo.github.io/auto_power_off/
-    - ATtiny10マイコン: https://ruimo.github.io/attiny10-blink/
-    - CH32V003マイコン: https://ruimo.github.io/ch32v003try/
-    - 万能導通テスター: https://r8c-m1x0a.github.io/univ_tester/
-    - オーディオスイッチャー: https://ruimo.github.io/audioswitcher/
     - マイコン:
         - diy/micro-controller/index.md
         - diy/micro-controller/esp32/index.md
+        - Attiny10: https://ruimo.github.io/attiny10-blink/
+        - CH32V003: https://ruimo.github.io/ch32v003try/
+    - UV-211 アンプ製作記: diy/uv211.md
+    - ジョイスティックを作ろう: diy/joystick.md
+    - 自動電源offスイッチ: https://ruimo.github.io/auto_power_off/
+    - 万能導通テスター: https://r8c-m1x0a.github.io/univ_tester/
+    - オーディオスイッチャー: https://ruimo.github.io/audioswitcher/
   - Tools:
     - tools/index.md
     - tools/genbar.md
