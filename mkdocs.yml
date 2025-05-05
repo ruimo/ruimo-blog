@@ -73,6 +73,7 @@ plugins:
       comments_path: "#__comments"  # コメントセクションへのリンク（オプション）
 theme:
   favicon: assets/images/favicon.ico
+  logo: assets/images/logo.gif
   custom_dir: docs/templates
   language: ja
   name: material
