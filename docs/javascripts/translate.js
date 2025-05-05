@@ -1,12 +1,14 @@
 // docs/javascripts/translate.js
 document.addEventListener('DOMContentLoaded', function() {
-  // Google Translate要素がまだ存在しない場合のみ作成
-  if (!document.getElementById('google_translate_element').hasChildNodes()) {
+    var e = document.getElementById('google_translate_element');
+    while (e.firstChild) {
+        e.removeChild(element.firstChild);
+    }
+
     var script = document.createElement('script');
     script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
     script.async = true;
     document.body.appendChild(script);
-  }
 });
 
 function googleTranslateElementInit() {
