@@ -1,3 +1,11 @@
+.md-content {
+  max-width: none !important;
+}
+
+.md-grid {
+  max-width: none !important;
+}
+
 .md-header-translate {
   display: inline-block;
   margin-right: 1rem;
