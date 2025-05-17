@@ -2137,6 +2137,46 @@ E: Package &#39;ia32-libs&#39; has no installation candidate
     <div class="md-post__meta md-meta">
       <ul class="md-meta__list">
         <li class="md-meta__item">
+          <time datetime="2025-05-17 00:00:00+00:00">2025年5月17日</time></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              このページは約1分で読めます
+            
+          </li>
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="_1"><a class="toclink" href="2025/05/17/%E6%BF%80%E5%AE%89%E3%82%A2%E3%83%B3%E3%83%97%E3%81%AE%E3%81%9D%E3%81%AE%E5%BE%8C/">激安アンプのその後</a></h2>
+<p>以前購入した<a href="https://www.ruimo.com/showArticle/1667">激安アンプ</a>、ラズパイオーディオの出力に使っている。</p>
+<p><img alt="回路図1" src="raspi-audio-power/raspi-audio.drawio.svg" /></p>
+<p>ラズパイZero Wに<a href="https://github.com/laheym/rpi-mpd">mpd</a>をインストールし、PCから<a href="https://www.musicpd.org/clients/ncmpc/">ncmpc</a>で再生している。DACはI2S接続。これはLine outしかない(3.5mmジャックが付いているが、これも実はLine out)ので、激安アンプを接続してヘッドホンを接続している。</p>
+<p>しばらく使ってみて色々特徴が分かった。</p>
+<h3 id="_2"><a class="toclink" href="2025/05/17/%E6%BF%80%E5%AE%89%E3%82%A2%E3%83%B3%E3%83%97%E3%81%AE%E3%81%9D%E3%81%AE%E5%BE%8C/#_2">無音時はノイズが無い</a></h3>
+<p>なかなか優秀。ホワイトノイズやハム的なものが全然無い。</p>
+<h3 id="_3"><a class="toclink" href="2025/05/17/%E6%BF%80%E5%AE%89%E3%82%A2%E3%83%B3%E3%83%97%E3%81%AE%E3%81%9D%E3%81%AE%E5%BE%8C/#_3">クリップが分かりにくい</a></h3>
+<p>A級、B級アンプと比べてクリップした時の音質変化が分かりにくい。DACの出力がかなり大きいので十分に絞らないとクリップする。</p>
+<h3 id="_4"><a class="toclink" href="2025/05/17/%E6%BF%80%E5%AE%89%E3%82%A2%E3%83%B3%E3%83%97%E3%81%AE%E3%81%9D%E3%81%AE%E5%BE%8C/#_4">再生時にノイズが乗る</a></h3>
+<p>静かな曲の再生時に「ガサガサ」というノイズが乗っていることに気付いた。最初はアンプの問題なのかと思ったが、この感じはラズパイのCPUの負荷変動による電源へのノイズがアンプに回り込んでいる可能性が高い。A級、B級アンプ時は「ビヨビヨ」という感じのノイズで聞こえたものだが、D級アンプだと静かな「ガサガサ」というノイズになるようだ。PAM8403の電源からのノイズに対する耐性が高いのだろう。</p>
+<p>高級アンプなんかは、デジタル系とアナログ系で別の電源を用意したりするが、まずは三端子レギュレータで電源を分けてみる。</p>
+<p><img alt="回路図" src="raspi-audio-power/schematics.png" /></p>
+<p>電源は9VのACアダプタにし、三端子レギュレータを2つ使ってラズパイ用と、DAC+アンプ用とに分けている。パスコンは積層セラミックコンデンサを使用。入力は10uFを使用。出力側のパスコンは、アンプ側には470uFの固体コンデンサがパスコンとして入っているので、省略。ラズパイ側だけ100uFを入れた。LM2940は低損失タイプの三端子レギュレータなので入力は6Vでも十分だろう。</p>
+<p>これでノイズは全く分からなくなった。</p>
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
           <time datetime="2025-05-03 00:00:00+00:00">2025年5月3日</time></li>
         
           <li class="md-meta__item">
