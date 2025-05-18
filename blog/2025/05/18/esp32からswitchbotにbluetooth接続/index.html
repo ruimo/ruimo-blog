@@ -8,13 +8,11 @@
       
       
       
-        <link rel="canonical" href="https://ruimo.github.io/ruimo-blog/blog/2025/05/17/cups-install-error/">
+        <link rel="canonical" href="https://ruimo.github.io/ruimo-blog/blog/2025/05/18/esp32%E3%81%8B%E3%82%89switchbot%E3%81%ABbluetooth%E6%8E%A5%E7%B6%9A/">
       
       
-        <link rel="prev" href="../%E6%BF%80%E5%AE%89%E3%82%A2%E3%83%B3%E3%83%97%E3%81%AE%E3%81%9D%E3%81%AE%E5%BE%8C/">
+        <link rel="prev" href="../../17/cups-install-error/">
       
-      
-        <link rel="next" href="../../18/esp32%E3%81%8B%E3%82%89switchbot%E3%81%ABbluetooth%E6%8E%A5%E7%B6%9A/">
       
       
         <link rel="alternate" type="application/rss+xml" title="新しいページのRSSフィード" href="../../../../../feed_rss_created.xml">
@@ -25,7 +23,7 @@
     
     
       
-        <title>Cups install error - るいもの戯れ言</title>
+        <title>ESP32からSwitchBotにBluetooth接続 - るいもの戯れ言</title>
       
     
     
@@ -68,7 +66,7 @@
     <meta property="og:image" content="https://ruimo.github.io/ruimo-blog/assets/images/default-ogp.png" />
     <meta name="twitter:image" content="https://ruimo.github.io/ruimo-blog/assets/images/default-ogp.png" />
   
-  <meta property="og:title" content="Cups install error" />
+  <meta property="og:title" content="ESP32からSwitchBotにBluetooth接続" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
 
@@ -89,6 +87,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#esp32switchbotbluetooth" class="md-skip">
+          コンテンツにスキップ
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -123,7 +126,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Cups install error
+              ESP32からSwitchBotにBluetooth接続
             
           </span>
         </div>
@@ -2067,6 +2070,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -2103,20 +2108,10 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2025-05-17 08:00:00+00:00" class="md-ellipsis">2025年5月17日</time>
+                        <time datetime="2025-05-18 00:00:00+00:00" class="md-ellipsis">2025年5月18日</time>
                       </div>
                     </li>
                     
-                    
-                      <li class="md-nav__item">
-                        <div class="md-nav__link">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
-                          <span class="md-ellipsis">
-                            in
-                            
-                              <a href="../../../../category/linux/">Linux</a></span>
-                        </div>
-                      </li>
                     
                     
                       
@@ -2125,7 +2120,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              このページは約1分で読めます
+                              このページは約2分で読めます
                             
                           </span>
                         </div>
@@ -2149,24 +2144,138 @@
 
 
 
-  <h1>Cups install error</h1>
+<h1 id="esp32switchbotbluetooth">ESP32からSwitchBotにBluetooth接続</h1>
+<p>ESP32からSwitchBotのボタンを動かしたい。</p>
+<p><a href="https://github.com/nkolban/ESP32_BLE_Arduino">ESP32_BLE_Arduino</a>というのがあるので、これで試してみる。</p>
+<p><a href="https://github.com/nkolban/ESP32_BLE_Arduino/blob/master/examples/BLE_client/BLE_client.ino">BLE client sample</a>があるので、てっとり早く動かしてみたが、どうにも動かない。</p>
+<p>AdvertiseしているBluetoothデバイスを探し、見つかり次第コールバックが呼ばれるのだけど、このサンプルではこうなっている。</p>
+<div class="language-text highlight"><pre><span></span><code>static BLEUUID serviceUUID(&quot;4fafc201-1fb5-459e-8fcc-c5c9c331914b&quot;);
+....
+class MyAdvertisedDeviceCallbacks: public BLEAdvertisedDeviceCallbacks {
+ /**
+   * Called for each advertising BLE server.
+   */
+  void onResult(BLEAdvertisedDevice advertisedDevice) {
+    Serial.print(&quot;BLE Advertised Device found: &quot;);
+    Serial.println(advertisedDevice.toString().c_str());
 
-<p>この前、家のサーバを新調(といってもデスクトップのお下がり)した時、USBに接続したブラザーのレーザプリンタ(HL2240D)のCUPS経由による印刷だけうまくいかず、仕方なくデスクトップの方にプリンタをつないでいたのだけど、デスクトップを電源offするとスマホからの印刷ができなくて不便なので、今日ちゃんと調べてみた。</p>
-<p>結論から言うと、<a href="https://support.brother.com/g/b/downloadhowto.aspx?c=as_ot&amp;lang=en&amp;prod=hl2240d_all&amp;os=128&amp;dlid=dlf006893_000&amp;flang=4&amp;type3=625">ブラザーのドライバ</a>をインストールする時に、画面の表示内容を注意深く見ていると、以下のようなエラーが表示されていた。ここでエラーになってもインストーラがapt install --forceで無理やり突き進んでしまって、ちゃんとインストールできていなかったようだ。</p>
-<div class="language-text highlight"><pre><span></span><code>Package ia32-libs is not available, but is referred to by another package.
-This may mean that the package is missing, has been obsoleted, or
-is only available from another source
-However the following packages replace it:
-  lib32z1
+    // We have found a device, let us now see if it contains the service we are looking for.
+    if (advertisedDevice.haveServiceUUID() &amp;&amp; advertisedDevice.isAdvertisingService(serviceUUID)) {
 
-E: Package &#39;ia32-libs&#39; has no installation candidate
+      BLEDevice::getScan()-&gt;stop();
+      myDevice = new BLEAdvertisedDevice(advertisedDevice);
+      doConnect = true;
+      doScan = true;
+
+    } // Found our server
 </code></pre></div>
-<p>ということで、ドライバのインストール前に以下を実行したところ解消した。分かってみればなんとも単純な結果だ。</p>
-<div class="language-text highlight"><pre><span></span><code>sudo apt install lib32z1
+<p>このserviceUUIDというのが、SwitchBotのボタン機能なので、それを持っているサービスを探すようになっているんだけど、</p>
+<div class="language-text highlight"><pre><span></span><code>if (advertisedDevice.haveServiceUUID() &amp;&amp; advertisedDevice.isAdvertisingService(serviceUUID))
 </code></pre></div>
-<p>このプリンターも、もう10年くらい使っているけどまだまだ使えて助かる。</p>
-<p>トラブルシューティングで生成AIに色々聞いたが、結局そのものズバりな解答は出てこなかった(まぁ、マイナーな事象だろうしね)。ただCUPSのトラブルシューティングに使えるコマンドは色々教えてもらえたのでそれなりには役に立った。</p>
-<p>今までCUPSとかIPPとか良く分からずに使っていたのだけど、元々CUPSはIPPをサポートした1実装という位置付けなのね。</p>
+<p>このif文の条件が全然成立しない。どうもadvertise deviceというのと、実際のdeviceというのは別物っぽくて、advertise deviceが持っているサービスは<code>0000fd3d-0000-1000-8000-00805f9b34fb</code>というUUIDだった。これはAmazon Alexaに見つけてもらうサービスみたい。</p>
+<p>なので、ここの条件文は以下のようにしてデバイスアドレスをチェックするように変更したら見つかるようになった。</p>
+<div class="language-text highlight"><pre><span></span><code>String addr = advertisedDevice.getAddress().toString().c_str();
+if (addr.equalsIgnoreCase(addrSwitchBot)) {
+</code></pre></div>
+<p>デバイスアドレスは、iPhone用のアプリでSwitchBotのデバイス情報から参照できる。なおデバイス情報を確認したらiPhone側のSwitchBotアプリは止めておかないと、ESP32側から接続できないので注意。</p>
+<p><a href="/ruimo-blog/blog/esp32-bt/IMG_2422.PNG" target="_blank">
+  <img src="/ruimo-blog/blog/esp32-bt/IMG_2422.PNG" width="400" alt="クリックで拡大">
+</a></p>
+<p>あとは、connectAndSendCommand()の中のキャラクタリスティックのチェックが終わったところで以下でボタンを押すコマンドを送れば良い。</p>
+<div class="language-text highlight"><pre><span></span><code>static uint8_t cmdPress[3] = {0x57, 0x01, 0x00};
+...
+pRemoteCharacteristic-&gt;writeValue(cmdPress, sizeof(cmdPress), false);
+</code></pre></div>
+<p>ソースの全体はこれ。</p>
+<div class="language-text highlight"><pre><span></span><code>#include &quot;BLEDevice.h&quot;
+#include &lt;HardwareSerial.h&gt;
+
+// 手元の SwitchBot のアドレス
+static String addrSwitchBot = &quot;??:??:??:??:??:??&quot;;
+// SwitchBot のユーザ定義サービス
+static BLEUUID serviceUUID(&quot;cba20d00-224d-11e6-9fb8-0002a5d5c51b&quot;);
+// 上記サービス内の対象キャラクタリスティック
+static BLEUUID    charUUID(&quot;cba20002-224d-11e6-9fb8-0002a5d5c51b&quot;);
+// SwitchBot の Press コマンド
+static uint8_t cmdPress[3] = {0x57, 0x01, 0x00};
+
+static BLEAdvertisedDevice* myDevice = nullptr;
+
+class AdvCallback: public BLEAdvertisedDeviceCallbacks {
+  void onResult(BLEAdvertisedDevice advertisedDevice) {
+    Serial.println(&quot;BLE device found: &quot;);
+    String addr = advertisedDevice.getAddress().toString().c_str();
+    Serial.printf(&quot;addr=[%s]\r\n&quot;, addr.c_str());
+    if (addr.equalsIgnoreCase(addrSwitchBot)) {
+      // SwitchBot を発見
+      Serial.println(&quot;found SwitchBot&quot;);
+      advertisedDevice.getScan()-&gt;stop();
+      myDevice = new BLEAdvertisedDevice(advertisedDevice);
+    }
+  }
+};
+
+void setup() {
+  Serial.begin(115200);
+  Serial.println(&quot;Setup&quot;);
+  BLEDevice::init(&quot;&quot;);
+
+  // デバイスからのアドバタイズをスキャン
+  BLEScan* pBLEScan = BLEDevice::getScan();
+  pBLEScan-&gt;setAdvertisedDeviceCallbacks(new AdvCallback());
+  pBLEScan-&gt;setActiveScan(true);
+  pBLEScan-&gt;start(30); 
+}
+
+void loop() {
+  Serial.println(&quot;Loop&quot;);
+  if (myDevice != nullptr) {
+    if (! connectAndSendCommand()) {
+      Serial.println(&quot;connectAndSendCommand failed&quot;);
+    }
+    myDevice = nullptr;
+    Serial.println(&quot;done&quot;);
+  }
+  delay(1000);
+}
+
+// Pressコマンド送信
+static bool connectAndSendCommand() {
+  Serial.println(&quot;start connectAndSendCommand&quot;);
+  BLEClient* pClient = BLEDevice::createClient();
+
+  bool success = pClient-&gt;connect(myDevice);
+  if (! success) {
+    Serial.println(&quot; - Connect failed.&quot;);
+    return false;
+  }
+  Serial.println(&quot; - Connected to server&quot;);
+
+  // 対象サービスを得る
+  BLERemoteService* pRemoteService = pClient-&gt;getService(serviceUUID);
+  if (pRemoteService == nullptr) {
+    Serial.println(&quot;target service not found&quot;);
+    return false;
+  }
+  Serial.println(&quot;found target service&quot;);
+
+  // 対象キャラクタリスティックを得る
+  BLERemoteCharacteristic* pRemoteCharacteristic = pRemoteService-&gt;getCharacteristic(charUUID);
+  if (pRemoteCharacteristic == nullptr) {
+    Serial.println(&quot;target characteristic not found&quot;);
+    return false;
+  }
+  Serial.println(&quot;found target characteristic&quot;);
+
+  // キャラクタリスティックに Press コマンドを書き込む
+  pRemoteCharacteristic-&gt;writeValue(cmdPress, sizeof(cmdPress), false);
+
+  delay(3000);
+  pClient-&gt;disconnect();
+
+  return true;
+}
+</code></pre></div>
 
 
 
@@ -2256,7 +2365,7 @@ E: Package &#39;ia32-libs&#39; has no installation candidate
       <nav class="md-footer__inner md-grid" aria-label="フッター" >
         
           
-          <a href="../%E6%BF%80%E5%AE%89%E3%82%A2%E3%83%B3%E3%83%97%E3%81%AE%E3%81%9D%E3%81%AE%E5%BE%8C/" class="md-footer__link md-footer__link--prev" aria-label="前: 激安アンプのその後">
+          <a href="../../17/cups-install-error/" class="md-footer__link md-footer__link--prev" aria-label="前: Cups install error">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2266,27 +2375,11 @@ E: Package &#39;ia32-libs&#39; has no installation candidate
                 前
               </span>
               <div class="md-ellipsis">
-                激安アンプのその後
+                Cups install error
               </div>
             </div>
           </a>
         
-        
-          
-          <a href="../../18/esp32%E3%81%8B%E3%82%89switchbot%E3%81%ABbluetooth%E6%8E%A5%E7%B6%9A/" class="md-footer__link md-footer__link--next" aria-label="次: ESP32からSwitchBotにBluetooth接続">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                次
-              </span>
-              <div class="md-ellipsis">
-                ESP32からSwitchBotにBluetooth接続
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
         
       </nav>
     

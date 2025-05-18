@@ -2104,6 +2104,163 @@
     <div class="md-post__meta md-meta">
       <ul class="md-meta__list">
         <li class="md-meta__item">
+          <time datetime="2025-05-18 00:00:00+00:00">2025年5月18日</time></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              このページは約2分で読めます
+            
+          </li>
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="esp32switchbotbluetooth"><a class="toclink" href="../../2025/05/18/esp32%E3%81%8B%E3%82%89switchbot%E3%81%ABbluetooth%E6%8E%A5%E7%B6%9A/">ESP32からSwitchBotにBluetooth接続</a></h2>
+<p>ESP32からSwitchBotのボタンを動かしたい。</p>
+<p><a href="https://github.com/nkolban/ESP32_BLE_Arduino">ESP32_BLE_Arduino</a>というのがあるので、これで試してみる。</p>
+<p><a href="https://github.com/nkolban/ESP32_BLE_Arduino/blob/master/examples/BLE_client/BLE_client.ino">BLE client sample</a>があるので、てっとり早く動かしてみたが、どうにも動かない。</p>
+<p>AdvertiseしているBluetoothデバイスを探し、見つかり次第コールバックが呼ばれるのだけど、このサンプルではこうなっている。</p>
+<div class="language-text highlight"><pre><span></span><code>static BLEUUID serviceUUID(&quot;4fafc201-1fb5-459e-8fcc-c5c9c331914b&quot;);
+....
+class MyAdvertisedDeviceCallbacks: public BLEAdvertisedDeviceCallbacks {
+ /**
+   * Called for each advertising BLE server.
+   */
+  void onResult(BLEAdvertisedDevice advertisedDevice) {
+    Serial.print(&quot;BLE Advertised Device found: &quot;);
+    Serial.println(advertisedDevice.toString().c_str());
+
+    // We have found a device, let us now see if it contains the service we are looking for.
+    if (advertisedDevice.haveServiceUUID() &amp;&amp; advertisedDevice.isAdvertisingService(serviceUUID)) {
+
+      BLEDevice::getScan()-&gt;stop();
+      myDevice = new BLEAdvertisedDevice(advertisedDevice);
+      doConnect = true;
+      doScan = true;
+
+    } // Found our server
+</code></pre></div>
+<p>このserviceUUIDというのが、SwitchBotのボタン機能なので、それを持っているサービスを探すようになっているんだけど、</p>
+<div class="language-text highlight"><pre><span></span><code>if (advertisedDevice.haveServiceUUID() &amp;&amp; advertisedDevice.isAdvertisingService(serviceUUID))
+</code></pre></div>
+<p>このif文の条件が全然成立しない。どうもadvertise deviceというのと、実際のdeviceというのは別物っぽくて、advertise deviceが持っているサービスは<code>0000fd3d-0000-1000-8000-00805f9b34fb</code>というUUIDだった。これはAmazon Alexaに見つけてもらうサービスみたい。</p>
+<p>なので、ここの条件文は以下のようにしてデバイスアドレスをチェックするように変更したら見つかるようになった。</p>
+<div class="language-text highlight"><pre><span></span><code>String addr = advertisedDevice.getAddress().toString().c_str();
+if (addr.equalsIgnoreCase(addrSwitchBot)) {
+</code></pre></div>
+<p>デバイスアドレスは、iPhone用のアプリでSwitchBotのデバイス情報から参照できる。なおデバイス情報を確認したらiPhone側のSwitchBotアプリは止めておかないと、ESP32側から接続できないので注意。</p>
+<p><a href="/ruimo-blog/blog/esp32-bt/IMG_2422.PNG" target="_blank">
+  <img src="/ruimo-blog/blog/esp32-bt/IMG_2422.PNG" width="400" alt="クリックで拡大">
+</a></p>
+<p>あとは、connectAndSendCommand()の中のキャラクタリスティックのチェックが終わったところで以下でボタンを押すコマンドを送れば良い。</p>
+<div class="language-text highlight"><pre><span></span><code>static uint8_t cmdPress[3] = {0x57, 0x01, 0x00};
+...
+pRemoteCharacteristic-&gt;writeValue(cmdPress, sizeof(cmdPress), false);
+</code></pre></div>
+<p>ソースの全体はこれ。</p>
+<div class="language-text highlight"><pre><span></span><code>#include &quot;BLEDevice.h&quot;
+#include &lt;HardwareSerial.h&gt;
+
+// 手元の SwitchBot のアドレス
+static String addrSwitchBot = &quot;??:??:??:??:??:??&quot;;
+// SwitchBot のユーザ定義サービス
+static BLEUUID serviceUUID(&quot;cba20d00-224d-11e6-9fb8-0002a5d5c51b&quot;);
+// 上記サービス内の対象キャラクタリスティック
+static BLEUUID    charUUID(&quot;cba20002-224d-11e6-9fb8-0002a5d5c51b&quot;);
+// SwitchBot の Press コマンド
+static uint8_t cmdPress[3] = {0x57, 0x01, 0x00};
+
+static BLEAdvertisedDevice* myDevice = nullptr;
+
+class AdvCallback: public BLEAdvertisedDeviceCallbacks {
+  void onResult(BLEAdvertisedDevice advertisedDevice) {
+    Serial.println(&quot;BLE device found: &quot;);
+    String addr = advertisedDevice.getAddress().toString().c_str();
+    Serial.printf(&quot;addr=[%s]\r\n&quot;, addr.c_str());
+    if (addr.equalsIgnoreCase(addrSwitchBot)) {
+      // SwitchBot を発見
+      Serial.println(&quot;found SwitchBot&quot;);
+      advertisedDevice.getScan()-&gt;stop();
+      myDevice = new BLEAdvertisedDevice(advertisedDevice);
+    }
+  }
+};
+
+void setup() {
+  Serial.begin(115200);
+  Serial.println(&quot;Setup&quot;);
+  BLEDevice::init(&quot;&quot;);
+
+  // デバイスからのアドバタイズをスキャン
+  BLEScan* pBLEScan = BLEDevice::getScan();
+  pBLEScan-&gt;setAdvertisedDeviceCallbacks(new AdvCallback());
+  pBLEScan-&gt;setActiveScan(true);
+  pBLEScan-&gt;start(30); 
+}
+
+void loop() {
+  Serial.println(&quot;Loop&quot;);
+  if (myDevice != nullptr) {
+    if (! connectAndSendCommand()) {
+      Serial.println(&quot;connectAndSendCommand failed&quot;);
+    }
+    myDevice = nullptr;
+    Serial.println(&quot;done&quot;);
+  }
+  delay(1000);
+}
+
+// Pressコマンド送信
+static bool connectAndSendCommand() {
+  Serial.println(&quot;start connectAndSendCommand&quot;);
+  BLEClient* pClient = BLEDevice::createClient();
+
+  bool success = pClient-&gt;connect(myDevice);
+  if (! success) {
+    Serial.println(&quot; - Connect failed.&quot;);
+    return false;
+  }
+  Serial.println(&quot; - Connected to server&quot;);
+
+  // 対象サービスを得る
+  BLERemoteService* pRemoteService = pClient-&gt;getService(serviceUUID);
+  if (pRemoteService == nullptr) {
+    Serial.println(&quot;target service not found&quot;);
+    return false;
+  }
+  Serial.println(&quot;found target service&quot;);
+
+  // 対象キャラクタリスティックを得る
+  BLERemoteCharacteristic* pRemoteCharacteristic = pRemoteService-&gt;getCharacteristic(charUUID);
+  if (pRemoteCharacteristic == nullptr) {
+    Serial.println(&quot;target characteristic not found&quot;);
+    return false;
+  }
+  Serial.println(&quot;found target characteristic&quot;);
+
+  // キャラクタリスティックに Press コマンドを書き込む
+  pRemoteCharacteristic-&gt;writeValue(cmdPress, sizeof(cmdPress), false);
+
+  delay(3000);
+  pClient-&gt;disconnect();
+
+  return true;
+}
+</code></pre></div>
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
           <time datetime="2025-05-17 08:00:00+00:00">2025年5月17日</time></li>
         
           <li class="md-meta__item">
