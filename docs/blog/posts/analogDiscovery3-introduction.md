@@ -13,7 +13,7 @@ categories:
 Analog Discovery 3を買ってみた。日本でも購入可能だが、最近少し円高に振れているので[本家](https://digilent.com/shop/analog-discovery-3/)で購入した。一緒に[BNC Adapter](https://digilent.com/shop/bnc-adapter-for-analog-discovery/)と[Impedance Analyzer](https://digilent.com/shop/impedance-analyzer-for-analog-discovery/)も購入。FedExなので数日で届いた。FedExの送料は```$10```ほど(昔は```$20```以上した記憶なのだが、最近安くなったのだろうか)。
 
 !!! warning "Shippingは送料じゃなかった"
-    Shippingに表示される```$10```は送料じゃなくて梱包手数料みたいのものみたい。しばらくたってからFedExが4500円払ってねという手紙が届く。なのでそのあたりも加味してどこで買うか決めた方が良い。
+    Shippingに表示される```$10```は送料じゃなくて梱包手数料みたいのものみたい。しばらくたってからFedExから4500円払ってねという手紙が届く。なのでそのあたりも加味してどこで買うか決めた方が良い。
 
 ## セットアップ
 
