@@ -2104,6 +2104,167 @@
     <div class="md-post__meta md-meta">
       <ul class="md-meta__list">
         <li class="md-meta__item">
+          <time datetime="2025-05-31 00:00:00+00:00">2025年5月31日</time></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              このページは約3分で読めます
+            
+          </li>
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="esp32fft"><a class="toclink" href="../../2025/05/31/esp32%E3%81%A7%E9%9F%B3%E5%A3%B0%E3%82%92%E8%A8%98%E9%8C%B2%E3%81%97%E3%81%A6fft%E3%81%99%E3%82%8B/">ESP32で音声を記録して、FFTする</a></h2>
+<p>うちにある石油ファンヒータ、2時間くらい経つとブザーが鳴って自動で消火する機能が付いている。消し忘れ防止のようだが、イヤホンなど付けていると気付かないことが多い。そこでブザーが鳴っていたら、それを検出する機器を作りたい。</p>
+<p>ESP32にマイクを接続して音声を記録して周波数成分を分析してみる。</p>
+<h3 id="_1"><a class="toclink" href="../../2025/05/31/esp32%E3%81%A7%E9%9F%B3%E5%A3%B0%E3%82%92%E8%A8%98%E9%8C%B2%E3%81%97%E3%81%A6fft%E3%81%99%E3%82%8B/#_1">マイク</a></h3>
+<p>以前使用した秋月のシリコンマイクが良かったので、今回も使用。</p>
+<p><a href="https://akizukidenshi.com/catalog/g/g108940/">
+<img alt="シリコンマイク" src="https://akizukidenshi.com/img/goods/L/108940.jpg" />
+</a></p>
+<p>20dBのアンプが内蔵されているので扱い易い。基板裏の半田ブリッジに半田を盛ってショートしておく。</p>
+<h3 id="esp32adc"><a class="toclink" href="../../2025/05/31/esp32%E3%81%A7%E9%9F%B3%E5%A3%B0%E3%82%92%E8%A8%98%E9%8C%B2%E3%81%97%E3%81%A6fft%E3%81%99%E3%82%8B/#esp32adc">ESP32のADC</a></h3>
+<p>ADCがあるので、試してみる。GPIO32がアナログ入力に使える。</p>
+<div class="language-text highlight"><pre><span></span><code>#include &lt;Arduino.h&gt;
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(32, ANALOG);
+}
+
+void loop() {
+  Serial.println(analogRead(32));
+  delay(300);
+}
+</code></pre></div>
+<p>12bit出力なのだが、可変抵抗を接続して0から4095になる範囲を見ると、</p>
+<table>
+<thead>
+<tr>
+<th>最低電圧</th>
+<th>最高電圧</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.12V</td>
+<td>3.18V</td>
+</tr>
+</tbody>
+</table>
+<p>マイクの出力範囲はオシロで見る限りこの範囲に入っているようなので、大丈夫そうだ。</p>
+<h3 id="esp32fft_1"><a class="toclink" href="../../2025/05/31/esp32%E3%81%A7%E9%9F%B3%E5%A3%B0%E3%82%92%E8%A8%98%E9%8C%B2%E3%81%97%E3%81%A6fft%E3%81%99%E3%82%8B/#esp32fft_1">ESP32でFFT</a></h3>
+<p>Espressif社が、esp-dspというデジタル信号処理用のライブラリを提供してくれているので、これを使うのうが良さそう。ここに<a href="https://github.com/espressif/esp-dsp/tree/eedf2a50811195224f07f941250a99bf1368d69e/examples/fft">サンプル</a>がある。これを見ながら自分用のを作成。サンプリング周波数は10kHzにし、サンプル数は1024にした。</p>
+<p>マイク信号はDCバイアスがかかっているので、平均値を減算している。</p>
+<div class="language-text highlight"><pre><span></span><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &quot;freertos/FreeRTOS.h&quot;
+#include &quot;freertos/task.h&quot;
+#include &quot;esp_system.h&quot;
+#include &quot;driver/spi_master.h&quot;
+#include &quot;soc/gpio_struct.h&quot;
+#include &quot;driver/gpio.h&quot;
+#include &quot;driver/uart.h&quot;
+#include &quot;soc/uart_struct.h&quot;
+#include &lt;math.h&gt;
+
+#include &quot;esp_dsp.h&quot;
+
+#define SAMPLING_FREQUENCY 10000
+unsigned int sampling_period_us = 1000L * 1000L / SAMPLING_FREQUENCY;
+
+#define N_SAMPLES 1024
+int N = N_SAMPLES;
+// Input test array
+__attribute__((aligned(16)))
+float x1[N_SAMPLES];
+// Window coefficients
+__attribute__((aligned(16)))
+float wind[N_SAMPLES];
+// working complex array
+__attribute__((aligned(16)))
+float y_cf[N_SAMPLES * 2];
+
+void setup() {
+  pinMode(32, ANALOG);
+  Serial.begin(115200);
+}
+
+void loop() {
+  esp_err_t ret = dsps_fft2r_init_fc32(NULL, CONFIG_DSP_MAX_FFT_SIZE);
+  if (ret != ESP_OK) {
+    Serial.printf(&quot;Not possible to initialize FFT. Error = %i&quot;, ret);
+    return;
+  }
+
+  dsps_wind_hann_f32(wind, N); // Generate hann window
+  //  dsps_tone_gen_f32(x1, N, 1.0, 0.16, 0); // Generate input signal: A=1.0, F=0.16
+
+  float ave = 0;
+  for (int i = 0; i &lt; N; ++i) {
+    unsigned long t = micros();
+    int a = analogRead(32);
+    while ((micros() - t) &lt; sampling_period_us) ;
+    x1[i] = a;
+    ave += a;
+  }
+
+  ave /= N;
+  Serial.println(&quot;Input:&quot;);
+  for (int i = 0; i &lt; N; ++i) {
+    x1[i] = x1[i] - ave;
+    Serial.printf(&quot;%d, %f\r\n&quot;, i, x1[i]);
+  }
+
+  // Apply window and convert to complex format
+  for (int i = 0 ; i &lt; N ; i++) {
+    y_cf[i * 2 + 0] = x1[i] * wind[i];  // 実部
+    y_cf[i * 2 + 1] = 0.0;              // 虚部は0
+  }
+
+  dsps_fft2r_fc32(y_cf, N); // FFT
+  dsps_bit_rev_fc32(y_cf, N); // Bit reverse
+
+  Serial.println(&quot;Output:&quot;);
+  // Calculate power spectrum
+  for (int i = 0 ; i &lt; N / 2 ; i++) {
+    float real = y_cf[i * 2 + 0];
+    float imag = y_cf[i * 2 + 1];
+    float power = (real * real + imag * imag) / N;
+    y_cf[i] = 10 * log10f(power);  // dB変換
+    Serial.printf(&quot;%d, %f\r\n&quot;, i, y_cf[i]);
+  }
+
+  // Show power spectrum
+  dsps_view(y_cf, N / 2, 64, 10, -60, 40, &#39;|&#39;);
+
+  while (true) delay(1000);
+}
+</code></pre></div>
+<p>iPhone用の<a href="https://apps.apple.com/om/app/tone-generator-audio-sound-hz/id1206449238">Tone Generator</a>というアプリがあったので、これで500, 1000, 2000Hzを出力した状態で実行。結果はシリアルに出力されるのでgnuplotでグラフにしてみた。</p>
+<p>500Hzの場合<br/>
+<img alt="500Hz" src="../../esp32-fft/500.png" /></p>
+<p>1000Hzの場合<br/>
+<img alt="1000Hz" src="../../esp32-fft/1000.png" /></p>
+<p>2000Hzの場合<br/>
+<img alt="2000Hz" src="../../esp32-fft/2000.png" /></p>
+<p>500Hzの場合は結構倍音が出ているようだが、ちゃんと周波数成分が抽出できているようだ。実際の石油ファンヒータのブザー音は冬までおあずけ。</p>
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
           <time datetime="2025-05-18 00:00:00+00:00">2025年5月18日</time></li>
         
         

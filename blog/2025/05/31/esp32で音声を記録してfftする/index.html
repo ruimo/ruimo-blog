@@ -8,13 +8,11 @@
       
       
       
-        <link rel="canonical" href="https://ruimo.github.io/ruimo-blog/blog/2025/05/18/esp32%E3%81%8B%E3%82%89switchbot%E3%81%ABbluetooth%E6%8E%A5%E7%B6%9A/">
+        <link rel="canonical" href="https://ruimo.github.io/ruimo-blog/blog/2025/05/31/esp32%E3%81%A7%E9%9F%B3%E5%A3%B0%E3%82%92%E8%A8%98%E9%8C%B2%E3%81%97%E3%81%A6fft%E3%81%99%E3%82%8B/">
       
       
-        <link rel="prev" href="../../17/cups-install-error/">
+        <link rel="prev" href="../../18/esp32%E3%81%8B%E3%82%89switchbot%E3%81%ABbluetooth%E6%8E%A5%E7%B6%9A/">
       
-      
-        <link rel="next" href="../../31/esp32%E3%81%A7%E9%9F%B3%E5%A3%B0%E3%82%92%E8%A8%98%E9%8C%B2%E3%81%97%E3%81%A6fft%E3%81%99%E3%82%8B/">
       
       
         <link rel="alternate" type="application/rss+xml" title="新しいページのRSSフィード" href="../../../../../feed_rss_created.xml">
@@ -25,7 +23,7 @@
     
     
       
-        <title>ESP32からSwitchBotにBluetooth接続 - るいもの戯れ言</title>
+        <title>ESP32で音声を記録して、FFTする - るいもの戯れ言</title>
       
     
     
@@ -68,7 +66,7 @@
     <meta property="og:image" content="https://ruimo.github.io/ruimo-blog/assets/images/default-ogp.png" />
     <meta name="twitter:image" content="https://ruimo.github.io/ruimo-blog/assets/images/default-ogp.png" />
   
-  <meta property="og:title" content="ESP32からSwitchBotにBluetooth接続" />
+  <meta property="og:title" content="ESP32で音声を記録して、FFTする" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
 
@@ -91,7 +89,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#esp32switchbotbluetooth" class="md-skip">
+        <a href="#esp32fft" class="md-skip">
           コンテンツにスキップ
         </a>
       
@@ -128,7 +126,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              ESP32からSwitchBotにBluetooth接続
+              ESP32で音声を記録して、FFTする
             
           </span>
         </div>
@@ -2075,6 +2073,41 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      マイク
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esp32adc" class="md-nav__link">
+    <span class="md-ellipsis">
+      ESP32のADC
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esp32fft_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      ESP32でFFT
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2110,7 +2143,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2025-05-18 00:00:00+00:00" class="md-ellipsis">2025年5月18日</time>
+                        <time datetime="2025-05-31 00:00:00+00:00" class="md-ellipsis">2025年5月31日</time>
                       </div>
                     </li>
                     
@@ -2122,7 +2155,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              このページは約2分で読めます
+                              このページは約3分で読めます
                             
                           </span>
                         </div>
@@ -2146,138 +2179,142 @@
 
 
 
-<h1 id="esp32switchbotbluetooth">ESP32からSwitchBotにBluetooth接続</h1>
-<p>ESP32からSwitchBotのボタンを動かしたい。</p>
-<p><a href="https://github.com/nkolban/ESP32_BLE_Arduino">ESP32_BLE_Arduino</a>というのがあるので、これで試してみる。</p>
-<p><a href="https://github.com/nkolban/ESP32_BLE_Arduino/blob/master/examples/BLE_client/BLE_client.ino">BLE client sample</a>があるので、てっとり早く動かしてみたが、どうにも動かない。</p>
-<p>AdvertiseしているBluetoothデバイスを探し、見つかり次第コールバックが呼ばれるのだけど、このサンプルではこうなっている。</p>
-<div class="language-text highlight"><pre><span></span><code>static BLEUUID serviceUUID(&quot;4fafc201-1fb5-459e-8fcc-c5c9c331914b&quot;);
-....
-class MyAdvertisedDeviceCallbacks: public BLEAdvertisedDeviceCallbacks {
- /**
-   * Called for each advertising BLE server.
-   */
-  void onResult(BLEAdvertisedDevice advertisedDevice) {
-    Serial.print(&quot;BLE Advertised Device found: &quot;);
-    Serial.println(advertisedDevice.toString().c_str());
-
-    // We have found a device, let us now see if it contains the service we are looking for.
-    if (advertisedDevice.haveServiceUUID() &amp;&amp; advertisedDevice.isAdvertisingService(serviceUUID)) {
-
-      BLEDevice::getScan()-&gt;stop();
-      myDevice = new BLEAdvertisedDevice(advertisedDevice);
-      doConnect = true;
-      doScan = true;
-
-    } // Found our server
-</code></pre></div>
-<p>このserviceUUIDというのが、SwitchBotのボタン機能なので、それを持っているサービスを探すようになっているんだけど、</p>
-<div class="language-text highlight"><pre><span></span><code>if (advertisedDevice.haveServiceUUID() &amp;&amp; advertisedDevice.isAdvertisingService(serviceUUID))
-</code></pre></div>
-<p>このif文の条件が全然成立しない。どうもadvertise deviceというのと、実際のdeviceというのは別物っぽくて、advertise deviceが持っているサービスは<code>0000fd3d-0000-1000-8000-00805f9b34fb</code>というUUIDだった。これはAmazon Alexaに見つけてもらうサービスみたい。</p>
-<p>なので、ここの条件文は以下のようにしてデバイスアドレスをチェックするように変更したら見つかるようになった。</p>
-<div class="language-text highlight"><pre><span></span><code>String addr = advertisedDevice.getAddress().toString().c_str();
-if (addr.equalsIgnoreCase(addrSwitchBot)) {
-</code></pre></div>
-<p>デバイスアドレスは、iPhone用のアプリでSwitchBotのデバイス情報から参照できる。なおデバイス情報を確認したらiPhone側のSwitchBotアプリは止めておかないと、ESP32側から接続できないので注意。</p>
-<p><a href="/ruimo-blog/blog/esp32-bt/IMG_2422.PNG" target="_blank">
-  <img src="/ruimo-blog/blog/esp32-bt/IMG_2422.PNG" width="400" alt="クリックで拡大">
+<h1 id="esp32fft">ESP32で音声を記録して、FFTする</h1>
+<p>うちにある石油ファンヒータ、2時間くらい経つとブザーが鳴って自動で消火する機能が付いている。消し忘れ防止のようだが、イヤホンなど付けていると気付かないことが多い。そこでブザーが鳴っていたら、それを検出する機器を作りたい。</p>
+<p>ESP32にマイクを接続して音声を記録して周波数成分を分析してみる。</p>
+<h2 id="_1">マイク</h2>
+<p>以前使用した秋月のシリコンマイクが良かったので、今回も使用。</p>
+<p><a href="https://akizukidenshi.com/catalog/g/g108940/">
+<img alt="シリコンマイク" src="https://akizukidenshi.com/img/goods/L/108940.jpg" />
 </a></p>
-<p>あとは、connectAndSendCommand()の中のキャラクタリスティックのチェックが終わったところで以下でボタンを押すコマンドを送れば良い。</p>
-<div class="language-text highlight"><pre><span></span><code>static uint8_t cmdPress[3] = {0x57, 0x01, 0x00};
-...
-pRemoteCharacteristic-&gt;writeValue(cmdPress, sizeof(cmdPress), false);
-</code></pre></div>
-<p>ソースの全体はこれ。</p>
-<div class="language-text highlight"><pre><span></span><code>#include &quot;BLEDevice.h&quot;
-#include &lt;HardwareSerial.h&gt;
-
-// 手元の SwitchBot のアドレス
-static String addrSwitchBot = &quot;??:??:??:??:??:??&quot;;
-// SwitchBot のユーザ定義サービス
-static BLEUUID serviceUUID(&quot;cba20d00-224d-11e6-9fb8-0002a5d5c51b&quot;);
-// 上記サービス内の対象キャラクタリスティック
-static BLEUUID    charUUID(&quot;cba20002-224d-11e6-9fb8-0002a5d5c51b&quot;);
-// SwitchBot の Press コマンド
-static uint8_t cmdPress[3] = {0x57, 0x01, 0x00};
-
-static BLEAdvertisedDevice* myDevice = nullptr;
-
-class AdvCallback: public BLEAdvertisedDeviceCallbacks {
-  void onResult(BLEAdvertisedDevice advertisedDevice) {
-    Serial.println(&quot;BLE device found: &quot;);
-    String addr = advertisedDevice.getAddress().toString().c_str();
-    Serial.printf(&quot;addr=[%s]\r\n&quot;, addr.c_str());
-    if (addr.equalsIgnoreCase(addrSwitchBot)) {
-      // SwitchBot を発見
-      Serial.println(&quot;found SwitchBot&quot;);
-      advertisedDevice.getScan()-&gt;stop();
-      myDevice = new BLEAdvertisedDevice(advertisedDevice);
-    }
-  }
-};
+<p>20dBのアンプが内蔵されているので扱い易い。基板裏の半田ブリッジに半田を盛ってショートしておく。</p>
+<h2 id="esp32adc">ESP32のADC</h2>
+<p>ADCがあるので、試してみる。GPIO32がアナログ入力に使える。</p>
+<div class="language-text highlight"><pre><span></span><code>#include &lt;Arduino.h&gt;
 
 void setup() {
   Serial.begin(115200);
-  Serial.println(&quot;Setup&quot;);
-  BLEDevice::init(&quot;&quot;);
-
-  // デバイスからのアドバタイズをスキャン
-  BLEScan* pBLEScan = BLEDevice::getScan();
-  pBLEScan-&gt;setAdvertisedDeviceCallbacks(new AdvCallback());
-  pBLEScan-&gt;setActiveScan(true);
-  pBLEScan-&gt;start(30); 
+  pinMode(32, ANALOG);
 }
 
 void loop() {
-  Serial.println(&quot;Loop&quot;);
-  if (myDevice != nullptr) {
-    if (! connectAndSendCommand()) {
-      Serial.println(&quot;connectAndSendCommand failed&quot;);
-    }
-    myDevice = nullptr;
-    Serial.println(&quot;done&quot;);
-  }
-  delay(1000);
-}
-
-// Pressコマンド送信
-static bool connectAndSendCommand() {
-  Serial.println(&quot;start connectAndSendCommand&quot;);
-  BLEClient* pClient = BLEDevice::createClient();
-
-  bool success = pClient-&gt;connect(myDevice);
-  if (! success) {
-    Serial.println(&quot; - Connect failed.&quot;);
-    return false;
-  }
-  Serial.println(&quot; - Connected to server&quot;);
-
-  // 対象サービスを得る
-  BLERemoteService* pRemoteService = pClient-&gt;getService(serviceUUID);
-  if (pRemoteService == nullptr) {
-    Serial.println(&quot;target service not found&quot;);
-    return false;
-  }
-  Serial.println(&quot;found target service&quot;);
-
-  // 対象キャラクタリスティックを得る
-  BLERemoteCharacteristic* pRemoteCharacteristic = pRemoteService-&gt;getCharacteristic(charUUID);
-  if (pRemoteCharacteristic == nullptr) {
-    Serial.println(&quot;target characteristic not found&quot;);
-    return false;
-  }
-  Serial.println(&quot;found target characteristic&quot;);
-
-  // キャラクタリスティックに Press コマンドを書き込む
-  pRemoteCharacteristic-&gt;writeValue(cmdPress, sizeof(cmdPress), false);
-
-  delay(3000);
-  pClient-&gt;disconnect();
-
-  return true;
+  Serial.println(analogRead(32));
+  delay(300);
 }
 </code></pre></div>
+<p>12bit出力なのだが、可変抵抗を接続して0から4095になる範囲を見ると、</p>
+<table>
+<thead>
+<tr>
+<th>最低電圧</th>
+<th>最高電圧</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.12V</td>
+<td>3.18V</td>
+</tr>
+</tbody>
+</table>
+<p>マイクの出力範囲はオシロで見る限りこの範囲に入っているようなので、大丈夫そうだ。</p>
+<h2 id="esp32fft_1">ESP32でFFT</h2>
+<p>Espressif社が、esp-dspというデジタル信号処理用のライブラリを提供してくれているので、これを使うのうが良さそう。ここに<a href="https://github.com/espressif/esp-dsp/tree/eedf2a50811195224f07f941250a99bf1368d69e/examples/fft">サンプル</a>がある。これを見ながら自分用のを作成。サンプリング周波数は10kHzにし、サンプル数は1024にした。</p>
+<p>マイク信号はDCバイアスがかかっているので、平均値を減算している。</p>
+<div class="language-text highlight"><pre><span></span><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &quot;freertos/FreeRTOS.h&quot;
+#include &quot;freertos/task.h&quot;
+#include &quot;esp_system.h&quot;
+#include &quot;driver/spi_master.h&quot;
+#include &quot;soc/gpio_struct.h&quot;
+#include &quot;driver/gpio.h&quot;
+#include &quot;driver/uart.h&quot;
+#include &quot;soc/uart_struct.h&quot;
+#include &lt;math.h&gt;
+
+#include &quot;esp_dsp.h&quot;
+
+#define SAMPLING_FREQUENCY 10000
+unsigned int sampling_period_us = 1000L * 1000L / SAMPLING_FREQUENCY;
+
+#define N_SAMPLES 1024
+int N = N_SAMPLES;
+// Input test array
+__attribute__((aligned(16)))
+float x1[N_SAMPLES];
+// Window coefficients
+__attribute__((aligned(16)))
+float wind[N_SAMPLES];
+// working complex array
+__attribute__((aligned(16)))
+float y_cf[N_SAMPLES * 2];
+
+void setup() {
+  pinMode(32, ANALOG);
+  Serial.begin(115200);
+}
+
+void loop() {
+  esp_err_t ret = dsps_fft2r_init_fc32(NULL, CONFIG_DSP_MAX_FFT_SIZE);
+  if (ret != ESP_OK) {
+    Serial.printf(&quot;Not possible to initialize FFT. Error = %i&quot;, ret);
+    return;
+  }
+
+  dsps_wind_hann_f32(wind, N); // Generate hann window
+  //  dsps_tone_gen_f32(x1, N, 1.0, 0.16, 0); // Generate input signal: A=1.0, F=0.16
+
+  float ave = 0;
+  for (int i = 0; i &lt; N; ++i) {
+    unsigned long t = micros();
+    int a = analogRead(32);
+    while ((micros() - t) &lt; sampling_period_us) ;
+    x1[i] = a;
+    ave += a;
+  }
+
+  ave /= N;
+  Serial.println(&quot;Input:&quot;);
+  for (int i = 0; i &lt; N; ++i) {
+    x1[i] = x1[i] - ave;
+    Serial.printf(&quot;%d, %f\r\n&quot;, i, x1[i]);
+  }
+
+  // Apply window and convert to complex format
+  for (int i = 0 ; i &lt; N ; i++) {
+    y_cf[i * 2 + 0] = x1[i] * wind[i];  // 実部
+    y_cf[i * 2 + 1] = 0.0;              // 虚部は0
+  }
+
+  dsps_fft2r_fc32(y_cf, N); // FFT
+  dsps_bit_rev_fc32(y_cf, N); // Bit reverse
+
+  Serial.println(&quot;Output:&quot;);
+  // Calculate power spectrum
+  for (int i = 0 ; i &lt; N / 2 ; i++) {
+    float real = y_cf[i * 2 + 0];
+    float imag = y_cf[i * 2 + 1];
+    float power = (real * real + imag * imag) / N;
+    y_cf[i] = 10 * log10f(power);  // dB変換
+    Serial.printf(&quot;%d, %f\r\n&quot;, i, y_cf[i]);
+  }
+
+  // Show power spectrum
+  dsps_view(y_cf, N / 2, 64, 10, -60, 40, &#39;|&#39;);
+
+  while (true) delay(1000);
+}
+</code></pre></div>
+<p>iPhone用の<a href="https://apps.apple.com/om/app/tone-generator-audio-sound-hz/id1206449238">Tone Generator</a>というアプリがあったので、これで500, 1000, 2000Hzを出力した状態で実行。結果はシリアルに出力されるのでgnuplotでグラフにしてみた。</p>
+<p>500Hzの場合<br/>
+<img alt="500Hz" src="../../../../esp32-fft/500.png" /></p>
+<p>1000Hzの場合<br/>
+<img alt="1000Hz" src="../../../../esp32-fft/1000.png" /></p>
+<p>2000Hzの場合<br/>
+<img alt="2000Hz" src="../../../../esp32-fft/2000.png" /></p>
+<p>500Hzの場合は結構倍音が出ているようだが、ちゃんと周波数成分が抽出できているようだ。実際の石油ファンヒータのブザー音は冬までおあずけ。</p>
 
 
 
@@ -2367,7 +2404,7 @@ static bool connectAndSendCommand() {
       <nav class="md-footer__inner md-grid" aria-label="フッター" >
         
           
-          <a href="../../17/cups-install-error/" class="md-footer__link md-footer__link--prev" aria-label="前: Cups install error">
+          <a href="../../18/esp32%E3%81%8B%E3%82%89switchbot%E3%81%ABbluetooth%E6%8E%A5%E7%B6%9A/" class="md-footer__link md-footer__link--prev" aria-label="前: ESP32からSwitchBotにBluetooth接続">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2377,27 +2414,11 @@ static bool connectAndSendCommand() {
                 前
               </span>
               <div class="md-ellipsis">
-                Cups install error
+                ESP32からSwitchBotにBluetooth接続
               </div>
             </div>
           </a>
         
-        
-          
-          <a href="../../31/esp32%E3%81%A7%E9%9F%B3%E5%A3%B0%E3%82%92%E8%A8%98%E9%8C%B2%E3%81%97%E3%81%A6fft%E3%81%99%E3%82%8B/" class="md-footer__link md-footer__link--next" aria-label="次: ESP32で音声を記録して、FFTする">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                次
-              </span>
-              <div class="md-ellipsis">
-                ESP32で音声を記録して、FFTする
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
         
       </nav>
     
