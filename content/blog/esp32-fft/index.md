@@ -1,6 +1,6 @@
 +++
 date = "2025-05-31"
-image = "https://ruimo.github.io/ruimo-blog/blog/esp32-fft/500.png"
+og_image = "https://ruimo.github.io/ruimo-blog/blog/esp32-fft/500.png"
 title = "ESP32で音声を記録して、FFTする"
 +++
 

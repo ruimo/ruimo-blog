@@ -1,6 +1,6 @@
 +++
 date ="2025-05-17"
-image = "raspi-audio-power/raspi-audio.drawio.svg"
+og_image = "raspi-audio-power/raspi-audio.drawio.svg"
 title = "激安アンプのその後"
 +++
 
