@@ -1,7 +1,8 @@
 +++
 date = "2025-05-31"
-og_image = "https://ruimo.github.io/ruimo-blog/blog/esp32-fft/500.png"
 title = "ESP32で音声を記録して、FFTする"
+[extra]
+og_image = "https://ruimo.github.io/ruimo-blog/blog/esp32-fft/500.png"
 +++
 
 うちにある石油ファンヒータ、2時間くらい経つとブザーが鳴って自動で消火する機能が付いている。消し忘れ防止のようだが、イヤホンなど付けていると気付かないことが多い。そこでブザーが鳴っていたら、それを検出する機器を作りたい。
