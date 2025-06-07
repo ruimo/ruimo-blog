@@ -49,3 +49,17 @@ url = "$BASE_URL/piano"
 [[extra.menu]]
 name = "Tools"
 url = "$BASE_URL/tools"
+
+[extra.giscus]
+repo = "ruimo/ruimo-blog"
+repo_id = "R_kgDON3pwEQ"
+category = "Announcements"
+category_id = "DIC_kwDON3pwEc4Cm2vv"
+mapping = "pathname"
+strict = "0"
+reactions_enabled = "1"
+emit_metadata = "0"
+input_position = "bottom"
+theme = "preferred_color_scheme"
+lang = "ja"
+loading = "lazy"
