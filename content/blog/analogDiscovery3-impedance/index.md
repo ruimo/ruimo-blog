@@ -1,9 +1,10 @@
 +++
 date = "2025-05-02 02:00:00"
-og_image = "https://ruimo.github.io/ruimo-blog/blog/analogDiscovery3-impedance/impedanceAnalyzer.jpg"
 title = "Analog Discovery 3 - インピーダンスアナライザ"
 [taxonomies]
 tags = ["Analog Discovery 3"]
+[extra]
+og_image = "https://ruimo.github.io/ruimo-blog/blog/analogDiscovery3-impedance/impedanceAnalyzer.jpg"
 +++
 
 [Analog Discovery 3の基本的なセットアップはこちら](../analogDiscovery3-introduction)

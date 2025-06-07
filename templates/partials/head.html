@@ -36,19 +36,6 @@
   <meta property="og:site_name" content="{{ config.title }}" />
   <meta property="og:description" content="{{ description }}" />
   <meta property="og:url" content="{{ page.permalink }}" />
-  {% if page.extra.cover.image %}
-  <!---->
-  {% set image = page.extra.cover.image %}
-  <!---->
-  {% elif config.extra.social_image %}
-  <!---->
-  {% set image = config.extra.social_image %}
-  <!---->
-  {% endif %}
-  <!---->
-  {% if image %}
-  <meta property="og:image" content="{{ get_url(path=image) }}" />
-  {% endif %}
   <!---->
   {% else %}
   <!-- Author -->
@@ -61,12 +48,21 @@
   <meta property="og:title" content="{{ config.title }}" />
   <meta property="og:description" content="{{ description }}" />
   <meta property="og:url" content="{{ get_url(path=``) }}" />
-  {% if page.extra.og_image %}
-  <meta property="og:image" content="{{ get_url(path=page.extra.og_image) }}">
-  {% elif config.extra.og_image %}
-  <meta property="og:image" content="{{ get_url(path=config.extra.og_image) }}" />
-  {% endif %}
   <!---->
+  {% endif %}
+
+  {% if page.extra.og_image %}
+    {% if page.extra.og_image is starting_with("http") %}
+      <meta property="og:image" content="{{ page.extra.og_image }}">
+    {% else %}
+      <meta property="og:image" content="{{ get_url(path=page.extra.og_image) }}">
+    {% endif %}
+  {% elif config.extra.og_image %}
+    {% if config.extra.og_image is starting_with("http") %}
+      <meta property="og:image" content="{{ config.extra.og_image }}" />
+    {% else %}
+      <meta property="og:image" content="{{ get_url(path=config.extra.og_image) }}" />
+    {% endif %}
   {% endif %}
 
   <!-- CSS & JS -->
