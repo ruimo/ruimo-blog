@@ -12,13 +12,19 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Setup Zola
+        uses: taiki-e/install-action@v2
+        with:
+          tool: zola
+      - name: Build with Zola
+        run: zola build
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
       - name: Configure Git Credentials
         run: |
           git config user.name github-actions-bot
           git config user.email github-actions-bot@users.noreply.github.com
-      - name: gh-deploy
-        run: |
-          git fetch
-          git branch -a
-          ./prepare.sh
-          ./deploy.sh
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+

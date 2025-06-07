@@ -1,0 +1,51 @@
+title = "るいもの戯言"
+
+# The URL the site will be built for
+base_url = "https://example.com"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = true
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = true
+
+theme = "kita"
+
+generate_feeds = true
+
+taxonomies = [
+    { name = "tags", feed = true },  # "tags" という名前のタクソノミーを有効にする
+]
+
+[markdown]
+# Whether to do syntax highlighting
+# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
+highlight_code = true
+
+[extra]
+# Put all your custom variables here
+
+# Enable KaTex math formula support globally.
+math = true
+# Enable mermaid support globally.
+mermaid = true
+# Enable comment support globally.
+comment = true
+
+og_image = "images/logo.gif"
+
+[[extra.menu]]
+name = "タグ"
+url = "$BASE_URL/tags"
+
+[[extra.menu]]
+name = "DIY"
+url = "$BASE_URL/diy"
+
+[[extra.menu]]
+name = "Piano"
+url = "$BASE_URL/piano"
+
+[[extra.menu]]
+name = "Tools"
+url = "$BASE_URL/tools"

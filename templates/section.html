@@ -1,0 +1,13 @@
+{% extends "index.html" %}<!---->
+{% block main %}
+<!-- Section Title -->
+<h1 class="mb-16">{{ section.title }}</h1>
+<!-- Pages -->
+
+{% for subsection in section.subsections %}
+    {% set sub = get_section(path=subsection) %}
+    <h2><a href="{{ sub.permalink }}">{{ sub.title }}</a></h2>
+{% endfor %}
+
+{% include "partials/page_list.html" %}<!---->
+{% endblock main %}
