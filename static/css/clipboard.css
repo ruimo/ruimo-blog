@@ -1,0 +1,49 @@
+/* コピーボタンのスタイル */
+.copy-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+    font-family: inherit;
+}
+
+.copy-button:hover {
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.copy-button.copied {
+    background: rgba(76, 175, 80, 0.9);
+    color: white;
+    border-color: #4CAF50;
+}
+
+/* ダークテーマ対応 */
+@media (prefers-color-scheme: dark) {
+    .copy-button {
+        background: rgba(68, 68, 68, 0.9);
+        color: white;
+        border-color: #555;
+    }
+    
+    .copy-button:hover {
+        background: rgba(68, 68, 68, 1);
+    }
+}
+
+/* コードブロックのスタイル調整 */
+pre {
+    position: relative !important;
+}
+
+pre code {
+    display: block;
+    padding-right: 80px; /* コピーボタンのスペースを確保 */
+}
