@@ -1,7 +1,8 @@
 +++
 date ="2025-05-17"
-og_image = "raspi-audio-power/raspi-audio.drawio.svg"
 title = "激安アンプのその後"
+[extra]
+og_image = "raspi-audio-power/raspi-audio.drawio.svg"
 +++
 
 以前購入した[激安アンプ](https://www.ruimo.com/showArticle/1667)、ラズパイオーディオの出力に使っている。
