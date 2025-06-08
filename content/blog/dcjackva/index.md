@@ -2,7 +2,7 @@
 date ="2025-6-8"
 title = "3Vから測定可能なDCジャック電圧電流計"
 [extra]
-og_image = "3_3.jpg"
+og_image = "/ruimo-blog/blog/dcjackva/3_3.jpg"
 +++
 
 DCジャックに対応した電圧電流計。前から気になっていたのだが、当時は最低電圧が4Vだったので二の足を踏んでいた(やはり3.3Vから測れて欲しいよねぇ)。
