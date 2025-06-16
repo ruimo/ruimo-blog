@@ -7,7 +7,7 @@ tags = ["Analog Discovery 3"]
 og_image = "https://ruimo.github.io/ruimo-blog/blog/analogDiscovery3-impedance/impedanceAnalyzer.jpg"
 +++
 
-[Analog Discovery 3の基本的なセットアップはこちら](../analogDiscovery3-introduction)
+[Analog Discovery 3の基本的なセットアップはこちら](../analogdiscovery3-introduction)
 
 次にインピーダンスアナライザを接続する。この向きで良いようだ。
 
