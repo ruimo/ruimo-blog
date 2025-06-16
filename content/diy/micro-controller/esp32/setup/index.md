@@ -65,14 +65,13 @@ File → Examples → 01.Basics → Blinkを開く。
 
 今回は[ESP32のDev Board](https://akizukidenshi.com/catalog/g/g115673/)を使用した。これはUSBシリアルと、ダウンローダ用の回路が載っている(同等の回路を用意すれば自作も可能)。
 
-!!! note
-
-    自作する場合は、上記の[ESP32のDev Boardの回路図](https://akizukidenshi.com/goodsaffix/esp32_devkitc_v4-sch.pdf)を参考にすると良い。
-    
-    - USBシリアルの信号線は3.3Vであること
-    - USBシリアルのTXDをESP32のRXD0に接続
-    - USBシリアルのRXDをESP32のTXD0に接続
-    - USBシリアルのDTR/RTSをトランジスタのスイッチを介してESP3のEN/IO0に接続
+> 📝 **Note:** 
+>    自作する場合は、上記の[ESP32のDev Boardの回路図](https://akizukidenshi.com/goodsaffix/esp32_devkitc_v4-sch.pdf)を参考にすると良い。
+>
+>    - USBシリアルの信号線は3.3Vであること
+>    - USBシリアルのTXDをESP32のRXD0に接続
+>    - USBシリアルのRXDをESP32のTXD0に接続
+>    - USBシリアルのDTR/RTSをトランジスタのスイッチを介してESP3のEN/IO0に接続
 
 以下はLinuxの場合のUSB Serialの設定。
 
