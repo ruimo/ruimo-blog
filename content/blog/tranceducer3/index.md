@@ -11,7 +11,7 @@ og_image = "/blog/tranceducer3/inductor.jpg"
 
 ![inductor](inductor.jpg)
 
-AliExpressで購入したEE42のフェライトコアに0.1mm x 100のリッツ線を21回巻いたもの。インダクタンスを測定してみる。
+AliExpressで購入したEE42のフェライトコアに0.1mm x 100のリッツ線を13回巻いたもの。インダクタンスを測定してみる。
 
 <a href="inductance.jpg" target="_blank">
   <img src="inductance.jpg" width="800" alt="クリックで拡大">
