@@ -2,7 +2,7 @@
 date ="2025-9-22"
 title = "池上散歩"
 [extra]
-og_image = "IMG_6654s.jpg"
+og_image = "https://ruimo.github.io/ruimo-blog/blog/2025-09-22/IMG_6654s.jpg"
 +++
 
 随分涼しくなったので、池上周辺を散歩。養源寺、大坊本行寺、呑川、あとは6丁目付近。夏が長かったせいか、お寺の中はあまり花が咲いてなかった。
