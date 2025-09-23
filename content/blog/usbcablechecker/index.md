@@ -2,7 +2,7 @@
 date ="2025-9-23"
 title = "USBケーブルチェッカ"
 [extra]
-og_image = "/ruimo-blog/blog/usbcablechecker/IMG_2717.JPG"
+og_image = "/blog/usbcablechecker/IMG_2717.JPG"
 +++
 
 [USB Cable Checker3](https://www.pc-koubou.jp/products/detail.php?product_id=1175815)が出ていたので買ってみた。
