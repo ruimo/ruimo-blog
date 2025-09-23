@@ -15,6 +15,6 @@ og_image = "/blog/usbcablechecker/IMG_2717.JPG"
 
 ![タグ](IMG_2719.JPG)
 
-タグはヘラマンタイトンのIT18Rを使用。
+タグは[ヘラマンタイトンのIT18R](https://amzn.to/3K9ClNz)を使用。
 
 ![ヘラマンタイトン](https://www.hellermanntyton.co.jp/library/img/product/id/marking/marking/marking_n_pic_900.jpg)
