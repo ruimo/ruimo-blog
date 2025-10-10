@@ -10,8 +10,8 @@ og_image = "/blog/shinagawaHanaKaido2025/IMG_6837.jpg"
 [しながわ花海道](https://www.hanakaido.org/)は、学校や地域の人が花を植えてくれているらしい。
 
 ![photo](IMG_6819.jpg)
-![photo](IMG_6820.jpg)
 
+![photo](IMG_6820.jpg)
 今の時期はキバナコスモスがメイン。
 
 ![photo](IMG_6822.jpg)
