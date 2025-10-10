@@ -1,6 +1,8 @@
 +++
 date = "2025-09-14 00:00:00"
 title = "ラジ館屋上"
+[taxonomies]
+tags = ["散歩"]
 [extra]
 og_image = "https://ruimo.github.io/ruimo-blog/blog/radikan/IMG_6642s.jpg"
 +++

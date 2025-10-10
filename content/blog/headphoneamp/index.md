@@ -2,6 +2,7 @@
 date = "2025-09-06 02:00:00"
 title = "ヘッドフォンアンプのその後"
 [taxonomies]
+tags = ["DIY"]
 [extra]
 og_image = "https://ruimo.github.io/ruimo-blog/blog/headphoneamp/amp0.jpg"
 +++

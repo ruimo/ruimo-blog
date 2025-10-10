@@ -1,6 +1,8 @@
 +++
 date ="2025-10-10"
 title = "ブラジル料理 バルバッコア"
+[taxonomies]
+tags = ["グルメ"]
 [extra]
 og_image = "/blog/barbacoa2025/ogp.JPG"
 +++
