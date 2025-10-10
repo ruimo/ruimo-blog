@@ -1,6 +1,8 @@
 +++
 date ="2025-9-23"
 title = "USBケーブルチェッカ"
+[taxonomies]
+tags = ["DIY"]
 [extra]
 og_image = "/blog/usbcablechecker/IMG_2717.JPG"
 +++

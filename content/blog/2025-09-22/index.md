@@ -1,6 +1,8 @@
 +++
 date ="2025-9-22"
 title = "池上散歩"
+[taxonomies]
+tags = ["散歩"]
 [extra]
 og_image = "https://ruimo.github.io/ruimo-blog/blog/2025-09-22/IMG_6654s.jpg"
 +++

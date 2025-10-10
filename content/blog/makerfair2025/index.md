@@ -1,6 +1,8 @@
 +++
 date ="2025-10-4"
 title = "Maker Faire 2025"
+[taxonomies]
+tags = ["DIY"]
 [extra]
 og_image = "/blog/makerfair2025/ogp.jpg"
 +++
