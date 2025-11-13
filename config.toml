@@ -54,6 +54,10 @@ url = "$BASE_URL/piano"
 name = "Tools"
 url = "$BASE_URL/tools"
 
+[[extra.menu]]
+name = "Publication"
+url = "https://static.ruimo.com/publication"
+
 [extra.giscus]
 repo = "ruimo/ruimo-blog"
 repo_id = "R_kgDON3pwEQ"

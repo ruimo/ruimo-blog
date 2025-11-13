@@ -11,17 +11,17 @@ JavaScript による，Barcode 作成ツールです．EAN13, EAN8, UPC-A, UPC-E
 
 使い方は至って簡単．ページを読み込むと「結果ウィンドウ」が表示されます．作成したバーコードはこの結果ウィンドウに表示されていきます．ページにコードと，コードタイプ，商品名を入力して下さい．最後のサイズは，作成するバーコードの大きさを指定します．入力が終わったら，「データ追加」ボタンを押してください．結果ウィンドウにバーコードが追加されます．プリンターの解像度が低い場合は大き目に作成して縮小コピーすると良いでしょう．また Fax 等で送る場合も大き目に印刷して送ったほうが良いでしょう．結果ウィンドウの中身を消したい場合は，「データ全消去」ボタンを押してください．
 
-[使ってみる](/static/tools/genBar/genBar.html)
+[使ってみる](https://static.ruimo.com/tools/genBar/genBar.html)
 
 ## ローカルで使用する
 
 ページをダウンロードしておけば，ローカルでも実行できます．以下の3つ のファイルをダウンロード(ナビゲータなら，右クリックしてSave Link As を 指定)してください．あとは，ダウンロードした場所のgenBar.htmlをブラウザー で開けば使用できます．
 
-[genBar.html(genBar 本体)](/static/tools/genBar/genBar.html)
+[genBar.html(genBar 本体)](https://static.ruimo.com/tools/genBar/genBar.html)
 
-[black.gif(黒バー)](/static/tools/genBar/black.gif)
+[black.gif(黒バー)](https://static.ruimo.com/tools/genBar/black.gif)
 
-[white.gif(白バー)](/static/tools/genBar/white.gif)
+[white.gif(白バー)](https://static.ruimo.com/tools/genBar/white.gif)
 
 ## 謝辞
 
