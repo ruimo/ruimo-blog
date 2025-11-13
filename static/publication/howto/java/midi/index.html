@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS"/>
+  <link rel="stylesheet" type="text/css" href="/stylesheet.css"/>
+  <title>JavaでMIDI</title>
+</head>
+<body>
+<p>Sorry, English version is not available at this time.</a></p>
+<h1>JavaでMIDI</h1>
+<h4>2007/1/6</h4>
+<p>比較的早い時期から、JavaはMIDIをサポートしています。とりあえず単純に音を出すだけなら、簡単に可能なのですが、一歩踏み込もうとすると、色々とはまり所があります。ここに自分の備忘録替わりに、記録を残すことにします。まず簡単な例から始めて、<a href="http://www.minet.jp/synthogy/">Ivory</a>というVST対応ピアノ音源を鳴らすに至るまでの方法を解説します。</p>
+
+<h2>JavaによるMIDI演奏の2つの方法</h2>
+
+<p>
+Javaには大きく分けて2つのMIDI演奏の方法があります。1つはレシーバ、もう1つはシーケンサです。レシーバはアドホックにMIDIメッセージをデバイスに送りたい場合に使用します。例えば画面に鍵盤の絵を出して、そこがクリックされたら音を出したいというような場合に向いています。シーケンサは、複数のMIDIメッセージを的確なタイミングで送り出したい場合に使用します。通常、音楽を演奏するのであればシーケンサを使うことになるでしょう。
+</p>
+
+<h3>レシーバ</h3>
+
+<p>最初に、より簡単なレシーバのサンプルから見てみましょう。</p>
+
+<pre class="codeSample">
+public class ReceiverSample {
+    public static void main(String[] args) throws Exception {
+        Receiver receiver = null;
+        try {
+            receiver = MidiSystem.getReceiver();
+
+            ShortMessage noteOn1 = new ShortMessage();
+            noteOn1.setMessage(ShortMessage.NOTE_ON, 60, 90);
+            receiver.send(noteOn1, 1);
+
+            ShortMessage noteOn2 = new ShortMessage();
+            noteOn2.setMessage(ShortMessage.NOTE_ON, 62, 90);
+            receiver.send(noteOn2, 1000L * 1000);
+            Thread.sleep(1100);
+        }
+        finally {
+            if (receiver != null) receiver.close();
+        }
+    }
+}
+</pre>
+
+<p>MidiSystem.getReceiver()を呼び出すと、レシーバが取得できます。Receiverにはsend()というメソッドがあり、これを呼び出すことでMIDIメッセージをデバイスに送り込むことができます。MIDIメッセージについては、ここでは詳細を割愛します。<a href="http://www.borg.com/~jglatt/tech/midispec.htm">The MIDI Specification</a>というサイトに、詳細な情報が記載されています(英語)ので参考にしてください。ここでは、ノートオンというメッセージを2つ送っています。</p>
+
+<pre class="codeSample">
+    ShortMessage noteOn1 = new ShortMessage();
+    noteOn1.setMessage(ShortMessage.NOTE_ON, 60, 90);
+...
+    noteOn2.setMessage(ShortMessage.NOTE_ON, 62, 90);
+    ShortMessage noteOn2 = new ShortMessage();
+</pre>
+
+<p>MIDIメッセージを作成するには、最初にメッセージオブジェクト(ここではShortMessage)を作成してから、setMessage()で内容を設定します(筆者は、このインターフェースが個人的には嫌いです。なんでイミュータブルにしなかったんでしょうね。いったんレシーバに渡した後にオブジェクトの内容を変更したりしないように注意してください)。setMessage()に指定している第二引数(60, 62)は、音程、第三引数(90)は音の大きさ(0-127)です。</p>
+
+<pre class="codeSample">
+    receiver.send(noteOn1, 1);
+...
+    receiver.send(noteOn2, 1000L * 1000);
+</pre>
+
+<p>sendの第二引数はタイミングをマイクロ秒で与えます。しかしこれは目安でしかなく、デバイスによってはサポートされません。事実、筆者の環境でもこの指定は無効で2つの音が同時に鳴りました。終わったらclose()を呼び出して、クローズしましょう。</p>
+
+<pre class="codeSample">
+    if (receiver != null) receiver.close();
+</pre>
+
+<h3>シーケンサ</h3>
+
+<p>次にシーケンサの例です。</p>
+
+<pre class="codeSample">
+public class Test {
+    public static void main(String[] args) throws Exception {
+        Sequencer sequencer = null;
+        try {
+            sequencer = MidiSystem.getSequencer();
+            sequencer.open();
+
+            Sequence seq = new Sequence(Sequence.PPQ, 240);
+            Track track = seq.createTrack();
+
+            MetaMessage tempo = new MetaMessage();
+            tempo.setMessage(0x51, new byte[] {0x07, (byte)0xa1, 0x20}, 3);
+            track.add(new MidiEvent(tempo, 0));
+        
+            ShortMessage noteOn1 = new ShortMessage();
+            noteOn1.setMessage(ShortMessage.NOTE_ON, 60, 64);
+            track.add(new MidiEvent(noteOn1, 0));
+
+            ShortMessage noteOn2 = new ShortMessage();
+            noteOn2.setMessage(ShortMessage.NOTE_OFF, 60, 0);
+            track.add(new MidiEvent(noteOn2, 480));
+        
+            sequencer.setSequence(seq);
+            sequencer.start();
+            while (sequencer.isRunning()) Thread.sleep(100);
+        }
+        finally {
+            if (sequencer != null &amp;&amp; sequencer.isOpen()) sequencer.close();
+        }
+    }
+}
+</pre>
+
+<p>今度はドの音に対してノートオンとノートオフを送って、1秒間鳴らしています。本来は、このようにノートオンとノートオフを対で送る必要があります。レシーバの例だとノートオンを出しただけなので、鍵盤が押されたままということになります。</p>
+
+<pre class="codeSample">
+    Sequencer sequencer = MidiSystem.getSequencer();
+    sequencer.open();
+</pre>
+
+<p>シーケンサもMidiSystemにお願いすれば用意してくれます。シーケンサは、このように明示的にopen()呼び出す必要があります。シーケンサに渡すデータはシーケンス(Sequence)です。SequencerとSequence、1文字しか違わないので注意してください。全然違うものです。シーケンスは1曲の音楽を表わしたものと考えると良いでしょう。シーケンスをシーケンサに渡して演奏するわけです。シーケンスの中には複数のトラックを置くことができます。トラックは各楽器のパートと考えると良いでしょう。</p>
+
+<pre class="codeSample">
+    Sequence seq = new Sequence(Sequence.PPQ, 240);
+</pre>
+
+<p>まずシーケンスを作成します。コンストラクタに渡しているのは、時間単位です。PPQはPulse Per Quarter noteで、四分音符を240tickで表わすという意味です。Pulseは、良くtickとも呼ばれます。このシーケンス内では1tickが四分音符の長さの1/240に相当するということです。</p>
+
+<pre class="codeSample">
+    Track track = seq.createTrack();
+</pre>
+
+<p>シーケンスのcreateTrack()を呼び出すことでトラックが生成できます。</p>
+
+<pre class="codeSample">
+    MetaMessage tempo = new MetaMessage();
+    tempo.setMessage(0x51, new byte[] {0x07, (byte)0xa1, 0x20}, 3);
+    track.add(new MidiEvent(tempo, 0));
+</pre>
+
+<p>これはテンポ設定のメタメッセージを書き込んでいます。これもMIDI仕様で定められています。バイト列07, a1, 20は、ビッグエンディアンの24bit整数0x07a120 = 500,000で、単位はマイクロ秒なので、0.5秒ということになります。シーケンスのコンストラクタで、PPQを指定していますから、四分音符の長さが0.5秒、つまり四分音符=120という速さを指定しています。</p>
+
+<p>先程の例と違いメッセージを更にMidiEventでくるんでいることが分かります。MIDIメッセージ自体には時間情報がありません。MidiEventはMIDIメッセージに時間情報を付け加えます。この例では0(単位はtick)を指定しているので、曲の開始と同時に、このメッセージが送られます。</p>
+
+<pre class="codeSample">
+    ShortMessage noteOn1 = new ShortMessage();
+    noteOn1.setMessage(ShortMessage.NOTE_ON, 60, 64);
+    track.add(new MidiEvent(noteOn1, 0));
+
+    ShortMessage noteOn2 = new ShortMessage();
+    noteOn2.setMessage(ShortMessage.NOTE_OFF, 60, 0);
+    track.add(new MidiEvent(noteOn2, 480));
+</pre>
+
+<p>同様にしてノートオンとノートオフを送っていますが、ノートオフでは、タイミングに480tickを指定しているので480/240 * 0.5 = 1で、1秒間鳴ることになります。</p>
+
+<pre class="codeSample">
+     sequencer.setSequence(seq);
+     sequencer.start();
+     while (sequencer.isRunning()) Thread.sleep(100);
+</pre>
+
+<p>シーケンスを作成したら、シーケンサに設定してシーケンサをスタートします。この後whileループで、シーケンサがisRunning()でfalseを返すまでの間、時間つぶしをしています。これをやらずに即座にプログラムを終了してしまうと、恐らく全く音が鳴らずに終了してしまうでしょう。</p>
+
+<pre class="codeSample">
+    if (sequencer != null &amp;&amp; sequencer.isOpen()) sequencer.close();
+</pre>
+
+<p>そして、最後にちゃんとシーケンサをクローズします。これを忘れないように注意してください。試しにこのclose()を削除した状態で、プログラムを実行してみてください。おそらくプログラムがいつまでも終了しなくなってしまうでしょう。シーケンサは別スレッドで動作するのですが、デーモンスレッドにはなっていないようで、シーケンサをクローズしないと、このようにプログラムがきちんと終了できなくなります。
+</p>
+
+<h2>デフォルトに頼らない方法</h2>
+
+<p>ここまでの例を見る限り、ずいぶんと簡単にMIDI音源を鳴らすことができることが分かります。これはいずれもデフォルトのレシーバ、シーケンサを使用しているためです。デフォルトのレシーバは、たまたまその時にシステム上に構成されているデバイスのいずれか、デフォルトのシーケンサはSunのReal-timeシーケンサと、やはりSunのソフトウェアシンセシンセサイザが使用されるようです。おもちゃ程度のアプリケーションであれば、これで良いのですが、ちゃんとしたMIDIのプログラムを書く場合には、出力デバイスを明示的に指定できないと困りますね。ここでは、その方法について解説します。</p>
+
+<h3>デバイスの種類</h3>
+
+<p>Java MIDIが扱うデバイスには3種類あります。</p>
+
+<ol>
+<li>シーケンサ<br/>
+
+タイミング情報を持ったMidiイベントを演奏することのできるデバイスです。</li>
+
+<li>シンセサイザ<br/>
+
+実際に音を生成できるデバイスです。</li>
+
+<li>その他<br/>
+
+MIDIポートなど、その他のMIDIデバイスです。</li>
+
+</ol>
+
+<p>実際にシステムに登録されているMIDIデバイスを一覧してみましょう。</p>
+
+<pre class="codeSample">
+public class DeviceList {
+    public static void main(String[] args) throws Exception {
+        MidiDevice.Info[] info = MidiSystem.getMidiDeviceInfo();
+        System.err.println("There are " + info.length + " devices.");
+        for (int i = 0; i &lt; info.length; i++) {
+            System.err.println("*** " + i + " ***");
+            System.err.println("  Description:" + info[i].getDescription());
+            System.err.println("  Name:" + info[i].getName());
+            System.err.println("  Vendor:" + info[i].getVendor());
+            MidiDevice device = MidiSystem.getMidiDevice(info[i]);
+            if (device instanceof Sequencer) {
+                System.err.println("  *** This is Sequencer.");
+            }
+            if (device instanceof Synthesizer) {
+                System.err.println("  *** This is Synthesizer.");
+            }
+            System.err.println();
+        }
+    }
+}
+</pre>
+
+<p>MIDIデバイスの一覧を取得するには、MidiSystem.getMidiDeviceInfo()を使います。</p>
+
+<pre class="codeSample">
+    MidiDevice.Info[] info = MidiSystem.getMidiDeviceInfo();
+</pre>
+
+<p>戻りはMidiDevice.Infoの配列です。getDescription()やgetName()を使用することで、そのデバイスの情報が得られます。この情報の1つを用いて実際のデバイスを取得するには、getMidiDevice()を使用します。</p>
+
+<pre class="codeSample">
+    device = MidiSystem.getMidiDevice(info[i]);
+</pre>
+
+<p>MIDIデバイスに3種類あることは、既に上で述べましたが、これを確認するにはインターフェースを用います。</p>
+
+<pre class="codeSample">
+    if (device instanceof Sequencer) {
+        System.err.println("  *** This is Sequencer.");
+    }
+    if (device instanceof Synthesizer) {
+        System.err.println("  *** This is Synthesizer.");
+    }
+</pre>
+
+<p>Sequencerを実装していればシーケンサ、Synthesizerを実装していればシンセサイザです。以下に筆者の環境での結果を示します。</p>
+
+<pre class="codeSample">
+There are 20 devices.
+*** 0 ***
+  Description:No details available
+  Name:MIDI Yoke NT:  1
+  Vendor:Unknown vendor
+
+*** 1 ***
+  Description:No details available
+  Name:MIDI Yoke NT:  2
+  Vendor:Unknown vendor
+
+*** 2 ***
+  Description:No details available
+  Name:MIDI Yoke NT:  3
+  Vendor:Unknown vendor
+
+*** 3 ***
+  Description:No details available
+  Name:MIDI Yoke NT:  4
+  Vendor:Unknown vendor
+
+*** 4 ***
+  Description:No details available
+  Name:MIDI Yoke NT:  5
+  Vendor:Unknown vendor
+
+*** 5 ***
+  Description:No details available
+  Name:MIDI Yoke NT:  6
+  Vendor:Unknown vendor
+
+*** 6 ***
+  Description:No details available
+  Name:MIDI Yoke NT:  7
+  Vendor:Unknown vendor
+
+*** 7 ***
+  Description:No details available
+  Name:MIDI Yoke NT:  8
+  Vendor:Unknown vendor
+
+*** 8 ***
+  Description:Windows MIDI_MAPPER
+  Name:Microsoft MIDI ?}?b
+  Vendor:Unknown vendor
+
+*** 9 ***
+  Description:External MIDI Port
+  Name:MIDI Yoke NT:  1
+  Vendor:Unknown vendor
+
+*** 10 ***
+  Description:External MIDI Port
+  Name:MIDI Yoke NT:  2
+  Vendor:Unknown vendor
+
+*** 11 ***
+  Description:External MIDI Port
+  Name:MIDI Yoke NT:  3
+  Vendor:Unknown vendor
+
+*** 12 ***
+  Description:External MIDI Port
+  Name:MIDI Yoke NT:  4
+  Vendor:Unknown vendor
+
+*** 13 ***
+  Description:External MIDI Port
+  Name:MIDI Yoke NT:  5
+  Vendor:Unknown vendor
+
+*** 14 ***
+  Description:External MIDI Port
+  Name:MIDI Yoke NT:  6
+  Vendor:Unknown vendor
+
+*** 15 ***
+  Description:External MIDI Port
+  Name:MIDI Yoke NT:  7
+  Vendor:Unknown vendor
+
+*** 16 ***
+  Description:External MIDI Port
+  Name:MIDI Yoke NT:  8
+  Vendor:Unknown vendor
+
+*** 17 ***
+  Description:Internal software synthesizer
+  Name:Microsoft GS Wavetable SW Synth
+  Vendor:Unknown vendor
+
+*** 18 ***
+  Description:Software sequencer
+  Name:Real Time Sequencer
+  Vendor:Sun Microsystems
+  *** This is Sequencer.
+
+*** 19 ***
+  Description:Software wavetable synthesizer and receiver
+  Name:Java Sound Synthesizer
+  Vendor:Sun Microsystems
+  *** This is Synthesizer.
+</pre>
+
+<p>この例では<a href="http://www.midiox.com/index.htm?http://www.midiox.com/myoke.htm">MIDI Yoke Junction</a>(以降単にMIDI Yoke)という仮想MIDIソフト(?)をインストールしています。例えば<a href="http://kenchin8.hp.infoseek.co.jp/">ソフトウェアMIDIキーボード</a>のようなソフトウェアで、Ivoryのようなソフトウェアシンセを鳴らしたい場合、原理的には2つのマシンが必要になります。ソフトウェアMIDIキーボードはサウンドカードのMIDI-OUTにMIDIメッセージを出力、これを別マシンのMIDI-INにつないでやって、そこでIvoryを動かすわけです。幾つかのMIDI用ソフトウェアシンセは、Windows上にMIDI出力デバイスとして構成されるため、単にソフトウェアMIDIキーボードのMIDI出力先を、ソフトウェアシンセに設定するという芸当もできるようになっていますが、Ivoryなどのソフトウェアでは、そういうことはできません。</p>
+
+<p>MIDI Yokeを使用すると、2つのソフトウェアを仮想的にMIDIケーブルで結ぶことができます。つまりソフトウェアMIDIキーボードの出力先をMIDI Yokeに、ソフトウェアシンセの入力元もMIDI Yokeにすることで、両者をケーブルでつないだように動作させることができるのです。これによって1台のマシンでシステムを構成することができます。</p>
+<p>なお、一部のソフトウェアシンセはMIDIでデータを受けることもできず、使用のためには、VSTやRTASといった専用のインターフェースが必要なものもあります(Ivoryもバージョン1.5まではそうでした)。この場合には、例えば<a href="http://www.hermannseib.com/english/vsthost.htm">VSTHost</a>のようなソフトウェアを使用して、MIDIから使用可能なように設定する必要があります。</p>
+
+<p>話が横道にそれました。これらの設定方法は最後に解説することにして、本題に戻りましょう。リストにはMIDI Yokeのポート1から8がなぜか、2セットあります。なぜ2セットあるかは<b>謎</b>です。MIDI Yokeの問題なのか、Java MIDIの問題なのかは不明です。これらのうち正しく動作するのは片方だけです(はまりました)。Descriptionに"External MIDI Port"とある方を使えば良いようです。</p>
+
+<p>MIDI Yokeは単なるMIDIポートなので、シーケンサでもシンセサイザでもありません。残りは、以下の4つです。</p>
+
+<pre class="codeSample">
+*** 8 ***
+  Description:Windows MIDI_MAPPER
+  Name:Microsoft MIDI ?}?b
+  Vendor:Unknown vendor
+
+*** 17 ***
+  Description:Internal software synthesizer
+  Name:Microsoft GS Wavetable SW Synth
+  Vendor:Unknown vendor
+
+*** 18 ***
+  Description:Software sequencer
+  Name:Real Time Sequencer
+  Vendor:Sun Microsystems
+  *** This is Sequencer.
+
+*** 19 ***
+  Description:Software wavetable synthesizer and receiver
+  Name:Java Sound Synthesizer
+  Vendor:Sun Microsystems
+  *** This is Synthesizer.
+</pre>
+
+<p>8番目のはWindows標準のMIDIマッパーです。名前が文字化けしていますね。WindowsでのMIDIデバイス名は、Unicodeじゃないのでしょうか？ 17番目のもWindows標準のソフトウェアMIDIシンセサイザです。シンセサイザではありますが、アプリケーションからは単なるMIDI出力デバイスに見えるためかJava MIDIではSynthesizerとは認識されません。18番目はJavaのシーケンサです。そして19番目はこれまたJava製のシンセサイザです。筆者はこれを見つけた時、ちょっと驚きました。Javaでシンセサイザが書かれる時代なのですね。</p>
+
+<p>上の方でデフォルトのシーケンサを使用する例を書きましたが、あの方法では、18番目のJavaシーケンサが使用されます(といっても他にシーケンサは無いわけですけどね)。Java 1.4までは、このシーケンサの出力先は19番目にあるJavaシンセサイザに固定されていて変更できませんでした。なのでシーケンサを使用しつつ外部MIDIデバイスに出力なんて芸当は出来なかったわけです。</p>
+
+<p>Java 5からは、この2つが分離されたので、シーケンサを使用しつつ、出力先は外部MIDIなんてこともできます。これでようやく本格的なMIDIシーケンサがJavaで書けるようになったといえるでしょう。それではその方法を見てみましょう。</p>
+
+<pre class="codeSample">
+public class Devices {
+    static Sequencer sequencer;
+    static MidiDevice yoke1;
+    
+    public static void main(String[] args) throws Exception {
+        try {
+            test();
+        }
+        finally {
+            if (sequencer != null &amp;&amp; sequencer.isOpen()) sequencer.close();
+        }
+    }
+    
+    static void test() throws Exception {
+        MidiDevice.Info[] info = MidiSystem.getMidiDeviceInfo();
+
+        for (int i = 0; i &lt; info.length; i++) {
+            if (info[i].getName().equals("MIDI Yoke NT:  1") &amp;&amp;
+                info[i].getDescription().equals("External MIDI Port"))
+            {
+                yoke1 = MidiSystem.getMidiDevice(info[i]);
+                yoke1.open();
+            }
+        }
+
+        if (yoke1 == null) throw new RuntimeException("MIDI Yoke not found.");
+        sequencer = (Sequencer)MidiSystem.getSequencer(false);
+        sequencer.getTransmitter().setReceiver(yoke1.getReceiver());
+        sequencer.open();
+
+        Sequence seq = null;
+        seq = new Sequence(Sequence.PPQ, 240);
+        Track track = seq.createTrack();
+
+        MetaMessage tempo = new MetaMessage();
+        tempo.setMessage(0x51, new byte[] {0x07, (byte)0xa1, 0x20}, 3);
+        track.add(new MidiEvent(tempo, 0));
+        
+        ShortMessage noteOn1 = new ShortMessage();
+        noteOn1.setMessage(ShortMessage.NOTE_ON, 60, 64);
+        track.add(new MidiEvent(noteOn1, 0));
+
+        ShortMessage noteOn2 = new ShortMessage();
+        noteOn2.setMessage(ShortMessage.NOTE_OFF, 60, 0);
+        track.add(new MidiEvent(noteOn2, 480));
+        
+        sequencer.setSequence(seq);
+        sequencer.start();
+        while (sequencer.isRunning()) {
+            Thread.sleep(100);
+        }
+    }
+}
+</pre>
+
+<p>最初のforループはMIDI Yokeのポート1とシーケンサデバイスを探しています。実際のアプリケーションでは設定画面でデバイス一覧を出して、ユーザに選択してもらう感じでしょう。</p>
+
+<pre class="codeSample">
+    yoke1 = MidiSystem.getMidiDevice(info[i]);
+    yoke1.open();
+...
+    sequencer = (Sequencer)MidiSystem.getSequencer(false);
+</pre>
+
+<p>MIDI Yokeのポートはopenしておきます。またシーケンサを取得する時には、引数としてfalseを渡す必要があります。前に見たサンプルでは引数無しのgetSequencer()を使用していましたが、その場合は自動的に出力先がJavaシンセサイザになってしまいます。falseを引数として渡すことで出力先未設定のままでシーケンサを生成できます。</p>
+
+<p>次にシーケンサの出力と、MIDI Yokeとを結び付けます。</p>
+
+<pre class="codeSample">
+    sequencer.getTransmitter().setReceiver(yoke1.getReceiver());
+    sequencer.open();
+</pre>
+
+<p>シーケンサのトランスミッタをgetTransmitter()で生成、MIDI YokeのgetReceiver()でレシーバを生成。その上でシーケンサのトランスミッタに、MIDI Yokeのレシーバを登録してやります。これでシーケンサ出力がMIDI Yokeに流れます。後の手順は、これまでと同一なので、説明の必要は無いでしょう。</p>
+
+<p>例えばIvoryをスタンドアロンで使用するならば、Ivoryをスタンドアロンで立ち上げ、Midi - DevicesでMIDI Yokeを指定します<br/>
+<img src="http://www.ruimo.com/pic/2006_01_06_02.png" alt="MIDI Yoke"/><br/>
+あとはJavaのプログラムを動かせばIvoryから音が出るはずです。もちろんIvoryで楽器を選ばないと音は出ませんよ。左上の"Imperial Hall Grand 10"と書いてあるところが、最初は"* Default"になっているので、クリックして楽器を選択するのを忘れないでください。
+</p>
+
+<p>VSTを使用する方法も書いておきます。VSTHostを使用するとWave出力の録音もできるので、後でMP3にしたい場合などには便利でしょう。VSTHostの導入は単にファイルを解凍するだけです。<a href="http://www.hermannseib.com/english/vsthost.htm">ここ</a>から入手してください。起動したらFile - New PlugIn...を選び、VSTプラグインを指定します。Ivoryの導入時に一緒に導入したはずです。デフォルトではC:\Program Files\Vstpluginsの下で、"Ivory VST.dll"というファイル名です。<br/>
+<img src="http://www.ruimo.com/pic/2006_01_06_03.png" alt="Plugin"/><br/>
+小さなコントロールパネル(?)が現われます。右上から3番目のダイヤル状のボタンをクリックするとIvoryプラグインの画面が表示されます。さきほどと同様なのでピアノを選択しておいてください。VSTHostの右上の方にピアノの鍵盤のアイコンがあるので、クリックすると、VSTHost内に鍵盤が現われます。VSTHostのEngine - Runを選んで開始してください。ピアノの鍵盤を押して音が出るのを確認します。音が出ない時は、Devices - Waveを選んで、Waveの出力先が正しいかどうかを確認してください。次にVSTHostの入力元をMIDI Yokeに変更します。Devices - MIDIを選んで、MIDI Input DevicesからMIDI Yoke NT:1を選択します。<br/>
+<img src="http://www.ruimo.com/pic/2006_01_06_04.png" alt="Input Devices"/><br/>
+VSTHost上のIvoryのコントロールパネル(? ピアノの絵じゃない方です)を右クリックして、Midi Devicesを選びます。明示的にMIDI Yokeだけを選んでも構いませんし、この例のようにAll loaded MIDI Input Devicesを選んでもいいでしょう。<br/>
+<img src="http://www.ruimo.com/pic/2006_01_06_05.png" alt="Input Devices"/><br/>
+これでJavaから音が出せるはずです。
+</p>
+
+<h3>[参考文献]</h3>
+
+<ol>
+<li><a href="http://java.sun.com/j2se/1.5.0/docs/guide/sound/programmer_guide/index.html">JavaSound API Programmer's Guide</a>(JavaSound APIのプログラマーズガイド)</li>
+<li><a href="http://www.borg.com/~jglatt/">MIDI is the language of gods.</a>(MIDI仕様がほぼ網羅されています)</li>
+</ol>
+
+<hr/>
+<p>
+  <a href="http://validator.w3.org/check?uri=referer">
+    <img src="http://www.w3.org/Icons/valid-xhtml10"
+         alt="Valid XHTML 1.0 Strict" height="31" width="88" />
+  </a>
+</p>
+<p>　<a href="mailto:ruimo@ruimo.com">ご感想をお聞かせください(ruimo@ruimo..com)。なお、誠に勝手ながら、HTMLメールはサーバーで全て削除されますので、テキストメールでお願いいたします。</a>
+</p>
+<p>　<a href="/">トップページへ</a></p>
+</body>
+</html>
