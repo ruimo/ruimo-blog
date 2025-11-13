@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS"/>
+  <link rel="stylesheet" type="text/css" href="/stylesheet.css"/>
+  <title>JavaDocでi18n</title>
+</head>
+<body>
+<p><a href="index_en.html">English version</a></p>
+<h1>JavaDocでi18n</h1>
+<h4>2006/12/31</h4>
+<p>残念ながら、現在のJavaDocはドキュメントのi18n(国際化)に対してサポートがありません。<a href="http://java.sun.com/j2se/javadoc/faq/index.html#localizationdoclets">ここ</a>を見ると国際化のためのDocletがあるようですが、公開されていませんし、やり方もちょっと面倒そうです。他に方法は無いかと考え、<a href="http://freemarker.sourceforge.net/">FreeMarker</a>を使用する方法に思い当たりました。</p>
+
+<p>
+FreeMarkerはテンプレートエンジンです。これをプリプロセッサとして使用することで、複数の言語のJavaDocを1つのソースコードに埋め込みます。JavaDocは以下のように記述します。
+</p>
+
+<pre class="codeSample">
+/**
+&lt;#if locale="ja"&gt;
+サイズ0配列。
+&lt;#else&gt;
+Empty arrays.
+&lt;/#if&gt;
+ */
+public class EmptyArrays {
+    EmptyArrays() {}
+</pre>
+
+<p>
+&lt;#...&gt;がFreeMarkerのディレクティブです。大事なことはFreeMarkerのディレクティブを、必ずJavaDocコメント内に入れておくということです。これによってソースコードをjavacでコンパイルする場合にはFreeMarkerによる処理無しでコンパイルすることができます。またFreeMarkerを通さずにコンパイルすることによって、コンパイルエラーの行番号がずれる問題を回避することができます。ソースコードは複数の言語が一度に記述できるようにUTF-8などを使用して記述します。この場合、javacにencodingオプションを付けてエンコーディングを明示します(本来はShift_JISなどを使用する場合にも付けるべきでしょう。そうしないとShift_JISがデフォルトエンコーディングでない環境で正しくコンパイルできません)。
+</p>
+
+<p>
+実際のJavaDocの生成はAnt taskを使用するのが簡単でしょう。まず<a href="http://freemarker.sourceforge.net/fmpp.html">ここ</a>からFMPPをダウンロードして展開しておきます。そしてこれを使用してFreeMarkerのディレクティブを処理します。
+</p>
+
+<pre class="codeSample">
+  &lt;property name="fmpp.lib" path="/usr/local/java/freemarker/fmpp_0.9.11/lib/fmpp.jar"/&gt;
+  &lt;taskdef name="fmpp" classname="fmpp.tools.AntTask" classpath="${fmpp.lib}"/&gt;
+
+  &lt;target name="javadoc" description="Generate javadoc."&gt;
+    &lt;macrodef name="javadoc-i18n"&gt;
+      &lt;attribute name="locale"/&gt;
+      &lt;sequential&gt;
+        &lt;mkdir dir="javadocsrc-@{locale}"/&gt;
+        &lt;fmpp sourceroot="src" outputroot="javadocsrc-@{locale}"
+              data="locale:@{locale}" logfile="log-@{locale}.fmpp"/&gt;   
+        &lt;javadoc sourcepath="javadocsrc-@{locale}" destdir="javadoc-@{locale}"
+                 windowtitle="Ruimo util" Locale="@{locale}" Encoding="UTF-8"
+                 packagenames="com.ruimo.util.*" charset="UTF-8"&gt;
+          &lt;link href="http://java.sun.com/javase/6/docs/api"/&gt;
+        &lt;/javadoc&gt;
+      &lt;/sequential&gt;
+    &lt;/macrodef&gt;
+
+    &lt;javadoc-i18n locale="ja"/&gt;
+    &lt;javadoc-i18n locale="en"/&gt;
+  &lt;/target&gt;
+</pre>
+
+<p>
+これで、無事日本語版と英語版のJavaDocが、javadoc-ja、javadoc-enディレクトリに出来上がります。もちろん同様にして、別の言語を追加することも容易に行うことができます。
+</p>
+
+<hr/>
+<p>
+  <a href="http://validator.w3.org/check?uri=referer">
+    <img src="http://www.w3.org/Icons/valid-xhtml10"
+         alt="Valid XHTML 1.0 Strict" height="31" width="88" />
+  </a>
+</p>
+<p>　<a href="mailto:ruimo@ruimo.uno.com">ご感想をお聞かせください(ruimo@ruimo.uno.com)。なお、誠に勝手ながら、HTMLメールはサーバーで全て削除されますので、テキストメールでお願いいたします。</a>
+</p>
+<p>　<a href="../..">トップページへ</a></p>
+</body>
+</html>

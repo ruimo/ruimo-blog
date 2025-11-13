@@ -1,0 +1,1111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+
+<HTML lang="ja">
+<!-- Generate Barcode Ver 3.00 By Shisei Hanai since 2002/11/13
+If you find any bugs, please send bug report to "ruimo@ruimo.com".
+This script can't run on Microsoft IE3.02. Try IE5 or later.
+I'm not sure if other browsers can work. Please try out by yourself!
+
+Acknowledgement:
+Saito Hiroshi: Contributor of UPC-E AddOn5, EAN13 AddOn2, UPC-A AddOn2, UPC-E AddOn2.
+//-->
+
+<HEAD>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+code39Bar = new Object;
+code39Bar[ "0" ] = "000110100";
+code39Bar[ "1" ] = "100100001";
+code39Bar[ "2" ] = "001100001";
+code39Bar[ "3" ] = "101100000";
+code39Bar[ "4" ] = "000110001";
+code39Bar[ "5" ] = "100110000";
+code39Bar[ "6" ] = "001110000";
+code39Bar[ "7" ] = "000100101";
+code39Bar[ "8" ] = "100100100";
+code39Bar[ "9" ] = "001100100";
+code39Bar[ "A" ] = "100001001";
+code39Bar[ "B" ] = "001001001";
+code39Bar[ "C" ] = "101001000";
+code39Bar[ "D" ] = "000011001";
+code39Bar[ "E" ] = "100011000";
+code39Bar[ "F" ] = "001011000";
+code39Bar[ "G" ] = "000001101";
+code39Bar[ "H" ] = "100001100";
+code39Bar[ "I" ] = "001001100";
+code39Bar[ "J" ] = "000011100";
+code39Bar[ "K" ] = "100000011";
+code39Bar[ "L" ] = "001000011";
+code39Bar[ "M" ] = "101000010";
+code39Bar[ "N" ] = "000010011";
+code39Bar[ "O" ] = "100010010";
+code39Bar[ "P" ] = "001010010";
+code39Bar[ "Q" ] = "000000111";
+code39Bar[ "R" ] = "100000110";
+code39Bar[ "S" ] = "001000110";
+code39Bar[ "T" ] = "000010110";
+code39Bar[ "U" ] = "110000001";
+code39Bar[ "V" ] = "011000001";
+code39Bar[ "W" ] = "111000000";
+code39Bar[ "X" ] = "010010001";
+code39Bar[ "Y" ] = "110010000";
+code39Bar[ "Z" ] = "011010000";
+code39Bar[ "-" ] = "010000101";
+code39Bar[ "*" ] = "010010100";
+code39Bar[ "+" ] = "010001010";
+code39Bar[ "$" ] = "010101000";
+code39Bar[ "%" ] = "000101010";
+code39Bar[ "/" ] = "010100010";
+code39Bar[ "." ] = "110000100";
+code39Bar[ " " ] = "011000100";
+
+nw7Bar = new Object;
+nw7Bar[ "0" ] = "0000011";
+nw7Bar[ "1" ] = "0000110";
+nw7Bar[ "2" ] = "0001001";
+nw7Bar[ "3" ] = "1100000";
+nw7Bar[ "4" ] = "0010010";
+nw7Bar[ "5" ] = "1000010";
+nw7Bar[ "6" ] = "0100001";
+nw7Bar[ "7" ] = "0100100";
+nw7Bar[ "8" ] = "0110000";
+nw7Bar[ "9" ] = "1001000";
+nw7Bar[ "-" ] = "0001100";
+nw7Bar[ "$" ] = "0011000";
+nw7Bar[ ":" ] = "1000101";
+nw7Bar[ "/" ] = "1010001";
+nw7Bar[ "." ] = "1010100";
+nw7Bar[ "+" ] = "0010101";
+nw7Bar[ "A" ] = "0011010";
+nw7Bar[ "B" ] = "0101001";
+nw7Bar[ "C" ] = "0001011";
+nw7Bar[ "D" ] = "0001110";
+
+leftOddBar = new Array( 10 );
+leftOddBar[ 0 ] = "0001101";
+leftOddBar[ 1 ] = "0011001";
+leftOddBar[ 2 ] = "0010011";
+leftOddBar[ 3 ] = "0111101";
+leftOddBar[ 4 ] = "0100011";
+leftOddBar[ 5 ] = "0110001";
+leftOddBar[ 6 ] = "0101111";
+leftOddBar[ 7 ] = "0111011";
+leftOddBar[ 8 ] = "0110111";
+leftOddBar[ 9 ] = "0001011";
+
+leftEvenBar = new Array( 10 );
+leftEvenBar[ 0 ] = "0100111";
+leftEvenBar[ 1 ] = "0110011";
+leftEvenBar[ 2 ] = "0011011";
+leftEvenBar[ 3 ] = "0100001";
+leftEvenBar[ 4 ] = "0011101";
+leftEvenBar[ 5 ] = "0111001";
+leftEvenBar[ 6 ] = "0000101";
+leftEvenBar[ 7 ] = "0010001";
+leftEvenBar[ 8 ] = "0001001";
+leftEvenBar[ 9 ] = "0010111";
+
+rightBar = new Array( 10 );
+rightBar[ 0 ] = "1110010";
+rightBar[ 1 ] = "1100110";
+rightBar[ 2 ] = "1101100";
+rightBar[ 3 ] = "1000010";
+rightBar[ 4 ] = "1011100";
+rightBar[ 5 ] = "1001110";
+rightBar[ 6 ] = "1010000";
+rightBar[ 7 ] = "1000100";
+rightBar[ 8 ] = "1001000";
+rightBar[ 9 ] = "1110100";
+
+guardBar = "101";
+UPCrightGuardBar = "010101";
+addOn5GuardBar = "1011";
+centerBar = "01010";
+
+oddEven4EAN = new Array( 10 );
+oddEven4EAN[ 0 ] = "OOOOOO";
+oddEven4EAN[ 1 ] = "OOEOEE";
+oddEven4EAN[ 2 ] = "OOEEOE";
+oddEven4EAN[ 3 ] = "OOEEEO";
+oddEven4EAN[ 4 ] = "OEOOEE";
+oddEven4EAN[ 5 ] = "OEEOOE";
+oddEven4EAN[ 6 ] = "OEEEOO";
+oddEven4EAN[ 7 ] = "OEOEOE";
+oddEven4EAN[ 8 ] = "OEOEEO";
+oddEven4EAN[ 9 ] = "OEEOEO";
+
+oddEven4UPC = new Array( 10 );
+oddEven4UPC[ 0 ] = "EEEEEE";
+oddEven4UPC[ 1 ] = "EEOEOO";
+oddEven4UPC[ 2 ] = "EEOOEO";
+oddEven4UPC[ 3 ] = "EEOOOE";
+oddEven4UPC[ 4 ] = "EOEEOO";
+oddEven4UPC[ 5 ] = "EOOEEO";
+oddEven4UPC[ 6 ] = "EOOOEE";
+oddEven4UPC[ 7 ] = "EOEOEO";
+oddEven4UPC[ 8 ] = "EOEOOE";
+oddEven4UPC[ 9 ] = "EOOEOE";
+
+oddEven4UPCE0 = new Array( 10 );
+oddEven4UPCE0[ 0 ] = "EEEOOO";   
+oddEven4UPCE0[ 1 ] = "EEOEOO";
+oddEven4UPCE0[ 2 ] = "EEOOEO";
+oddEven4UPCE0[ 3 ] = "EEOOOE";
+oddEven4UPCE0[ 4 ] = "EOEEOO";
+oddEven4UPCE0[ 5 ] = "EOOEEO";
+oddEven4UPCE0[ 6 ] = "EOOOEE";
+oddEven4UPCE0[ 7 ] = "EOEOEO";
+oddEven4UPCE0[ 8 ] = "EOEOOE";
+oddEven4UPCE0[ 9 ] = "EOOEOE";
+
+oddEven4UPCE1 = new Array( 10 );
+oddEven4UPCE1[ 0 ] = "OOOEEE";   
+oddEven4UPCE1[ 1 ] = "OOEOEE";
+oddEven4UPCE1[ 2 ] = "OOEEOE";
+oddEven4UPCE1[ 3 ] = "OOEEEO";
+oddEven4UPCE1[ 4 ] = "OEOOEE";
+oddEven4UPCE1[ 5 ] = "OEEOOE";
+oddEven4UPCE1[ 6 ] = "OEEEOO";
+oddEven4UPCE1[ 7 ] = "OEOEOE";
+oddEven4UPCE1[ 8 ] = "OEOEEO";
+oddEven4UPCE1[ 9 ] = "OEEOEO";
+
+oddEven4AddOn5 = new Array( 10 );
+oddEven4AddOn5[ 0 ] = "EEOOO";
+oddEven4AddOn5[ 1 ] = "EOEOO";
+oddEven4AddOn5[ 2 ] = "EOOEO";
+oddEven4AddOn5[ 3 ] = "EOOOE";
+oddEven4AddOn5[ 4 ] = "OEEOO";
+oddEven4AddOn5[ 5 ] = "OOEEO";
+oddEven4AddOn5[ 6 ] = "OOOEE";
+oddEven4AddOn5[ 7 ] = "OEOEO";
+oddEven4AddOn5[ 8 ] = "OEOOE";
+oddEven4AddOn5[ 9 ] = "OOEOE";
+
+oddEven4AddOn2 = new Array( 4 );
+oddEven4AddOn2[ 0 ] = "OO";
+oddEven4AddOn2[ 1 ] = "OE";
+oddEven4AddOn2[ 2 ] = "EO";
+oddEven4AddOn2[ 3 ] = "EE";
+
+comments = new Array();
+codes = new Array();
+codeTypes = new Array();
+sizes = new Array();
+dataIdx = 0;
+
+function dumpBar( bar, size )
+{
+    var i;
+
+    for( i = 0; i < bar.length; i++ ) {
+        if( bar.charAt( i ) == "1" ) {
+            resultWin.document.write( "<IMG SRC=\"black.gif\" HEIGHT="+50*size+" WIDTH="+size+">" );
+        }
+        else {
+            resultWin.document.write( "<IMG SRC=\"white.gif\" HEIGHT="+50*size+" WIDTH="+size+">" );
+        }
+    }
+}
+
+function printBar( bar, table, size )
+{
+    var i;
+
+    for( i = 0; i < bar.length; i++ ) {
+        dumpBar( table[ bar.charAt( i ) ], size );
+    }
+}
+
+function writeEAN8( code, size )
+{
+    var i;
+    var c;
+
+    dumpBar( guardBar, size );
+    for( i = 0; i < 4; i++ ) {
+        c = code.charAt( i );
+        printBar( c, leftOddBar, size );
+    }
+
+    dumpBar( centerBar, size );
+
+    for( i = 4; i < 8; i++ ) {
+        c = code.charAt( i );
+        printBar( c, rightBar, size );
+    }
+
+    dumpBar( guardBar, size );
+}
+
+function dumpCode( code, size )
+{
+    var i;
+    var color;
+
+    color = "black";
+    for( i = 0; i < code.length; i++ ) {
+        if( code.charAt( i ) == "1" ) {
+            resultWin.document.write( "<IMG SRC=\""+color+".gif\" HEIGHT="+50*size+" WIDTH="+size*3+">" );
+        }
+        else {
+            resultWin.document.write( "<IMG SRC=\""+color+".gif\" HEIGHT="+50*size+" WIDTH="+size+">" );
+        }
+
+        if( color == "black" ) {
+            color = "white";
+        }
+        else {
+            color = "black";
+        }
+    }
+}
+
+function writeNW7( code, size )
+{
+    var c;
+    var i;
+
+    for( i = 0; i < code.length; i++ ) {
+        dumpCode( nw7Bar[ code.charAt( i ) ]+"0", size );
+    }
+}
+
+function writeCode39( code, size )
+{
+    var c;
+    var i;
+
+    code = "*" + code + "*";
+    for( i = 0; i < code.length; i++ ) {
+        dumpCode( code39Bar[ code.charAt( i ) ]+"0", size );
+    }
+}
+
+function writeEAN13( code, size )
+{
+    var topDigit;
+    var oddEven;
+    var c;
+    var i;
+
+    dumpBar( guardBar, size );
+    topDigit = code.charAt( 0 );
+    oddEven = oddEven4EAN[ topDigit ];
+    for( i = 1; i < 7; i++ ) {
+        c = code.charAt( i );
+        if( oddEven.charAt( i - 1 ) == "O" ) {
+            printBar( c, leftOddBar, size );
+        }
+        else {
+            printBar( c, leftEvenBar, size );
+        }
+    }
+
+    dumpBar( centerBar, size );
+
+    for( i = 7; i < 13; i++ ) {
+        c = code.charAt( i );
+        printBar( c, rightBar, size );
+    }
+
+    dumpBar( guardBar, size );
+}
+
+function writeEAN13AddOn5( code, size )
+{
+    var oddEven;
+    var c;
+    var i;
+    var cd;
+
+    writeEAN13( code.substr(0, 13), size );
+    for (i = 0; i < size; i++) {
+        resultWin.document.write("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+    }
+
+    dumpBar( addOn5GuardBar, size );
+    code = code.substr(13, 5);
+    cd = calcAddOn5CD( code );
+    oddEven = oddEven4AddOn5[ cd ];
+    for( i = 0; i < 5; i++ ) {
+        c = code.charAt( i );
+        if( oddEven.charAt( i ) == "O" ) {
+            printBar( c, leftOddBar, size );
+        }
+        else {
+            printBar( c, leftEvenBar, size );
+        }
+
+        if ( i < 4 ) {
+            dumpBar( "01", size );
+        }
+    }
+}
+
+function writeEAN13AddOn2( code, size )
+{
+    var oddEven;
+    var c;
+    var i;
+    var cd;
+
+    writeEAN13( code.substr(0, 13), size );
+    for (i = 0; i < size; i++) {
+        resultWin.document.write("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+    }
+
+    dumpBar( addOn5GuardBar, size );
+    code = code.substr(13, 2);
+    cd = calcAddOn2CD( code );
+    oddEven = oddEven4AddOn2[ cd ];
+    for( i = 0; i < 2; i++ ) {
+        c = code.charAt( i );
+        if( oddEven.charAt( i ) == "O" ) {
+            printBar( c, leftOddBar, size );
+        }
+        else {
+            printBar( c, leftEvenBar, size );
+        }
+
+        if ( i < 1 ) {
+            dumpBar( "01", size );
+        }
+    }
+}
+
+function writeUPCA( code, size )
+{
+    var c;
+    var i;
+
+    dumpBar( guardBar, size );
+
+    for( i = 0; i < 6; i++ ) {
+        c = code.charAt( i );
+        printBar( c, leftOddBar, size );
+    }
+
+    dumpBar( centerBar, size );
+
+    for( i = 6; i < 12; i++ ) {
+        c = code.charAt( i );
+        printBar( c, rightBar, size );
+    }
+
+    dumpBar( guardBar, size );
+}
+
+function writeUPCAAddOn5( code, size )
+{
+    var c;
+    var i;
+    var cd;
+    var oddEven;
+
+    writeUPCA( code.substr(0, 12), size );
+    for (i = 0; i < size; i++) {
+        resultWin.document.write("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+    }
+
+    dumpBar( addOn5GuardBar, size );
+    code = code.substr(12, 5);
+    cd = calcAddOn5CD( code );
+    oddEven = oddEven4AddOn5[ cd ];
+
+    for( i = 0; i < 5; i++ ) {
+        c = code.charAt( i );
+        if( oddEven.charAt( i ) == "O" ) {
+            printBar( c, leftOddBar, size );
+        }
+        else {
+            printBar( c, leftEvenBar, size );
+        }
+
+        if ( i < 4 ) {
+            dumpBar( "01", size );
+        }
+    }
+}
+
+function writeUPCAAddOn2( code, size )
+{
+    var c;
+    var i;
+    var cd;
+    var oddEven;
+
+    writeUPCA( code.substr(0, 12), size );
+    for (i = 0; i < size; i++) {
+        resultWin.document.write("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+    }
+
+    dumpBar( addOn5GuardBar, size );
+    code = code.substr(12, 2);
+    cd = calcAddOn2CD( code );
+    oddEven = oddEven4AddOn2[ cd ];
+    for( i = 0; i < 2; i++ ) {
+        c = code.charAt( i );
+        if( oddEven.charAt( i ) == "O" ) {
+            printBar( c, leftOddBar, size );
+        }
+        else {
+            printBar( c, leftEvenBar, size );
+        }
+
+        if ( i < 1 ) {
+            dumpBar( "01", size );
+        }
+    }
+}
+
+function writeUPCE( code, size )
+{
+    var oddEven;
+    var c;
+    var i;
+    var cd;
+
+    dumpBar( guardBar, size );
+    cd = code.charAt( 7 );
+    if (code.charAt(0) == "0") {
+        oddEven = oddEven4UPCE0[ cd ];
+    }
+    else {
+        oddEven = oddEven4UPCE1[ cd ];
+    }
+
+    for( i = 1; i < 7; i++ ) {
+        c = code.charAt( i );
+        if( oddEven.charAt( i-1 ) == "O" ) {
+            printBar( c, leftOddBar, size );
+        }
+        else {
+            printBar( c, leftEvenBar, size );
+        }
+    }
+
+    dumpBar( UPCrightGuardBar, size );
+}
+
+function calcEAN13CD( code )
+{
+    var i;
+    var sum;
+    var weight;
+
+    weight = "131313131313";
+    sum = 0;
+    for( i = 0; i < 12; i++ ) {
+        sum += code.charAt( i ) * weight.charAt( i );
+    }
+    sum %= 10;
+    sum = 10 - sum;
+    if( sum == 10 ) sum = 0;
+    return sum.toString();
+}
+
+function calcAddOn5CD( code )
+{
+    var i;
+    var sum;
+    var weight;
+
+    weight = "39393";
+    sum = 0;
+    for( i = 0; i < 5; i++ ) {
+        sum += code.charAt( i ) * weight.charAt( i );
+    }
+    sum %= 10;
+    return sum.toString();
+}
+
+function calcAddOn2CD( code )
+{
+    var i;
+    var sum;
+    var weight;
+
+    sum = 0;
+    for( i = 0; i < 2; i++ ) {
+        sum += code.charAt( i );
+    }
+    sum %= 4;
+    return sum.toString();
+}
+
+function calcEAN8CD( code )
+{
+    var i;
+    var sum;
+    var weight;
+
+    weight = "3131313";
+    sum = 0;
+    for( i = 0; i < 7; i++ ) {
+        sum += code.charAt( i ) * weight.charAt( i );
+    }
+    sum %= 10;
+    sum = 10 - sum;
+    if( sum == 10 ) sum = 0;
+    return sum.toString();
+}
+
+function calcUPCACD( code )
+{
+    var i;
+    var sum;
+    var weight;
+
+    weight = "31313131313";
+    sum = 0;
+    for( i = 0; i < 11; i++ ) {
+        sum += code.charAt( i ) * weight.charAt( i );
+    }
+    sum %= 10;
+    sum = 10 - sum;
+    if( sum == 10 ) sum = 0;
+    return sum.toString();
+}
+
+function calcUPCECD( code )
+{
+    var i;
+    var upcA;
+    var ent;
+
+    ent = new Array();
+    for( i = 0; i < 7; i++ ) {
+        ent[i] = code.charAt(i);
+    }
+
+    if( ent[6] == 0 || ent[6] == 1 || ent[6] == 2 ) {
+        upcA = ent[0]+ent[1]+ent[2]+ent[6]+"0000"+ent[3]+ent[4]+ent[5];
+    }
+    else if( ent[6] == 3 ) {
+        upcA = ent[0]+ent[1]+ent[2]+ent[3]+"00000"+ent[4]+ent[5];
+    }
+    else if( ent[6] == 4 ) {
+        upcA = ent[0]+ent[1]+ent[2]+ent[3]+ent[4]+"00000"+ent[5];
+    }
+    else {
+        upcA = ent[0]+ent[1]+ent[2]+ent[3]+ent[4]+ent[5]+"0000"+ent[6];
+    }
+
+    return calcUPCACD( upcA );
+}
+
+function clearBar()
+{
+    if( ! resultWin.closed ) {
+        resultWin.close();
+    }
+
+    resultWin = window.open( "" );
+    resultWin.document.writeln( "<HTML><TITLE>結果ウィンドウ</TITLE><BODY></BODY></HTML>" );
+    self.focus();
+    dataIdx = 0;
+}
+
+function writeUPCEAddOn5( code, size )
+{
+    var oddEven;
+    var c;
+    var i;
+    var cd;
+
+    writeUPCE( code.substr(0, 8), size );
+    for (i = 0; i < size; i++) {
+        resultWin.document.write("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+    }
+
+    dumpBar( addOn5GuardBar, size );
+    code = code.substr(8, 5);
+    cd = calcAddOn5CD( code );
+    oddEven = oddEven4AddOn5[ cd ];
+    for( i = 0; i < 5; i++ ) {
+        c = code.charAt( i );
+        if( oddEven.charAt( i ) == "O" ) {
+            printBar( c, leftOddBar, size );
+        }
+        else {
+            printBar( c, leftEvenBar, size );
+        }
+
+        if ( i < 4 ) {
+            dumpBar( "01", size );
+        }
+    }
+}
+
+function writeUPCEAddOn2( code, size )
+{
+    var oddEven;
+    var c;
+    var i;
+    var cd;
+
+    writeUPCE( code.substr(0, 8), size );
+    for (i = 0; i < size; i++) {
+        resultWin.document.write("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+    }
+
+    dumpBar( addOn5GuardBar, size );
+    code = code.substr(8, 2);
+    cd = calcAddOn2CD( code );
+    oddEven = oddEven4AddOn2[ cd ];
+    for( i = 0; i < 2; i++ ) {
+        c = code.charAt( i );
+        if( oddEven.charAt( i ) == "O" ) {
+            printBar( c, leftOddBar, size );
+        }
+        else {
+            printBar( c, leftEvenBar, size );
+        }
+
+        if ( i < 1 ) {
+            dumpBar( "01", size );
+        }
+    }
+}
+
+function addBar()
+{
+    var code;
+    var cd;
+    var i;
+    var codeType;
+
+    code = document.genBarForm.CodeDigit.value;
+    codeType = "UNKNOWN";
+    for (i = 0; i < document.genBarForm.CodeType.length; i++) {
+        if( document.genBarForm.CodeType[i].checked ) {
+            codeType = document.genBarForm.CodeType[i].value;
+            break;
+        }
+    }
+
+    if (codeType == "UNKNOWN") {
+        alert( "コードタイプを選択してください" );
+        return;
+    }
+
+    if( code.length == 0 ) {
+        alert( "コードを入力してください" );
+        return;
+    }
+
+    if( codeType == "EAN13" ) {
+        for( i = 0; i < code.length; i++ ) {
+            if( "0123456789".indexOf( code.charAt( i ) ) == -1 ) {
+                alert( "EAN13 で使用できるコードは，数字のみです" );
+                return;
+            }
+        }
+
+        if( code.length == 12 ) {
+            cd = calcEAN13CD( code );
+            code = code + cd;
+        }
+      
+        if( code.length != 13 ) {
+            alert( "EAN13 のコードは 12 桁か 13 桁で指定してください" );
+            return;
+        }
+    }
+    if( codeType == "EAN13 AddOn 5" ) {
+        for( i = 0; i < code.length; i++ ) {
+            if( "0123456789".indexOf( code.charAt( i ) ) == -1 ) {
+                alert( "EAN13 AddOn 5 で使用できるコードは，数字のみです" );
+                return;
+            }
+        }
+
+        if( code.length == 17 ) {
+            cd = calcEAN13CD( code.substr(0, 12) );
+            code = code.substr(0, 12) + cd + code.substr(12, 5);
+        }
+      
+        if( code.length != 18 ) {
+            alert( "EAN13 AddOn 5 のコードは 17 桁か 18 桁で指定してください" );
+            return;
+        }
+    }
+    else if( codeType == "EAN13 AddOn 2" ) {
+        for( i = 0; i < code.length; i++ ) {
+            if( "0123456789".indexOf( code.charAt( i ) ) == -1 ) {
+                alert( "EAN13 AddOn 2 で使用できるコードは，数字のみです" );
+                return;
+            }
+        }
+
+        if( code.length == 14 ) {
+            cd = calcEAN13CD( code.substr(0, 12) );
+            code = code.substr(0, 12) + cd + code.substr(12, 2);
+        }
+      
+        if( code.length != 15 ) {
+            alert( "EAN13 AddOn 2 のコードは 14 桁か 15 桁で指定してください" );
+            return;
+        }
+    }
+    else if( codeType == "EAN8" ) {
+        for( i = 0; i < code.length; i++ ) {
+            if( "0123456789".indexOf( code.charAt( i ) ) == -1 ) {
+                alert( "EAN8 で使用できるコードは，数字のみです" );
+                return;
+            }
+        }
+
+        if( code.length == 7 ) {
+            cd = calcEAN8CD( code );
+            code = code + cd;
+        }
+
+        if( code.length != 8 ) {
+            alert( "EAN8 のコードは 7 桁 か 8 桁で指定してください" );
+            return;
+        }
+    }
+    else if( codeType == "UPC-A" ) {
+        for( i = 0; i < code.length; i++ ) {
+            if( "0123456789".indexOf( code.charAt( i ) ) == -1 ) {
+                alert( "UPC-A で使用できるコードは，数字のみです" );
+                return;
+            }
+        }
+
+        if( code.length == 11 ) {
+            cd = calcUPCACD( code );
+            code = code + cd;
+        }
+
+        if( code.length != 12 ) {
+            alert( "UPC-A のコードは 11 桁か 12 桁で指定してください" );
+            return;
+        }
+    }
+    else if( codeType == "UPC-A AddOn 5" ) {
+        for( i = 0; i < code.length; i++ ) {
+            if( "0123456789".indexOf( code.charAt( i ) ) == -1 ) {
+                alert( "UPC-A AddOn 5 で使用できるコードは，数字のみです" );
+                return;
+            }
+        }
+
+        if( code.length == 16 ) {
+            cd = calcUPCACD( code.substr(0, 11) );
+            code = code.substr(0, 11) + cd + code.substr(11, 5);
+        }
+
+        if( code.length != 17 ) {
+            alert( "UPC-A AddOn 5 のコードは 16 桁か 17 桁で指定してください" );
+            return;
+        }
+    }
+    else if( codeType == "UPC-A AddOn 2" ) {
+        for( i = 0; i < code.length; i++ ) {
+            if( "0123456789".indexOf( code.charAt( i ) ) == -1 ) {
+                alert( "UPC-A AddOn 2 で使用できるコードは，数字のみです" );
+                return;
+            }
+        }
+
+        if( code.length == 13 ) {
+            cd = calcUPCACD( code.substr(0, 11) );
+            code = code.substr(0, 11) + cd + code.substr(11, 2);
+        }
+
+        if( code.length != 14 ) {
+            alert( "UPC-A AddOn 2 のコードは 13 桁か 14 桁で指定してください" );
+            return;
+        }
+    }
+    else if( codeType == "UPC-E" ) {
+        for( i = 0; i < code.length; i++ ) {
+            if( "0123456789".indexOf( code.charAt( i ) ) == -1 ) {
+                alert( "UPC-E で使用できるコードは，数字のみです" );
+                return;
+            }
+        }
+
+        if( code.length == 6 ) {
+            code = "0" + code;
+        }
+
+        if( code.length == 7 ) {
+            cd = calcUPCECD( code );
+            code = code + cd;
+        }
+
+        if( code.length != 8 ) {
+            alert( "UPC-E のコードは 6-8 桁で指定してください" );
+            return;
+        }
+
+        if( code.charAt( 0 ) != "0" && code.charAt( 0 ) != "1" ) {
+            alert( "UPC-E のコードの先頭は 0 か 1 しか許されません" );
+            return;
+        }
+    }
+    else if( codeType == "UPC-E AddOn 5" ) {
+        for( i = 0; i < code.length; i++ ) {
+            if( "0123456789".indexOf( code.charAt( i ) ) == -1 ) {
+                alert( "UPC-E AddOn 5 で使用できるコードは，数字のみです" );
+                return;
+            }
+        }
+
+        if( code.length == 11 ) {
+            code = "0" + code;
+        }
+
+        if( code.length == 12 ) {
+            cd = calcUPCECD( code.substr(0, 7) );
+            code = code.substr(0, 7) + cd + code.substr(7, 5);
+        }
+
+        if( code.length != 13 ) {
+            alert( "UPC-E AddOn 5 のコードは 11-13 桁で指定してください" );
+            return;
+        }
+        if( code.charAt( 0 ) != "0" && code.charAt( 0 ) != "1" ) {
+            alert( "UPC-E のコードの先頭は 0 か 1 しか許されません" );
+            return;
+        }
+    }
+    else if( codeType == "UPC-E AddOn 2" ) {
+        for( i = 0; i < code.length; i++ ) {
+            if( "0123456789".indexOf( code.charAt( i ) ) == -1 ) {
+                alert( "UPC-E AddOn 2 で使用できるコードは，数字のみです" );
+                return;
+            }
+        }
+
+        if( code.length == 8 ) {
+            code = "0" + code;
+        }
+
+        if( code.length == 9 ) {
+            cd = calcUPCECD( code.substr(0, 7) );
+            code = code.substr(0, 7) + cd + code.substr(7, 2);
+        }
+
+        if( code.length != 10 ) {
+            alert( "UPC-E AddOn 2 のコードは 8-10 桁で指定してください" );
+            return;
+        }
+        if( code.charAt( 0 ) != "0" && code.charAt( 0 ) != "1" ) {
+            alert( "UPC-E のコードの先頭は 0 か 1 しか許されません" );
+            return;
+        }
+    }
+    else if( codeType == "NW-7" ) {
+        for( i = 0; i < code.length; i++ ) {
+            if( "0123456789-$:/.+ABCD".indexOf( code.charAt( i ) ) == -1 ) {
+                alert( "NW-7 で使用できるコードは，数字, -, $, :, /, ., +, A, B, C, D のみです" );
+                return;
+            }
+        }
+    }
+    else if( codeType == "CODE-39" ) {
+        for( i = 0; i < code.length; i++ ) {
+            if( ( "0123456789" +
+                  "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+                  "-*+$%/. " ).indexOf( code.charAt( i ) ) == -1 ) {
+                alert( "CODE-39 で使用できるコードは，数字，大文字のアルファベット, -, *, +, $, %, /, ., SPACE のみです" );
+                return;
+            }
+        }
+    }
+
+    comments[ dataIdx ] = document.genBarForm.Comment.value;
+    codes[ dataIdx ] = code;
+    codeTypes[ dataIdx ] = codeType;
+    sizes[ dataIdx ] = document.genBarForm.Size.selectedIndex + 1;
+    dataIdx++;
+
+    if( resultWin.closed ) {
+        resultWin = window.open( "" );
+    }
+
+    resultWin.document.open();
+
+    resultWin.document.writeln( "<HTML>" );
+    resultWin.document.writeln( "<TITLE>結果ウィンドウ</TITLE></HTML>" );
+    resultWin.document.writeln( "<BODY>" );
+
+    for( i = 0; i < dataIdx; i++ ) {
+        resultWin.document.writeln( "<TABLE BORDER WIDTH=100% CELLPADDING=10>" );
+
+        resultWin.document.write( "<TR>" );
+        resultWin.document.write( "<TD NOWRAP ALIGN=CENTER>" );
+
+        if( codeTypes[i] == "EAN13" ) {
+            writeEAN13( codes[i], sizes[i] );
+        }
+        else if( codeTypes[i] == "EAN13 AddOn 5" ) {
+            writeEAN13AddOn5( codes[i], sizes[i] );
+        }
+        else if( codeTypes[i] == "EAN13 AddOn 2" ) {
+            writeEAN13AddOn2( codes[i], sizes[i] );
+        }
+        else if( codeTypes[i] == "EAN8" ) {
+            writeEAN8( codes[i], sizes[i] );
+        }
+        else if( codeTypes[i] == "UPC-A" ) {
+            writeUPCA( codes[i], sizes[i] );
+        }
+        else if( codeTypes[i] == "UPC-A AddOn 5" ) {
+            writeUPCAAddOn5( codes[i], sizes[i] );
+        }
+        else if( codeTypes[i] == "UPC-A AddOn 2" ) {
+            writeUPCAAddOn2( codes[i], sizes[i] );
+        }
+        else if( codeTypes[i] == "UPC-E" ) {
+            writeUPCE( codes[i], sizes[i] );
+        }
+        else if( codeTypes[i] == "UPC-E AddOn 5" ) {
+            writeUPCEAddOn5( codes[i], sizes[i] );
+        }
+        else if( codeTypes[i] == "UPC-E AddOn 2" ) {
+            writeUPCEAddOn2( codes[i], sizes[i] );
+        }
+        else if( codeTypes[i] == "NW-7" ) {
+            writeNW7( codes[i], sizes[i] );
+        }
+        else if( codeTypes[i] == "CODE-39" ) {
+            writeCode39( codes[i], sizes[i] );
+        }
+
+        resultWin.document.write( "</TD>" );
+      
+        resultWin.document.write( "<TD ROWSPAN=2 ALIGN=CENTER>" );
+        resultWin.document.write( "<FONT SIZE=+"+sizes[i]+">" );
+        resultWin.document.write( comments[i] );
+        resultWin.document.write( "</FONT>" );
+        resultWin.document.write( "</TD>" );
+        resultWin.document.write( "</TR>" );
+      
+        resultWin.document.write( "<TR>" );
+        resultWin.document.write( "<TD NOWRAP ALIGN=CENTER>" );
+        resultWin.document.write( "<FONT SIZE=+"+sizes[i]+">" );
+
+        if( codeTypes[i] == "EAN13 AddOn 5") {
+            resultWin.document.write( codes[i].substr(0, 13) + "&nbsp;&nbsp;" + codes[i].substr(13, 5) );
+        }
+        else if ( codeTypes[i] == "UPC-A AddOn 5") {
+            resultWin.document.write( codes[i].substr(0, 12) + "&nbsp;&nbsp;" + codes[i].substr(12, 5) );
+        }
+        else if ( codeTypes[i] == "UPC-E AddOn 5") {
+            resultWin.document.write( codes[i].substr(0, 8) + "&nbsp;&nbsp;" + codes[i].substr(8, 5) );
+        }
+        else if( codeTypes[i] == "EAN13 AddOn 2") {
+            resultWin.document.write( codes[i].substr(0, 13) + "&nbsp;&nbsp;" + codes[i].substr(13, 2) );
+        }
+        else if ( codeTypes[i] == "UPC-A AddOn 2") {
+            resultWin.document.write( codes[i].substr(0, 12) + "&nbsp;&nbsp;" + codes[i].substr(12, 2) );
+        }
+        else if ( codeTypes[i] == "UPC-E AddOn 2") {
+            resultWin.document.write( codes[i].substr(0, 8) + "&nbsp;&nbsp;" + codes[i].substr(8, 2) );
+        }
+        else {
+            resultWin.document.write( codes[i] );
+        }
+        resultWin.document.write( "</FONT>" );
+        resultWin.document.write( "</TD>" );
+        resultWin.document.write( "</TR>" );
+      
+        resultWin.document.writeln( "</TABLE>" );
+    }
+
+    resultWin.document.writeln( "</BODY>" );
+    resultWin.document.writeln( "</HTML>" );
+
+    resultWin.document.close();
+    resultWin.focus();
+}
+//-->
+</SCRIPT>
+genBar Ver 3.00
+</HEAD>
+<TITLE>
+Generate Barcode Ver 3.00 Modify By Saito Hiroshi 2004/03/02 Orignal Ver 2.02 By Shisei Hanai 2002/11/13
+</TITLE>
+<BODY>
+<FORM name="genBarForm">
+<TABLE BORDER=1 CELLPADDING=5>
+<TR>
+<TD>コード</TD>
+<TD><INPUT TYPE="text" size="20" name="CodeDigit"></TD>
+</TR>
+<TR>
+<TD>コードタイプ</TD>
+<TD>
+<INPUT TYPE="radio" name="CodeType" VALUE="EAN13">EAN13
+<INPUT TYPE="radio" name="CodeType" VALUE="EAN13 AddOn 5">EAN13 AddOn 5
+<INPUT TYPE="radio" name="CodeType" VALUE="EAN13 AddOn 2">EAN13 AddOn 2<BR>
+<INPUT TYPE="radio" name="CodeType" VALUE="EAN8">EAN8
+<BR>
+<INPUT TYPE="radio" name="CodeType" VALUE="UPC-A">UPC-A
+<INPUT TYPE="radio" name="CodeType" VALUE="UPC-A AddOn 5">UPC-A AddOn 5
+<INPUT TYPE="radio" name="CodeType" VALUE="UPC-A AddOn 2">UPC-A AddOn 2<BR>
+<INPUT TYPE="radio" name="CodeType" VALUE="UPC-E">UPC-E
+<INPUT TYPE="radio" name="CodeType" VALUE="UPC-E AddOn 5">UPC-E AddOn 5
+<INPUT TYPE="radio" name="CodeType" VALUE="UPC-E AddOn 2">UPC-E AddOn 2<BR>
+<BR>
+<INPUT TYPE="radio" name="CodeType" VALUE="NW-7">NW-7(CODABAR)
+<BR>
+<INPUT TYPE="radio" name="CodeType" VALUE="CODE-39">CODE-39
+</TD>
+</TR>
+<TR>
+<TD>商品名</TD>
+<TD><INPUT TYPE="text" size="40" name="Comment"></TD>
+</TR>
+<TR>
+<TD>サイズ</TD>
+<TD><SELECT name="Size">
+<OPTION VALUE=1>1
+<OPTION VALUE=2>2
+<OPTION VALUE=3>3
+<OPTION VALUE=4>4
+<OPTION VALUE=5>5
+</SELECT></TD>
+<TR ROWSPAN=4>
+<TD COLSPAN=2 ALIGN=CENTER>
+<INPUT TYPE="button" name="Add" VALUE="データ追加" onClick="addBar();">
+<INPUT TYPE="button" name="Clear" VALUE="データ全消去" onClick="clearBar();">
+</TD>
+</TR>
+</TABLE>
+</FORM>
+<SCRIPT>
+<!--
+document.genBarForm.CodeType[ 0 ].click();
+resultWin = window.open( "" );
+resultWin.document.writeln( "<HTML><TITLE>結果ウィンドウ</TITLE><BODY></BODY></HTML>" );
+self.focus();
+//-->
+</SCRIPT>
+<BR>
+<BR>
+<BR>
+<HR>
+Change History<BR>
+Ver 1.00 1997/8/22<BR>
+Ver 1.03 2000/3/31<BR>
+Ver 2.00 2002/10/10<BR>
+Ver 2.01 2002/10/20<BR>
+Ver 2.02 2002/11/13<BR>
+Ver 3.00 2004/3/2 By Saito Hiroshi: Add following symbology support.<BR>
+&nbsp;&nbsp;UPC-E AddOn5, EAN13 AddOn2, UPC-A AddOn2, UPC-E AddOn2<BR>
+
+    <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      _uacct = "UA-2112066-1";
+      urchinTracker();
+    </script>
+</BODY>
+</HTML>

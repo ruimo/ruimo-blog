@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<jnlp spec="1.0+" 
+      codebase="http://www.ruimo.com/howto/java" 
+      href="jscrollpane2.jnlp">
+
+  <information> 
+    <title>JScrollPaneサンプル</title> 
+    <vendor>ruimo</vendor> 
+    <offline-allowed/> 
+  </information> 
+
+  <resources> 
+    <j2se version="1.5"/> 
+    <jar href="jscrollpane2.jar"/> 
+  </resources> 
+
+  <application-desc main-class="NewJFrame"/> 
+
+</jnlp>

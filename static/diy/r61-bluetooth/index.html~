@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS"/>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+  <title>ThinkPad R61にBluetoothを増設</title>
+</head>
+<body>
+<h1>ThinkPad R61にBluetoothのドータカードを増設</h1>
+<p>ThinkPad R61 8943-A12は、Bluetoothが搭載されていませんが、ドータカードを増設することで利用可能になります。私は、<a href="http://www.noteparts.com/?pid=5318714">noteparts.com</a>で購入しました。</p>
+<p><b>ここの内容は、基本的に保守マニュアルに掲載されている内容を参考にすれば、誰にでも可能ですが、ここに書かれている内容については無保証です。うまくいかなくても何ら保証しませんので、自己責任でお願いします。</b></p>
+<p>
+<img class="Image1" src="/bin-files/r61-bluetooth/bluetooth01.jpg"/><br/>
+届いたドータカード、思ったよりも小さい。
+<br style="clear: both"/>
+</p>
+
+<p>
+<img class="Image1" src="/bin-files/r61-bluetooth/bluetooth02.jpg"/><br/>
+裏側の、矢印部分のネジを外します。ネジは無くさないように皿にでも入れておきましょう。<a href="/r61/index.html">CPU交換</a>の時と同じ要領で、上部カバーまで外します。
+<br style="clear: both"/>
+</p>
+
+<p>
+<img class="Image1" src="/bin-files/r61-bluetooth/bluetooth03.jpg"/><br/>
+液晶のフレキを留めている部分と、無線LANのネジを外します。
+<br style="clear: both"/>
+</p>
+
+<p>
+<img class="Image1" src="/bin-files/r61-bluetooth/bluetooth04.jpg"/><br/>
+背中部分のシールを時計用ドライバなどを用いて外すと、
+<br style="clear: both"/>
+</p>
+
+<p>
+<img class="Image1" src="/bin-files/r61-bluetooth/bluetooth05.jpg"/><br/>
+ネジが表われるので、これを外します。左右にあります。
+<br style="clear: both"/>
+</p>
+
+<p>
+<img class="Image1" src="/bin-files/r61-bluetooth/bluetooth06.jpg"/><br/>
+液晶を支えるヒンジ部分のネジを外します。
+<br style="clear: both"/>
+</p>
+
+<p>
+<img class="Image1" src="/bin-files/r61-bluetooth/bluetooth07.jpg"/><br/>
+液晶パネルが外れます。この時、フレキが粘着テーブになっているので、ゆっくりとはがしてください。
+<br style="clear: both"/>
+</p>
+
+<p>
+<img class="Image1" src="/bin-files/r61-bluetooth/bluetooth08.jpg"/><br/>
+前面下上部の丸いシールを外すと...
+<br style="clear: both"/>
+</p>
+
+<p>
+<img class="Image1" src="/bin-files/r61-bluetooth/bluetooth09.jpg"/><br/>
+ネジが現われるので、外します。3箇所あります。
+<br style="clear: both"/>
+</p>
+
+<p>
+<img class="Image1" src="/bin-files/r61-bluetooth/bluetooth10.jpg"/><br/>
+いよいよ、一番、難しい作業です。液晶の前面ベゼルを外すのですが、まず正面、向かって右側から外すのが良いでしょう。ベゼル部分を内側に押しながら、引くと外れます。慎重にやってください。完全に外さず、写真のような状態にしておきます。右が外れれば、あとは同じ要領で左、上を外します。そして普段、液晶パネルを開く時のレバーを開いた状態にしたまま(こうしないと、爪が折れる危険があります)、ベゼルを外します。下側は粘着テーブで付いているので、ゆっくりはがします。
+<br style="clear: both"/>
+</p>
+
+<p>
+<img class="Image1" src="/bin-files/r61-bluetooth/bluetooth11.jpg"/><br/>
+お疲れ様でした。これで難関は突破しました。液晶下部にドータカードを入れる場所があります。
+<br style="clear: both"/>
+</p>
+
+<p>
+<img class="Image1" src="/bin-files/r61-bluetooth/bluetooth12.jpg"/><br/>
+ドータカードをはめます。今回、私が買ったパーツには、ネジが付いていませんでした。とりあえず無線LANをとめていたネジを拝借して、急場はしのぎ、週末にでも追加のネジを買いにいくことにします。
+<br style="clear: both"/>
+</p>
+
+<p>
+<img class="Image1" src="/bin-files/r61-bluetooth/bluetooth13.jpg"/><br/>
+ネジ留めしたところ。あとは逆順に組み立てるだけですが、その前に、普段掃除できない、ベゼルと液晶の間の部分を掃除しておくと良いでしょう。
+<br style="clear: both"/>
+</p>
+
+<hr/>
+<p>　<a href="mailto:ruimo@ruimo.com">ご感想をお聞かせください(ruimo@ruimo.com)。なお、誠に勝手ながら、HTMLメールはサーバーで全て削除されますので、テキストメールでお願いいたします。</a>
+</p>
+<p>　<a href="../..">トップページへ</a></p>
+    <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      _uacct = "UA-2112066-1";
+      urchinTracker();
+    </script>
+</body>
+</html>
