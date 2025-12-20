@@ -8,7 +8,7 @@ tags = ["Analog Discovery 3", "超音波洗浄器"]
 40年くらい前に秋月で買ったもの。確か魚群探知機から外したものという説明だった気がする。ずっと放置していたのだが、これを使って超音波洗浄器を作りたい。
 
 <figure markdown="span">
-![transducer](analogDiscovery3-tranceducer/transducer.jpg)
+<img src='analogDiscovery3-tranceducer/transducer.jpg'>
 <figcaption>超音波振動子</figcaption>
 </figure markdown="span">
 
