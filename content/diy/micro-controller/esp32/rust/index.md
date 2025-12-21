@@ -115,6 +115,8 @@ CONFIG_XTAL_FREQ=26
 
 あと、どうも生成される雛形はsdkconfig.defaultsを読んでくれないみたいなので、Cargo.tomlの最後に以下を追加しておく。
 
+> ⚠ **Warning:** この設定は、最新版では不要のようだ。
+
 ```
 [package.metadata.esp-idf-sys]
 esp_idf_sdkconfig_defaults = ["sdkconfig.defaults"]
@@ -202,3 +204,7 @@ lrwxrwxrwx 1 root root 13 12月 21 13:58 usb-Silicon_Labs_CP2102N_USB_to_UART_Br
 ```
 
 単体テストを書くと、cargo testもESP32で実行しようとするので、ハードウェアに関係しないロジックは別クレートに分けて、dependenciesに指定する方が良さそうだ。
+
+## 参考
+
+[サンプル集](https://github.com/esp-rs/esp-idf-svc/tree/master/examples)
