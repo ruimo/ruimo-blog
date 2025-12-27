@@ -2,7 +2,7 @@
 date ="2025-12-27"
 title = "カメラ買い替え"
 [extra]
-og_image = "/blog/alpha7v-0/DSC00047.JPG"
+og_image = "/blog/alpha7v-0/ogp.jpg"
 +++
 
 # 発端
