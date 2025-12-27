@@ -1,0 +1,36 @@
+/* --- 1. 基本設定（ライトモード：htmlにdarkクラスがない時） --- */
+.custom-note {
+    --note-bg: #f9f9f9;
+    --note-border: #e0e0e0;
+    --note-accent: #007acc;
+    --note-text: #333333;
+
+    background-color: var(--note-bg);
+    border: 1px solid var(--note-border);
+    border-left: 5px solid var(--note-accent);
+    padding: 0.4em;
+    border-radius: 6px;
+    color: var(--note-text);
+    line-height: 1.6;
+}
+
+/* --- 2. ダークモード用の上書き（htmlにdarkクラスがある時） --- */
+html.dark .custom-note {
+    --note-bg: #1e1e1e;
+    --note-border: #333333;
+    --note-accent: #4db6ac;
+    --note-text: #e0e0e0;
+}
+
+/* ラベル部分の装飾 */
+.note-label {
+    display: block;
+    color: var(--note-accent);
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    text-transform: uppercase;
+}
+
+.note-body > *:last-child {
+    margin-bottom: 0 !important; /* 最後の段落の下余白を強制的に消す */
+}
