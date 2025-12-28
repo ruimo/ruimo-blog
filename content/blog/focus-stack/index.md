@@ -2,7 +2,7 @@
 date ="2025-12-28"
 title = "深度合成(フォーカススタッキング)"
 [extra]
-og_image = "/blog/focusStack/ogp.jpg"
+og_image = "/blog/focus-stack/ogp.jpg"
 +++
 
 一眼カメラは撮像素子が大きいので、ボケた写真を撮るのに向いている。逆に全体にピントを合わせた写真を撮るのは苦手だ。
