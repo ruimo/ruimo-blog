@@ -1,6 +1,6 @@
 +++
 date ="2025-12-30"
-title = "SSOPの半田付け"
+title = "0.65mmピッチ! MUSE72323(SSOP)の半田付けにチャレンジ"
 [extra]
 og_image = "/blog/ssop/ogp.jpg"
 +++
