@@ -2,7 +2,7 @@
 date ="2025-12-29"
 title = "正負DC/DCコンバータのノイズを確認"
 [extra]
-og_image = "/blog/alpha7v-1/ogp.jpg"
+og_image = "/blog/15v/ogp.jpg"
 +++
 
 # はじめに
