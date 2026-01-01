@@ -26,35 +26,132 @@ anyhow = "1"
 main.rsはこんな感じ。
 
 ```rust
-use esp_idf_svc::eventloop::EspSystemEventLoop;
-use esp_idf_svc::hal::prelude::Peripherals;
-use esp_idf_svc::http::server::{Configuration, EspHttpServer};
-use esp_idf_svc::http::Method;
-use esp_idf_svc::ipv4;
+use core::cmp::Ordering;
+use core::convert::TryInto;
+use std::net::Ipv4Addr;
+use std::str::FromStr;
+
+use esp_idf_svc::hal::peripherals::Peripherals;
 use esp_idf_svc::netif::{EspNetif, NetifConfiguration, NetifStack};
-use esp_idf_svc::nvs::EspDefaultNvsPartition;
-use esp_idf_svc::wifi::{AuthMethod, BlockingWifi, EspWifi, WifiDriver};
-use esp_idf_svc::io::{EspIOError, Write};
+use esp_idf_svc::wifi::{WifiDriver, ClientConfiguration, Configuration as WifiConfiguration};
+use esp_idf_svc::{
+    http::Method,
+    io::Write,
+    wifi::{AuthMethod},
+    ws::FrameType,
+    eventloop::EspSystemEventLoop,
+    http::server::EspHttpServer,
+    nvs::EspDefaultNvsPartition,
+    systime::EspSystemTime,
+    wifi::{BlockingWifi, EspWifi},
+};
 use esp_idf_svc::ipv4::{
     ClientConfiguration as IpClientConfiguration, ClientSettings as IpClientSettings,
     Configuration as IpConfiguration, Mask, Subnet,
 };
-use esp_idf_svc::wifi::{ClientConfiguration, Configuration as WifiConfiguration};
-use std::net::Ipv4Addr;
-use std::result::Result;
-use std::str::FromStr;
-use log::info;
 
-const SSID: &str = env!("ESP32_WIFI_SSID");
-const PASSWORD: &str = env!("ESP32_WIFI_PASS");
+use esp_idf_svc::sys::{EspError, ESP_ERR_INVALID_SIZE};
+
+use log::*;
+
+use std::{borrow::Cow, collections::BTreeMap, ffi::CStr, str, sync::Mutex};
+
+const SSID: &str = env!("WIFI_SSID");
+const PASSWORD: &str = env!("WIFI_PASS");
 const DEVICE_IP: &str = env!("ESP_DEVICE_IP");
 const GATEWAY_IP: &str = env!("GATEWAY_IP");
 const GATEWAY_NETMASK: Option<&str> = option_env!("GATEWAY_NETMASK");
+static INDEX_HTML: &str = include_str!("http_ws_server_page.html");
+
+// Max payload length
+const MAX_LEN: usize = 8;
+
+// Need lots of stack to parse JSON
+const STACK_SIZE: usize = 10240;
+
+struct GuessingGame {
+    guesses: u32,
+    secret: u32,
+    done: bool,
+}
+
+impl GuessingGame {
+    fn new(secret: u32) -> Self {
+        Self {
+            guesses: 0,
+            secret,
+            done: false,
+        }
+    }
+
+    fn guess(&mut self, guess: u32) -> (Ordering, u32) {
+        if self.done {
+            (Ordering::Equal, self.guesses)
+        } else {
+            self.guesses += 1;
+            let cmp = guess.cmp(&self.secret);
+            if cmp == Ordering::Equal {
+                self.done = true;
+            }
+            (cmp, self.guesses)
+        }
+    }
+
+    fn parse_guess(input: &str) -> Option<u32> {
+        // Trim control codes (including null bytes) and/or whitespace
+        let Ok(number) = input
+            .trim_matches(|c: char| c.is_ascii_control() || c.is_whitespace())
+            .parse::<u32>()
+        else {
+            warn!("Not a number: `{input}` (length {})", input.len());
+            return None;
+        };
+        if !(1..=100).contains(&number) {
+            warn!("Not in range ({number})");
+            return None;
+        }
+        Some(number)
+    }
+}
+
+// Super rudimentary pseudo-random numbers
+fn rand() -> u32 {
+    EspSystemTime::now(&EspSystemTime {}).subsec_nanos() / 65537
+}
+
+// Serialize numbers in English
+fn nth(n: u32) -> Cow<'static, str> {
+    match n {
+        smaller @ (0..=13) => Cow::Borrowed(match smaller {
+            0 => "zeroth",
+            1 => "first",
+            2 => "second",
+            3 => "third",
+            4 => "fourth",
+            5 => "fifth",
+            6 => "sixth",
+            7 => "seventh",
+            8 => "eighth",
+            9 => "ninth",
+            10 => "10th",
+            11 => "11th",
+            12 => "12th",
+            13 => "13th",
+            _ => unreachable!(),
+        }),
+        larger => Cow::Owned(match larger % 10 {
+            1 => format!("{larger}st"),
+            2 => format!("{larger}nd"),
+            3 => format!("{larger}rd"),
+            _ => format!("{larger}th"),
+        }),
+    }
+}
 
 fn main() -> anyhow::Result<()> {
     esp_idf_svc::sys::link_patches();
     esp_idf_svc::log::EspLogger::initialize_default();
-
+    
     let peripherals = Peripherals::take()?;
     let sys_loop = EspSystemEventLoop::take()?;
     let nvs = EspDefaultNvsPartition::take()?;
@@ -62,25 +159,91 @@ fn main() -> anyhow::Result<()> {
     let wifi = WifiDriver::new(peripherals.modem, sys_loop.clone(), Some(nvs))?;
     let wifi = configure_wifi(wifi)?;
     let mut wifi = BlockingWifi::wrap(wifi, sys_loop)?;
-    connect_wifi(&mut wifi)?;    
+    connect_wifi(&mut wifi)?;  
 
-    // サーバー設定とインスタンス化
-    let mut server = EspHttpServer::new(&Configuration::default())?;
+    let mut server = create_server()?;
 
-    // GETエンドポイントの登録
     server.fn_handler("/", Method::Get, |req| {
-        req.into_ok_response()?.write_all(b"Hello from Rust REST Server!")?;
-        Ok::<(), EspIOError>(())
+        req.into_ok_response()?
+            .write_all(INDEX_HTML.as_bytes())
+            .map(|_| ())
     })?;
 
-    // POSTエンドポイント（JSONデータの受信など）
-    server.fn_handler("/api/data", Method::Post, |mut req| {
-        let mut buf = [0u8; 100];
-        let len = req.read(&mut buf).unwrap();
-        // ここでserde等を使ってbufをパースする処理
-        
-        req.into_ok_response()?.write_all(b"Data received")?;
-        Ok::<(), EspIOError>(())
+    let guessing_games = Mutex::new(BTreeMap::<i32, GuessingGame>::new());
+
+    server.ws_handler("/ws/guess", move |ws| {
+        let mut sessions = guessing_games.lock().unwrap();
+        if ws.is_new() {
+            sessions.insert(ws.session(), GuessingGame::new((rand() % 100) + 1));
+            info!("New WebSocket session ({} open)", sessions.len());
+            ws.send(
+                FrameType::Text(false),
+                "Welcome to the guessing game! Enter a number between 1 and 100".as_bytes(),
+            )?;
+            return Ok(());
+        } else if ws.is_closed() {
+            sessions.remove(&ws.session());
+            info!("Closed WebSocket session ({} open)", sessions.len());
+            return Ok(());
+        }
+        let session = sessions.get_mut(&ws.session()).unwrap();
+
+        // NOTE: Due to the way the underlying C implementation works, ws.recv()
+        // may only be called with an empty buffer exactly once to receive the
+        // incoming buffer size, then must be called exactly once to receive the
+        // actual payload.
+        let (_frame_type, len) = match ws.recv(&mut []) {
+            Ok(frame) => frame,
+            Err(e) => return Err(e),
+        };
+
+        if len > MAX_LEN {
+            ws.send(FrameType::Text(false), "Request too big".as_bytes())?;
+            ws.send(FrameType::Close, &[])?;
+            return Err(EspError::from_infallible::<ESP_ERR_INVALID_SIZE>());
+        }
+
+        let mut buf = [0; MAX_LEN]; // Small digit buffer can go on the stack
+        ws.recv(buf.as_mut())?;
+
+        let Ok(user_string) = CStr::from_bytes_until_nul(&buf[..len]) else {
+            ws.send(FrameType::Text(false), "[CStr decode Error]".as_bytes())?;
+            return Ok(());
+        };
+
+        let Ok(user_string) = user_string.to_str() else {
+            ws.send(FrameType::Text(false), "[UTF-8 Error]".as_bytes())?;
+            return Ok(());
+        };
+
+        let Some(user_guess) = GuessingGame::parse_guess(user_string) else {
+            ws.send(
+                FrameType::Text(false),
+                "Please enter a number between 1 and 100".as_bytes(),
+            )?;
+            return Ok(());
+        };
+
+        match session.guess(user_guess) {
+            (Ordering::Greater, n) => {
+                let reply = format!("Your {} guess was too high", nth(n));
+                ws.send(FrameType::Text(false), reply.as_ref())?;
+            }
+            (Ordering::Less, n) => {
+                let reply = format!("Your {} guess was too low", nth(n));
+                ws.send(FrameType::Text(false), reply.as_ref())?;
+            }
+            (Ordering::Equal, n) => {
+                let reply = format!(
+                    "You guessed {} on your {} try! Refresh to play again",
+                    session.secret,
+                    nth(n)
+                );
+                ws.send(FrameType::Text(false), reply.as_ref())?;
+                ws.send(FrameType::Close, &[])?;
+            }
+        }
+        Ok::<(), EspError>(())
     })?;
 
     loop {
@@ -150,6 +313,15 @@ fn connect_wifi(wifi: &mut BlockingWifi<EspWifi<'static>>) -> Result<(), esp_idf
     info!("Wifi netif up");
 
     Ok(())
+}
+
+fn create_server() -> anyhow::Result<EspHttpServer<'static>> {
+    let server_configuration = esp_idf_svc::http::server::Configuration {
+        stack_size: STACK_SIZE,
+        ..Default::default()
+    };
+
+    Ok(EspHttpServer::new(&server_configuration)?)
 }
 ```
 
