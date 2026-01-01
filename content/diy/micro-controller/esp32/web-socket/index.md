@@ -5,9 +5,9 @@ title = "ESP32でRustを使ってWebSocket server"
 og_image = "/diy/micro-controller/esp32/web-socket/ogp.jpg"
 +++
 
-[Lチカ](/diy/micro-controller/esp32/rust)が動いたので、REST serverをRustで実装してみる。
+[Lチカ](/diy/micro-controller/esp32/rust)が動いたので、WebSocket serverをRustで実装してみる。
 
-Lチカの時と同様に雛形を作る。名前はrest-serverにした
+Lチカの時と同様に雛形を作る。名前はws-serverにした
 
     cargo generate --git https://github.com/esp-rs/esp-idf-template cargo
 
@@ -190,3 +190,5 @@ CONFIG_HTTPD_WS_SUPPORT=y
 ![borwser](browser.png)
 
 簡単な数当てゲームが動くので、二分法で当てよう(笑)。
+
+ソース全体は[こちら](https://github.com/ruimo/esp32-ws-server/tree/main)
