@@ -1,0 +1,14 @@
+error[E0599]: no method named `ws_handler` found for struct `EspHttpServer` in the current scope
+   --> src/main.rs:134:12
+    |
+134 |     server.ws_handler("/ws/guess", None, move |ws| {
+    |     -------^^^^^^^^^^
+    |
+help: there is a method `handler` with a similar name
+    |
+134 -     server.ws_handler("/ws/guess", None, move |ws| {
+134 +     server.handler("/ws/guess", None, move |ws| {
+    |
+
+
+CONFIG_HTTPD_WS_SUPPORT=y
