@@ -2,7 +2,7 @@
 date ="2026-01-02"
 title = "EasyEDAで自分用にコンポーネントを作り、3Dモデルも登録してケースも3Dプリント可能にする"
 [extra]
-og_image = "/blog/yo/IMG_2979.JPG"
+og_image = "/diy/easyeda/create-component/ogp.jpg"
 +++
 
 JLCPCBとの連携が便利なので、最近はもっぱらEasyEDAを回路設計と基板設計に使用している。EasyEDAに自分が使いたい部品が全て登録されていれば良いが、そうでない場合は自分で登録する必要がある。
