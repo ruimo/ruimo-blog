@@ -2,7 +2,7 @@
 date ="2026-1-4"
 title = "理想ダイオード回路を検証"
 [extra]
-og_image = "/blog/15v/ogp.jpg"
+og_image = "/blog/ideal-diode/ogp.jpg"
 +++
 
 [理想ダイオード回路でオーディオ信号の大きさを測定する](/blog/smart-volume0)の回路、動作原理を確かめていなかったので、ちゃんと検証しておく。
