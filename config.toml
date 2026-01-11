@@ -18,8 +18,10 @@ taxonomies = [
 ]
 
 [markdown]
-highlight_code = true
 render_emoji = true
+
+[markdown.highlighting]
+theme = "ayu-dark"
 
 [extra]
 # Put all your custom variables here
