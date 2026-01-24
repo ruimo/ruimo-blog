@@ -11,6 +11,8 @@ og_image = "/blog/ikegami-baien-2026-01-24/ogp.jpg"
 <img width="600px" src="https://m.media-amazon.com/images/I/61hYZK10TLL._AC_SL1000_.jpg">
 </a>
 
+池上梅園は五分咲きという感じ。今年は一斉に咲く感じではく、1月上旬に咲き出した株はもう花が終わりになっている感じ。多分来週あたりにしだれ梅が満開になりそう。
+
 {{ clickable_img(src="DSC01196.JPG", alt="photo") }}
 {{ clickable_img(src="DSC01203.JPG", alt="photo") }}
 {{ clickable_img(src="DSC01204.JPG", alt="photo") }}
