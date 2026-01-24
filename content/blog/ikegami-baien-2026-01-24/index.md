@@ -33,4 +33,4 @@ og_image = "/blog/ikegami-baien-2026-01-24/ogp.jpg"
 {{ clickable_img(src="DSC01289.JPG", alt="photo") }}
 {{ clickable_img(src="DSC01294.JPG", alt="photo") }}
 
-やはりフラッシュは強力だ。光量の調整が面倒だけど、そこに目を瞑れば万能感がある。
+やはりフラッシュは強力だ。メカシャッターにしないと発光しないのと光量の調整が面倒だけど、そこに目を瞑れば万能感がある。
