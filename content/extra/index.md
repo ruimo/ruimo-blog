@@ -9,19 +9,19 @@ hidden = true
 +++
 
 Meissen 19th Century Porcelain Statue
-{{ clickable_img(src="extra/DSC01320.JPG", alt="photo") }}
+{{ clickable_img(src="DSC01320.JPG", alt="photo") }}
 
-{{ clickable_img(src="extra/DSC01321.JPG", alt="photo") }}
+{{ clickable_img(src="DSC01321.JPG", alt="photo") }}
 
 An Original Marble Plate from 1889
-{{ clickable_img(src="extra/DSC01322.JPG", alt="photo") }}
+{{ clickable_img(src="DSC01322.JPG", alt="photo") }}
 
-{{ clickable_img(src="extra/DSC01323.JPG", alt="photo") }}
+{{ clickable_img(src="DSC01323.JPG", alt="photo") }}
 
-{{ clickable_img(src="extra/DSC01324.JPG", alt="photo") }}
+{{ clickable_img(src="DSC01324.JPG", alt="photo") }}
 
 OLD Sweet Adorable Meissen Girl & Cow
 Designer = Max Bochmann 1910
-{{ clickable_img(src="extra/DSC01328.JPG", alt="photo") }}
+{{ clickable_img(src="DSC01328.JPG", alt="photo") }}
 
-{{ clickable_img(src="extra/DSC01329.JPG", alt="photo") }}
+{{ clickable_img(src="DSC01329.JPG", alt="photo") }}
