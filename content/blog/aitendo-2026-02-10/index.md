@@ -2,7 +2,7 @@
 date ="2026-02-10"
 title = "aitendoの実店舗閉店"
 [extra]
-og_image = "/blog/15v/ogp.jpg"
+og_image = "/blog/aitendo-2026-02-10/ogp.jpg"
 +++
 
 [aitendoの実店舗が閉店](https://www.aitendo.com/news#whatnew_data287)とのこと。実店舗はずっと気にはなっていたのだけど、JRだと最寄りが鴬谷駅。しかしこの駅は京浜東北線の快速が止まらない。上野からだと30分くらい歩くので結局日比谷線に乗り換えて入谷駅に行く必要があり、面倒なので二の足を踏んでいた。
