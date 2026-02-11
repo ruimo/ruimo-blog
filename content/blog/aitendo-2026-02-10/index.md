@@ -32,3 +32,19 @@ og_image = "/blog/aitendo-2026-02-10/ogp.jpg"
 戦利品。これで199円は破格ですね。良い思い出にもなった。ありがとうaitendoさん。
 
 {{ clickable_img(src="IMG_3133.JPG", alt="photo") }}
+
+P.S. そういえば、おまけももらっていたのだった。
+
+ゲルマニウムダイオードか、1チップラジオ(？)。ゲルマニウムダイオードの方をもらった。
+
+{{ clickable_img(src="IMG_3136.JPG", alt="photo") }}
+
+万能テスターで測ったら0.3VくらいVfがあって結構高いなと思ったけど、
+
+{{ clickable_img(src="IMG_3134.JPG", alt="photo") }}
+
+SANWAのテスターで測ったら、0.1V強だった。かかる電圧でVfが変化するのかな。
+
+{{ clickable_img(src="IMG_3135.JPG", alt="photo") }}
+
+そういえば、これ以前、実はゲルマニウムダイオードじゃなくてショットキーバリアダイオードだったみたいなオチだったような気もする。
