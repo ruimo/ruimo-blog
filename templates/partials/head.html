@@ -35,7 +35,7 @@
   <meta property="og:title" content="{{ page_title }}" />
   <meta property="og:site_name" content="{{ config.title }}" />
   <meta property="og:description" content="{{ description }}" />
-  <meta property="og:url" content="{{ page.permalink }}" />
+  <meta property="og:url" content="{{ page.permalink | safe }}" />
   <!---->
   {% else %}
   <!-- Author -->
@@ -47,7 +47,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="{{ config.title }}" />
   <meta property="og:description" content="{{ description }}" />
-  <meta property="og:url" content="{{ get_url(path=``) }}" />
+  <meta property="og:url" content="{{ get_url(path='') | safe }}" />
   <!---->
   {% endif %}
 
