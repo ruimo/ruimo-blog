@@ -48,3 +48,12 @@ SANWAのテスターで測ったら、0.1V強だった。かかる電圧でVfが
 {{ clickable_img(src="IMG_3135.JPG", alt="photo") }}
 
 そういえば、これ以前、実はゲルマニウムダイオードじゃなくてショットキーバリアダイオードだったみたいなオチだったような気もする。
+
+追記:
+Analog Discovery用のトランジスタ・テスターを買ったので測定してみた。
+
+{{ clickable_img(src="IMG_3150.JPG", alt="photo") }}
+
+{{ clickable_img(src="2026-02-20_17-50.png", alt="photo") }}
+
+SANWAのテスターだと、0.6mAくらいで測定したVfのようだ。
