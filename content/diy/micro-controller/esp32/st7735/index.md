@@ -1,6 +1,8 @@
 +++
 date = "2026-2-21"
 title = "ESP32でRustを使ってLCD(ST7735)を制御する"
+[extra]
+og_image = "/diy/micro-controller/esp32/st7735/lcd.png"
 +++
 
 自作の組み込み機器の表示での文字などの表示は、7セグLEDを使うことが多いが、7セグLEDは結構ピン数が多いので面倒。ずっと気になっていたLCDを試してみた。
