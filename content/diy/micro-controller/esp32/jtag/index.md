@@ -1,6 +1,8 @@
 +++
 date = "2026-2-28"
 title = "JTAGを使った書き込み"
+[extra]
+og_image = "/diy/micro-controller/esp32/jtag/esp32s3n16r8.JPG"
 +++
 
 これまでESP32の開発では、秋月のdevkitを使ってきた。
