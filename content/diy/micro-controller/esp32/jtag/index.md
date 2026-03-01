@@ -8,7 +8,7 @@ og_image = "/diy/micro-controller/esp32/jtag/esp32s3n16r8.JPG"
 これまでESP32の開発では、秋月のdevkitを使ってきた。
 
 <a href="https://akizukidenshi.com/catalog/g/g115673/">
-<img src="https://akizukidenshi.com/img/goods/L/115673.jpg">
+<img src="115673.jpg">
 </a>
 
 USB serialが載っているので、簡単に書き込みができる。ただ、微妙に書き込みに時間がかかるのがだんだんストレスになってきた。
