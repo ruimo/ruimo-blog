@@ -9,7 +9,7 @@ Google検索して新しそうなものを探すと[これ](https://github.com/a
 
 WCH-LinkEの設定は[以前書いた通り](https://ruimo.github.io/ch32v003try/)。
 
-コードはシンプルで、rprintln!()というのを使えば、PC側に表示できる。
+コードはシンプルで、rprintln!()というのを使えば、PC側に表示できるのでprintデバッグも可能。
 
 ```Rust
 #![no_std]
