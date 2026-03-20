@@ -2,7 +2,7 @@
 date ="2026-3-20"
 title = "近所を散歩"
 [extra]
-og_image = "/blog/2026-2-22/ogp.jpg"
+og_image = "/blog/2026-03-20/DSC01427.JPG"
 +++
 
 雨上がり。
