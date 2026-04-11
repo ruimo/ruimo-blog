@@ -39,4 +39,34 @@ AI: 「外しても動くかもしれません。試してみます」
 
 で、なんかすっきりしない結果だったが、なんか最近、こうしてAIとの雑談でデバッグするのが結構楽しくなってきてしまった。
 
+一番やっかいだったのは、wlink statusの結果で
+
+```
+wlink status
+10:40:28 [INFO] Connected to WCH-Link v2.20(v40) (WCH-LinkE-CH32V305)
+10:40:28 [INFO] Attached chip: CH32V20X [CH32V203C8T6] (ChipID: 0x20310500)
+10:40:28 [INFO] Chip ESIG: FlashSize(64KB) UID(cd-ab-83-de-56-bd-a6-47)
+10:40:28 [INFO] Flash protected: false
+10:40:28 [INFO] RISC-V ISA(misa): Some("RV32ACIMUX")
+10:40:28 [INFO] RISC-V arch(marchid): Some("WCH-V4B")
+10:40:28 [WARN] The halt status may be incorrect because detaching might resume the MCU
+10:40:28 [INFO] Dmstatus {
+    .0: 0x382,
+    allhavereset: false,
+    anyhavereset: false,
+    allresumeack: false,
+    anyresumeack: false,
+    allunavail: false,
+    anyunavail: false,
+    allrunning: false,
+    anyrunning: false,
+    allhalted: true,
+    anyhalted: true,
+    authenticated: true,
+    version: 0x2,
+}
+```
+
+allrunningがfalse、allhaltedがtrueになる。これwlink statusをやると実行が止まっちゃうみたいなんだよね。helpを見てwlink resumeをしても、すぐに止まっちゃう。正解はwlink resetみたい。これに私もAIもかなり振り回された。
+
 コードは[こちら](https://github.com/ruimo/ch32v203-blinky-rust)
