@@ -4,7 +4,7 @@ title = "スピーカー電力計 - 電圧、電流測定"
 [taxonomies]
 tags = ["スピーカー電力計"]
 [extra]
-og_image = "/blog/speakerWatMeter3/ogp.jpg"
+og_image = "/blog/speakerwatmeter3/ogp.jpg"
 +++
 
 スピーカー電力計、今回は電圧と電流の測定回路の検証。
