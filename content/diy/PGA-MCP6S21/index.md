@@ -13,7 +13,7 @@ MCP6S21は8PINしかないので接続は簡単。CH0が入力でV<sub>OUT</sub>
 
 ![](pin.png)
 
-SPIのよる制御は簡単。[2バイトを送れば良い](https://akizukidenshi.com/goodsaffix/mcp6s2x.pdf)。
+SPIによる制御は簡単。[2バイトを送れば良い](https://akizukidenshi.com/goodsaffix/mcp6s2x.pdf)。
 
 ![](inst.png)1バイト目がInstruction。Write to registerは、010で、gain registerが0だから、1バイト目は0x40
 
