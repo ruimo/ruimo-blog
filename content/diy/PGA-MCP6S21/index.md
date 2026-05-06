@@ -1,7 +1,7 @@
 +++
 title = "プログラマブル・ゲイン・アンプ MCP6S21のテスト"
-description = ""
 date="2026-05-06"
+[extra]
 og_image = "/diy/pga-mcp6s21/ogp.jpg"
 +++
 
