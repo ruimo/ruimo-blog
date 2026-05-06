@@ -2,6 +2,7 @@
 title = "プログラマブル・ゲイン・アンプ MCP6S21のテスト"
 description = ""
 date="2026-05-06"
+og_image = "/diy/pga-mcp6s21/ogp.jpg"
 +++
 
 MCP6S21は、SPI制御で増幅率を指定できるアンプ。ラズパイを使って動作確認してみる。
