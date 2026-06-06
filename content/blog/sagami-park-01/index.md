@@ -1,6 +1,6 @@
 +++
 date ="2026-6-5"
-title = "相模原公園 01 噴水編"
+title = "相模原公園 01 (噴水編)"
 [taxonomies]
 tags = ["散歩"]
 [extra]
