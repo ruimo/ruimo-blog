@@ -13,6 +13,12 @@ theme = "kita"
 
 generate_feeds = true
 
+# RSS feed configuration
+feed_filenames = ["atom.xml", "rss.xml"]
+# The number of articles to include in the feed. All items are included if
+# this limit is not set (the default).
+feed_limit = 20
+
 taxonomies = [
     { name = "tags", feed = true },  # "tags" という名前のタクソノミーを有効にする
 ]
