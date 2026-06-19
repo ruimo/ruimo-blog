@@ -38,9 +38,21 @@
     }
 }
 
+/* シェルプロンプト記号の色 */
+.prompt {
+    color: #7c5cd8;
+    user-select: none;
+}
+
 /* コードブロックのスタイル調整 */
 pre {
     position: relative !important;
+    margin-bottom: 0;
+}
+
+/* {% shell() %} の直後のコードブロックの上マージンを消す */
+pre + pre {
+    margin-top: 0;
 }
 
 pre code {

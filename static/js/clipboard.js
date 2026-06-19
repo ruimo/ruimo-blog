@@ -70,7 +70,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const codeBlocks = document.querySelectorAll('pre code');
-    
+
+    // data-shell なブロックの行頭プロンプト記号を span で囲んで色付け
+    codeBlocks.forEach(function(codeBlock) {
+        if (!codeBlock.dataset.shell) return;
+        codeBlock.innerHTML = codeBlock.textContent.split('\n').map(function(line) {
+            return line.replace(/^([$#])( )/, '<span class="prompt">$1</span>$2');
+        }).join('\n');
+    });
+
     codeBlocks.forEach(function(codeBlock) {
         const pre = codeBlock.parentNode;
         
@@ -82,7 +90,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         copyButton.addEventListener('click', function(e) {
             e.preventDefault();
-            const code = codeBlock.textContent || codeBlock.innerText;
+            const raw = codeBlock.textContent || codeBlock.innerText;
+            const code = codeBlock.dataset.shell
+                ? raw.split('\n').map(function(line) {
+                    return line.replace(/^[$#] /, '');
+                }).join('\n')
+                : raw;
             copyToClipboard(code, copyButton);
         });
         
