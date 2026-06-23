@@ -2,7 +2,7 @@
 date ="2026-6-23"
 title = "川崎市緑化センター"
 [extra]
-og_image = "/blog/kawasakicityGreencenter/ogp.jpg"
+og_image = "/blog/kawasakicitygreencenter/ogp.jpg"
 +++
 
 家から近いので行ってみた。
