@@ -1,3 +1,32 @@
+/* --- obj_viewer shortcode --- */
+.obj-viewer-wrap {
+    margin: 1.5em 0;
+}
+.obj-viewer-title {
+    margin: 0 0 0.4em;
+    font-weight: bold;
+    font-size: 0.95em;
+}
+.obj-viewer-container {
+    width: 100%;
+    background-color: #2a2a2a;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+}
+.obj-viewer-container canvas {
+    display: block;
+}
+.obj-viewer-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    font-size: 14px;
+}
+
+
 /* --- 1. 基本設定（ライトモード：htmlにdarkクラスがない時） --- */
 .custom-note {
     --note-bg: #f9f9f9;

@@ -1,0 +1,17 @@
+{% if src is starting_with("/") %}
+  {% set _model_path = src %}
+{% else %}
+  {% set _page_path = page.path | trim_start_matches(pat="/") %}
+  {% set _model_path = "/" ~ _page_path ~ src %}
+{% endif %}
+<div class="obj-viewer-wrap">
+  {% if title %}<p class="obj-viewer-title">{{ title }}</p>{% endif %}
+  <iframe
+    src="/obj-viewer.html?model={{ _model_path | urlencode_strict }}"
+    width="100%"
+    height="{{ height | default(value="400") }}"
+    style="border:none; border-radius:6px; display:block;"
+    loading="lazy"
+    title="{{ title | default(value=src) }}"
+  ></iframe>
+</div>
