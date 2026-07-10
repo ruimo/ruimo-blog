@@ -19,15 +19,15 @@
 
     document.getElementById('ss-overlay').addEventListener('click', closeSlideshow);
     document.getElementById('ss-close').addEventListener('click', closeSlideshow);
-    document.getElementById('ss-prev').addEventListener('click', function () { move(-1); resetTimer(); });
-    document.getElementById('ss-next').addEventListener('click', function () { move(1);  resetTimer(); });
+    document.getElementById('ss-prev').addEventListener('click', function () { move(-1); });
+    document.getElementById('ss-next').addEventListener('click', function () { move(1);  });
     // 画像クリックで次へ
-    document.getElementById('ss-img').addEventListener('click', function () { move(1); resetTimer(); });
+    document.getElementById('ss-img').addEventListener('click', function () { move(1); });
 
     document.addEventListener('keydown', function (e) {
       if (!document.getElementById('ss-modal').classList.contains('ss-open')) return;
-      if (e.key === 'ArrowLeft')  { move(-1); resetTimer(); }
-      if (e.key === 'ArrowRight') { move(1);  resetTimer(); }
+      if (e.key === 'ArrowLeft')  { move(-1); }
+      if (e.key === 'ArrowRight') { move(1);  }
       if (e.key === 'Escape')     closeSlideshow();
     });
   }
@@ -38,7 +38,7 @@
 
   function resetTimer() {
     clearTimeout(autoTimer);
-    autoTimer = setTimeout(function () { move(1); resetTimer(); }, 5000);
+    autoTimer = null;
   }
 
   // ページ内の全 data-slideshow 画像を収集
@@ -52,6 +52,15 @@
   function show(index) {
     current = (index + images.length) % images.length;
     var ssImg = document.getElementById('ss-img');
+    clearTimeout(autoTimer);
+    autoTimer = null;
+    ssImg.onload = null;
+    var setAt = Date.now();
+    ssImg.onload = function () {
+      var elapsed = Date.now() - setAt;
+      var delay = Math.max(0, 5000 - elapsed);
+      autoTimer = setTimeout(function () { move(1); }, delay);
+    };
     ssImg.src = images[current].src;
     ssImg.alt = images[current].alt;
     document.getElementById('ss-caption').textContent = images[current].alt;
@@ -62,6 +71,7 @@
   }
 
   function move(dir) {
+    resetTimer();
     show(current + dir);
   }
 
@@ -81,6 +91,5 @@
     var idx = images.findIndex(function (im) { return im.src === src; });
     show(idx >= 0 ? idx : 0);
     document.getElementById('ss-modal').classList.add('ss-open');
-    resetTimer();
   };
 })();
