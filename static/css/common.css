@@ -72,3 +72,104 @@ html.dark .custom-note {
 .note-body > *:last-child {
     margin-bottom: 0 !important; /* 最後の段落の下余白を強制的に消す */
 }
+
+
+/* --- スライドショー（clickable_img shortcode） --- */
+.slideshow-img-wrap {
+    display: inline-block;
+    position: relative;
+}
+.slideshow-btn {
+    display: block;
+    margin: 4px 0 0 0;
+    padding: 3px 10px;
+    font-size: 0.78em;
+    cursor: pointer;
+    background: #3b82d4;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    opacity: 0.85;
+    transition: opacity 0.2s;
+}
+.slideshow-btn:hover {
+    opacity: 1;
+}
+
+/* モーダル本体 */
+#ss-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+#ss-modal.ss-open {
+    display: flex;
+}
+#ss-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.82);
+}
+#ss-box {
+    position: relative;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 92vw;
+    max-height: 92vh;
+}
+#ss-img {
+    max-width: 88vw;
+    max-height: 78vh;
+    object-fit: contain;
+    border-radius: 4px;
+    display: block;
+    cursor: pointer;
+}
+#ss-caption {
+    color: #e0e0e0;
+    font-size: 0.88em;
+    margin-top: 8px;
+    min-height: 1.2em;
+    text-align: center;
+}
+#ss-counter {
+    color: #aaa;
+    font-size: 0.78em;
+    margin-top: 2px;
+}
+#ss-close {
+    position: absolute;
+    top: -36px;
+    right: 0;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.6em;
+    cursor: pointer;
+    line-height: 1;
+    padding: 2px 6px;
+}
+#ss-prev, #ss-next {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #fff;
+    font-size: 2em;
+    cursor: pointer;
+    padding: 10px 14px;
+    border-radius: 4px;
+    transition: background 0.2s;
+    z-index: 10001;
+}
+#ss-prev { left: 12px; }
+#ss-next { right: 12px; }
+#ss-prev:hover, #ss-next:hover {
+    background: rgba(255,255,255,0.3);
+}
