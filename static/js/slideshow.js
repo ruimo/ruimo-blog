@@ -10,8 +10,13 @@
       '  <button id="ss-close" title="閉じる">✕</button>',
       '  <button id="ss-prev" title="前の画像">&#10094;</button>',
       '  <img id="ss-img" src="" alt="">',
+      '  <div id="ss-progress-wrap"><div id="ss-progress-bar"></div></div>',
       '  <div id="ss-caption"></div>',
-      '  <div id="ss-counter"></div>',
+      '  <div id="ss-footer">',
+      '    <div id="ss-counter"></div>',
+      '    <div id="ss-remaining"></div>',
+      '    <label id="ss-interval-label"><input id="ss-interval" type="number" min="1" max="99" value="5">秒</label>',
+      '  </div>',
       '  <button id="ss-next" title="次の画像">&#10095;</button>',
       '</div>',
     ].join('');
@@ -23,6 +28,12 @@
     document.getElementById('ss-next').addEventListener('click', function () { move(1);  });
     // 画像クリックで次へ
     document.getElementById('ss-img').addEventListener('click', function () { move(1); });
+    // 秒数変更時にcookieへ保存
+    document.getElementById('ss-interval').addEventListener('change', function () {
+      var v = parseInt(this.value, 10);
+      if (isNaN(v) || v < 1) { this.value = 5; v = 5; }
+      saveIntervalToCookie(v);
+    });
 
     document.addEventListener('keydown', function (e) {
       if (!document.getElementById('ss-modal').classList.contains('ss-open')) return;
@@ -35,10 +46,69 @@
   var images = [];   // { src, alt }
   var current = 0;
   var autoTimer = null;
+  var remainTimer = null;  // 残り秒数更新用
+
+  var COOKIE_KEY = 'ss_interval';
+
+  function saveIntervalToCookie(sec) {
+    var expires = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toUTCString();
+    document.cookie = COOKIE_KEY + '=' + sec + '; expires=' + expires + '; path=/; SameSite=Lax';
+  }
+
+  function loadIntervalFromCookie() {
+    var m = document.cookie.match(/(?:^|;\s*)ss_interval=(\d+)/);
+    return m ? parseInt(m[1], 10) : 5;
+  }
+
+  function getInterval() {
+    var el = document.getElementById('ss-interval');
+    var v = el ? parseInt(el.value, 10) : 5;
+    return (isNaN(v) || v < 1 ? 5 : v) * 1000;
+  }
 
   function resetTimer() {
     clearTimeout(autoTimer);
+    clearInterval(remainTimer);
     autoTimer = null;
+    remainTimer = null;
+    stopProgress();
+  }
+
+  function startProgress(durationMs) {
+    var bar = document.getElementById('ss-progress-bar');
+    if (!bar) return;
+    bar.style.transition = 'none';
+    bar.style.width = '0%';
+    // 強制リフロー
+    bar.offsetWidth; // eslint-disable-line no-unused-expressions
+    bar.style.transition = 'width ' + durationMs + 'ms linear';
+    bar.style.width = '100%';
+  }
+
+  function stopProgress() {
+    var bar = document.getElementById('ss-progress-bar');
+    if (!bar) return;
+    bar.style.transition = 'none';
+    bar.style.width = '0%';
+  }
+
+  function startRemaining(durationMs) {
+    var el = document.getElementById('ss-remaining');
+    if (!el) return;
+    var endsAt = Date.now() + durationMs;
+    function tick() {
+      var left = Math.ceil((endsAt - Date.now()) / 1000);
+      el.textContent = left > 0 ? left + '秒' : '';
+    }
+    tick();
+    remainTimer = setInterval(tick, 500);
+  }
+
+  function stopRemaining() {
+    clearInterval(remainTimer);
+    remainTimer = null;
+    var el = document.getElementById('ss-remaining');
+    if (el) el.textContent = '';
   }
 
   // ページ内の全 data-slideshow 画像を収集
@@ -58,7 +128,9 @@
     var setAt = Date.now();
     ssImg.onload = function () {
       var elapsed = Date.now() - setAt;
-      var delay = Math.max(0, 5000 - elapsed);
+      var delay = Math.max(0, getInterval() - elapsed);
+      startProgress(delay);
+      startRemaining(delay);
       autoTimer = setTimeout(function () { move(1); }, delay);
     };
     ssImg.src = images[current].src;
@@ -77,7 +149,11 @@
 
   function closeSlideshow() {
     clearTimeout(autoTimer);
+    clearInterval(remainTimer);
     autoTimer = null;
+    remainTimer = null;
+    stopProgress();
+    stopRemaining();
     document.getElementById('ss-modal').classList.remove('ss-open');
     document.getElementById('ss-img').src = '';
   }
@@ -85,6 +161,9 @@
   // グローバルに公開（clickable_img.html の onclick から呼ぶ）
   window.openSlideshow = function (triggerImg) {
     ensureModal();
+    // cookie から秒数を復元
+    var el = document.getElementById('ss-interval');
+    if (el) el.value = loadIntervalFromCookie();
     collectImages();
     if (images.length === 0) return;
     var src = triggerImg.getAttribute('data-slideshow') || triggerImg.src;

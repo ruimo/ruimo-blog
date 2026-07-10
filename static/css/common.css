@@ -130,6 +130,21 @@ html.dark .custom-note {
     display: block;
     cursor: pointer;
 }
+#ss-progress-wrap {
+    width: 88vw;
+    max-width: 88vw;
+    height: 3px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 2px;
+    margin-top: 6px;
+    overflow: hidden;
+}
+#ss-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #fff;
+    border-radius: 2px;
+}
 #ss-caption {
     color: #e0e0e0;
     font-size: 0.88em;
@@ -137,10 +152,35 @@ html.dark .custom-note {
     min-height: 1.2em;
     text-align: center;
 }
+#ss-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 4px;
+}
 #ss-counter {
     color: #aaa;
     font-size: 0.78em;
-    margin-top: 2px;
+}
+#ss-remaining {
+    color: #aaa;
+    font-size: 0.78em;
+    min-width: 2.5em;
+    text-align: right;
+}
+#ss-interval-label {
+    color: #aaa;
+    font-size: 0.78em;
+}
+#ss-interval {
+    width: 3em;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 3px;
+    color: #fff;
+    font-size: 1em;
+    padding: 1px 4px;
+    text-align: center;
 }
 #ss-close {
     position: absolute;
