@@ -1,3 +1,13 @@
-<a href="{{ src | safe }}" target="_blank" rel="noopener noreferrer">
-    <img src="{{ src | safe }}" alt="{{ alt }}" {% if width %}width="{{ width }}"{% endif %}>
-</a>
+<span class="slideshow-img-wrap">
+  <img
+    src="{{ src | safe }}"
+    alt="{{ alt }}"
+    {% if width %}width="{{ width }}"{% endif %}
+    class="slideshow-img"
+    data-slideshow="{{ src | safe }}"
+    data-alt="{{ alt }}"
+    onclick="openSlideshow(this)"
+    style="cursor:zoom-in;"
+  >
+  <button class="slideshow-btn" onclick="openSlideshow(this.previousElementSibling)" title="スライドショーで表示">▶ スライドショー</button>
+</span>
