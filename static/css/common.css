@@ -83,6 +83,10 @@ html.dark .custom-note {
     display: inline-block;
     position: relative;
 }
+.slideshow-img-wrap > a {
+    display: block;
+    line-height: 0;
+}
 .slideshow-btn {
     display: block;
     margin: 4px 0 0 0;
