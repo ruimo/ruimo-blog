@@ -1,13 +1,14 @@
 <span class="slideshow-img-wrap">
-  <img
-    src="{{ src | safe }}"
-    alt="{{ alt }}"
-    {% if width %}width="{{ width }}"{% endif %}
-    class="slideshow-img"
-    data-slideshow="{{ src | safe }}"
-    data-alt="{{ alt }}"
-    onclick="openSlideshow(this)"
-    style="cursor:zoom-in;"
-  >
-  <button class="slideshow-btn" onclick="openSlideshow(this.previousElementSibling)" title="スライドショーで表示">▶ スライドショー</button>
+  <a href="{{ src | safe }}" target="_blank" rel="noopener" title="元サイズで表示">
+    <img
+      src="{{ src | safe }}"
+      alt="{{ alt }}"
+      {% if width %}width="{{ width }}"{% endif %}
+      class="slideshow-img"
+      data-slideshow="{{ src | safe }}"
+      data-alt="{{ alt }}"
+      style="cursor:zoom-in;"
+    >
+  </a>
+  <button class="slideshow-btn" onclick="openSlideshow(this.parentNode.querySelector('img.slideshow-img'))" title="スライドショーで表示">▶ スライドショー</button>
 </span>
