@@ -1,3 +1,17 @@
+{# 画像URLを絶対URLに正規化する（Google Lens は公開された絶対URLしか読めないため、
+   ローカルプレビュー時でも config.base_url を基準にした本番URLを組み立てる） #}
+{% set _base = config.base_url | trim_end_matches(pat="/") %}
+{% if src is starting_with("http") %}
+  {% set _abs_src = src %}
+{% elif src is starting_with("/") %}
+  {% set _abs_src = _base ~ src %}
+{% elif page %}
+  {% set _abs_src = _base ~ page.path ~ src %}
+{% else %}
+  {% set _abs_src = _base ~ "/" ~ src %}
+{% endif %}
+{% set _enc_src = _abs_src | urlencode_strict %}
+{% set _lens_url = "https://lens.google.com/uploadbyurl?url=" ~ _enc_src %}
 <span class="slideshow-img-wrap">
   <a href="{{ src | safe }}" target="_blank" rel="noopener" title="元サイズで表示">
     <img
@@ -7,8 +21,12 @@
       class="slideshow-img"
       data-slideshow="{{ src | safe }}"
       data-alt="{{ alt }}"
+      data-lens="{{ _lens_url | safe }}"
       style="cursor:zoom-in;"
     >
   </a>
-  <button class="slideshow-btn" onclick="openSlideshow(this.parentNode.querySelector('img.slideshow-img'))" title="スライドショーで表示">▶ スライドショー</button>
+  <span class="img-btn-row">
+    <button class="slideshow-btn" onclick="openSlideshow(this.closest('.slideshow-img-wrap').querySelector('img.slideshow-img'))" title="スライドショーで表示">▶ スライドショー</button>
+    <a class="slideshow-btn lens-btn" href="{{ _lens_url | safe }}" target="_blank" rel="noopener nofollow" referrerpolicy="no-referrer" title="Google レンズでこの画像を検索">これは何？</a>
+  </span>
 </span>
