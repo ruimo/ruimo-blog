@@ -16,6 +16,7 @@
       '    <div id="ss-counter"></div>',
       '    <div id="ss-remaining"></div>',
       '    <label id="ss-interval-label"><input id="ss-interval" type="number" min="1" max="99" value="5">秒</label>',
+      '    <a id="ss-lens" href="#" target="_blank" rel="noopener nofollow" referrerpolicy="no-referrer" title="Google レンズでこの画像を検索">これは何？</a>',
       '  </div>',
       '  <button id="ss-next" title="次の画像">&#10095;</button>',
       '</div>',
@@ -34,6 +35,12 @@
       if (isNaN(v) || v < 1) { this.value = 5; v = 5; }
       saveIntervalToCookie(v);
     });
+    // Google レンズを開くときは自動送りを止める（別タブで見比べられるように）
+    document.getElementById('ss-lens').addEventListener('click', function (e) {
+      e.stopPropagation();
+      resetTimer();
+      stopRemaining();
+    });
 
     document.addEventListener('keydown', function (e) {
       if (!document.getElementById('ss-modal').classList.contains('ss-open')) return;
@@ -43,10 +50,23 @@
     });
   }
 
-  var images = [];   // { src, alt }
+  var images = [];   // { src, alt, lens }
   var current = 0;
   var autoTimer = null;
   var remainTimer = null;  // 残り秒数更新用
+
+  // Google レンズ用URL。テンプレートが付与した data-lens を優先し、
+  // 無ければ現在のページを基準に絶対URL化して組み立てる
+  function lensUrlFor(im) {
+    if (im.lens) return im.lens;
+    var abs;
+    try {
+      abs = new URL(im.src, document.baseURI).href;
+    } catch (e) {
+      return '';
+    }
+    return 'https://lens.google.com/uploadbyurl?url=' + encodeURIComponent(abs);
+  }
 
   var COOKIE_KEY = 'ss_interval';
 
@@ -115,7 +135,11 @@
   function collectImages() {
     images = [];
     document.querySelectorAll('img[data-slideshow]').forEach(function (img) {
-      images.push({ src: img.getAttribute('data-slideshow'), alt: img.getAttribute('data-alt') || img.alt || '' });
+      images.push({
+        src: img.getAttribute('data-slideshow'),
+        alt: img.getAttribute('data-alt') || img.alt || '',
+        lens: img.getAttribute('data-lens') || ''
+      });
     });
   }
 
@@ -137,6 +161,16 @@
     ssImg.alt = images[current].alt;
     document.getElementById('ss-caption').textContent = images[current].alt;
     document.getElementById('ss-counter').textContent = (current + 1) + ' / ' + images.length;
+    var lens = document.getElementById('ss-lens');
+    if (lens) {
+      var url = lensUrlFor(images[current]);
+      if (url) {
+        lens.href = url;
+        lens.style.display = '';
+      } else {
+        lens.style.display = 'none';
+      }
+    }
     // 前後ボタンの表示制御
     document.getElementById('ss-prev').style.visibility = images.length > 1 ? 'visible' : 'hidden';
     document.getElementById('ss-next').style.visibility = images.length > 1 ? 'visible' : 'hidden';
