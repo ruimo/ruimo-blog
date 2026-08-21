@@ -1,4 +1,5 @@
 title = "るいもの戯言"
+default_language = "ja"
 
 # The URL the site will be built for
 base_url = "https://www.ruimo.com/"
@@ -7,7 +8,7 @@ base_url = "https://www.ruimo.com/"
 compile_sass = true
 
 # Whether to build a search index to be used later on by a JavaScript library
-build_search_index = true
+build_search_index = false
 
 theme = "kita"
 
@@ -42,6 +43,11 @@ mermaid = true
 comment = true
 
 og_image = "images/logo.gif"
+
+[[extra.menu]]
+name = "Search"
+url = "$BASE_URL/search"
+icon = "search"
 
 [[extra.menu]]
 name = "タグ"
