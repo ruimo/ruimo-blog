@@ -1,0 +1,71 @@
+{% extends "index.html" %}<!---->
+{% block main %}
+<article data-pagefind-ignore>
+  <header class="mb-16">
+    <h1 class="my-0! pb-2.5">{{ section.title }}</h1>
+  </header>
+
+  <link href="{{ get_url(path='pagefind/pagefind-ui.css') }}" rel="stylesheet" />
+  <style>
+    .pagefind-ui {
+      --pagefind-ui-primary: #2563eb;
+      --pagefind-ui-text: #27272a;
+      --pagefind-ui-background: #ffffff;
+      --pagefind-ui-border: #d4d4d8;
+      --pagefind-ui-tag: #e4e4e7;
+    }
+
+    html.dark .pagefind-ui {
+      --pagefind-ui-primary: #93c5fd;
+      --pagefind-ui-fade: #a1a1aa;
+      --pagefind-ui-text: #f4f4f5;
+      --pagefind-ui-background: #27272a;
+      --pagefind-ui-border: #52525b;
+      --pagefind-ui-tag: #3f3f46;
+    }
+
+    html.dark .pagefind-ui mark {
+      background-color: #854d0e;
+      color: #fef3c7;
+    }
+  </style>
+  <script src="{{ get_url(path='pagefind/pagefind-ui.js') }}"></script>
+
+  <div id="search" class="not-prose"></div>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const search = document.querySelector("#search");
+      if (!window.PagefindUI) {
+        search.textContent = "検索インデックスを読み込めませんでした。";
+        return;
+      }
+
+      try {
+        search.replaceChildren();
+        new PagefindUI({
+          element: "#search",
+          bundlePath: "{{ get_url(path='pagefind') }}/",
+          showSubResults: true,
+          translations: {
+            placeholder: "サイト内を検索",
+            clear_search: "検索をクリア",
+            load_more: "さらに読み込む",
+            search_label: "このサイトを検索",
+            filters_label: "フィルター",
+            zero_results: "[SEARCH_TERM] に一致する記事はありませんでした。",
+            many_results: "[SEARCH_TERM] の検索結果: [COUNT] 件",
+            one_result: "[SEARCH_TERM] の検索結果: [COUNT] 件",
+            alt_search: "代わりに [DIFFERENT_TERM] を検索",
+            search_suggestion: "[SEARCH_TERM] に一致する記事はありませんでした。次の検索を試してください: [DIFFERENT_TERM]",
+            searching: "[SEARCH_TERM] を検索中...",
+          },
+        });
+      } catch (error) {
+        search.textContent = "検索を初期化できませんでした。";
+        console.error(error);
+      }
+    });
+  </script>
+</article>
+{% endblock main %}

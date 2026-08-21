@@ -104,9 +104,23 @@
         {% for menu in config.extra.menu %}
         <li>
           <a
-            class="primary-link block py-2 text-center text-lg font-medium lg:px-3 lg:py-0"
+            class="primary-link flex items-center justify-center gap-1.5 py-2 text-center text-lg font-medium lg:px-3 lg:py-0"
             href="{{ menu.url | replace(from=`$BASE_URL`, to=config.base_url) | safe }}"
-            >{{ menu.name }}</a
+            {% if menu.icon | default(value="") == "search" %}aria-label="{{ menu.name }}" title="{{ menu.name }}"{% endif %}
+            >{% if menu.icon | default(value="") == "search" %}<svg
+              class="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="transform: translateY(0.08em);"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>{% else %}<span>{{ menu.name }}</span>{% endif %}</a
           >
         </li>
         {% endfor %}

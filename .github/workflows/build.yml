@@ -25,6 +25,8 @@ jobs:
           tool: zola@0.22.1
       - name: Build with Zola
         run: zola build
+      - name: Build search index
+        run: npx --yes pagefind@1.5.2 --site public
       - name: Setup Pages
         uses: actions/configure-pages@v6
       - name: Upload artifact
@@ -42,4 +44,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
-
