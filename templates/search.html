@@ -48,6 +48,16 @@
           bundlePath: "{{ get_url(path='pagefind') }}/",
           autofocus: true,
           showSubResults: true,
+          processResult: (result) => {
+            const image = result.meta?.image;
+            if (image && !/^(?:[a-z]+:|\/|#)/i.test(image)) {
+              result.meta.image = new URL(
+                image,
+                new URL(result.url, window.location.href),
+              ).pathname;
+            }
+            return result;
+          },
           translations: {
             placeholder: "サイト内を検索",
             clear_search: "検索をクリア",
