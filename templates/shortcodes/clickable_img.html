@@ -2,24 +2,28 @@
    ローカルプレビュー時でも config.base_url を基準にした本番URLを組み立てる） #}
 {% set _base = config.base_url | trim_end_matches(pat="/") %}
 {% if src is starting_with("http") %}
+  {% set _site_src = src %}
   {% set _abs_src = src %}
 {% elif src is starting_with("/") %}
+  {% set _site_src = src %}
   {% set _abs_src = _base ~ src %}
 {% elif page %}
+  {% set _site_src = page.path ~ src %}
   {% set _abs_src = _base ~ page.path ~ src %}
 {% else %}
+  {% set _site_src = "/" ~ src %}
   {% set _abs_src = _base ~ "/" ~ src %}
 {% endif %}
 {% set _enc_src = _abs_src | urlencode_strict %}
 {% set _lens_url = "https://lens.google.com/uploadbyurl?url=" ~ _enc_src %}
 <span class="slideshow-img-wrap">
-  <a href="{{ src | safe }}" target="_blank" rel="noopener" title="元サイズで表示">
+  <a href="{{ _site_src | safe }}" target="_blank" rel="noopener" title="元サイズで表示">
     <img
-      src="{{ src | safe }}"
+      src="{{ _site_src | safe }}"
       alt="{{ alt }}"
       {% if width %}width="{{ width }}"{% endif %}
       class="slideshow-img"
-      data-slideshow="{{ src | safe }}"
+      data-slideshow="{{ _site_src | safe }}"
       data-alt="{{ alt }}"
       data-lens="{{ _lens_url | safe }}"
       style="cursor:zoom-in;"
