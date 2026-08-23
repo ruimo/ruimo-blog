@@ -26,7 +26,9 @@ jobs:
       - name: Build with Zola
         run: zola build
       - name: Build search index
-        run: npx --yes pagefind@1.5.2 --site public
+        run: >-
+          npx --yes pagefind@1.5.2 --site public
+          --glob "{index.html,404.html,blog/**/*.html,diy/**/*.html,piano/**/*.html,search/**/*.html,tags/**/*.html,tools/**/*.html}"
       - name: Setup Pages
         uses: actions/configure-pages@v6
       - name: Upload artifact

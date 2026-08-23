@@ -62,6 +62,14 @@
             searching: "[SEARCH_TERM] を検索中...",
           },
         });
+
+        search.addEventListener("click", (event) => {
+          if (!event.target.closest(".pagefind-ui__search-clear")) return;
+
+          requestAnimationFrame(() => {
+            search.querySelector(".pagefind-ui__search-input")?.focus();
+          });
+        });
       } catch (error) {
         search.textContent = "検索を初期化できませんでした。";
         console.error(error);
