@@ -12,6 +12,10 @@ build_pagefind() {
 }
 
 has_site_changes() {
+    if [ ! -e "$PAGEFIND_STAMP" ]; then
+        return 0
+    fi
+
     for path in config.toml content sass static templates themes; do
         if [ -e "$path" ] && find "$path" -type f -newer "$PAGEFIND_STAMP" -print -quit | grep -q .; then
             return 0
