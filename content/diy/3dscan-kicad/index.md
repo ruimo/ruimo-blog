@@ -45,6 +45,10 @@ Fusionを0.1mmで実行してから、Merge Alignmentで2つのスキャンを�
 
 ![](mode.png)
 
+左端の「選択オブジェクトのリスト」でモデルをクリックして選択状態にする(この例では"dcbarrel"と書かれているところ)
+
+![](2026-09-26-08-36-02.png)
+
 メニューのメッシュ=>間引きを何度かやる
 
 ![](mabiki.png)
@@ -61,7 +65,114 @@ Fusionを0.1mmで実行してから、Merge Alignmentで2つのスキャンを�
 
 ![](ok.png)
 
-ここまでできたら、Ctrl+Eでエクスポートを選び、形式にSTEPを選んで保管する。
+この向きが角度0になるようにするため、表示=>パネル=>Pythonコンソールで以下を実行する。
+
+{% note() %}
+今回、先に角度を修正=>原点移動したけど、多分逆の順序でやった方が楽だと思う。
+{% end %}
+
+```python
+import FreeCAD as App
+
+doc = App.ActiveDocument
+src = Gui.Selection.getSelection()[0]
+
+pl = src.Placement
+shape = src.Shape.copy()
+
+# Placementを形状へ焼き込む
+shape.Placement = App.Placement()
+shape = shape.transformGeometry(pl.toMatrix())
+
+# 新しい固定済みシェイプを作成
+obj = doc.addObject("PartDesign::Feature", src.Label + "_zero")
+obj.Shape = shape
+obj.Placement = App.Placement()
+
+doc.recompute()
+```
+
+メッシュのままだと、最終的にkicadのPCBから3Dをエクスポートできないので、ここでメッシュからシェイプに変換しておく。まずメニューをpartにし、
+
+![](2026-09-26-08-40-26.png)
+
+パートメニューで「メッシュからシェイプへ」を選ぶ。縫い合わせはチェックせずに実行。こんな風に2つ「選択オブジェクトのリスト」に表示されるので下の立方体アイコンが付いている方を選択する。
+
+![](2026-09-26-08-42-11.png)
+
+3Dスキャンしていると、原点とはかけ離れた場所に存在することが多く、kicad上での位置合わせが大変なので重心を原点に移動する。freecadのPythonコンソールで以下を実行。
+
+```python
+exec("""
+import FreeCAD as App
+import FreeCADGui as Gui
+
+doc = App.ActiveDocument
+sel = Gui.Selection.getSelection()
+
+if not sel:
+    raise RuntimeError("元のオブジェクトを1つ選択してください")
+
+src = sel[0]
+shape = src.Shape.copy()
+
+if shape.Solids:
+    elements = shape.Solids
+    weights = [x.Volume for x in elements]
+    centers = [x.CenterOfMass for x in elements]
+    center_type = "体積重心"
+elif shape.Faces:
+    elements = shape.Faces
+    weights = [x.Area for x in elements]
+    centers = [x.CenterOfMass for x in elements]
+    center_type = "面積重心"
+elif shape.Edges:
+    elements = shape.Edges
+    weights = [x.Length for x in elements]
+    centers = [x.CenterOfMass for x in elements]
+    center_type = "線重心"
+else:
+    raise RuntimeError("重心を計算できる要素がありません")
+
+total = sum(weights)
+if total <= 0:
+    raise RuntimeError("重心計算に使える要素がありません")
+
+center = App.Vector(0, 0, 0)
+for point, weight in zip(centers, weights):
+    center += point * weight
+center /= total
+
+container = doc.addObject("App::Part", src.Name + "_CenteredPart")
+container.Label = src.Label + "_CenteredPart"
+
+result = doc.addObject("Part::Feature", src.Name + "_CenteredShape")
+result.Label = src.Label + "_CenteredShape"
+result.Shape = shape
+container.addObject(result)
+
+# 重心を原点へ移動
+result.Placement = App.Placement(
+    App.Vector(-center.x, -center.y, -center.z),
+    App.Rotation()
+)
+
+src.Visibility = False
+doc.recompute()
+
+Gui.Selection.clearSelection()
+Gui.Selection.addSelection(result)
+
+print("重心の種類:", center_type)
+print("移動前の重心:", center)
+print("移動量:", result.Placement.Base)
+print("新しいオブジェクト:", result.Name)
+""")
+```
+
+![](2026-09-26-10-17-37.png)
+
+一番下のbodyを選んでCtrl+Eでエクスポートを選び、形式にSTEPを選んで保管する。
 
 ## KiCadへの設定
 
@@ -69,7 +180,7 @@ Fusionを0.1mmで実行してから、Merge Alignmentで2つのスキャンを�
 
 ![](kicad.png)
 
-3Dモデルのタブを選び、上でエクスポートしたwrlファイルを選ぶ。フットプリントの穴に合うようにオフセットを調整してやればOK。
+3Dモデルのタブを選び、上でエクスポートしたSTEPファイルを選ぶ。フットプリントの穴に合うようにオフセットを調整してやればOK。
 
 {% note() %}
 STEPファイルでエクスポートせず、wrlファイルなどにするとkicad側がインチだと誤解するようで、サイズが合わなくなるので注意。拡大率で帳尻を合わせることも可能だが、そうすると基板全体を3Dファイルで書き出す時に警告が表示され、うまくレンダリングされなくなる。
