@@ -1,0 +1,13 @@
+{% set _base = config.extra.r2_url | trim_end_matches(pat="/") %}
+{% if src is starting_with("/") %}
+  {% set _src = src | trim_start_matches(pat="/") %}
+{% else %}
+  {% set _page_path = page.path | trim_start_matches(pat="/") %}
+  {% set _src = _page_path ~ src %}
+{% endif %}
+<img
+  src="{{ _base }}/{{ _src }}"
+  alt="{{ alt | default(value='') }}"
+  {% if width %}width="{{ width }}"{% endif %}
+  loading="lazy"
+>

@@ -1,0 +1,30 @@
+{% set _base = config.extra.r2_url | trim_end_matches(pat="/") %}
+{% if src is starting_with("/") %}
+  {% set _src = src | trim_start_matches(pat="/") %}
+{% else %}
+  {% set _page_path = page.path | trim_start_matches(pat="/") %}
+  {% set _src = _page_path ~ src %}
+{% endif %}
+{% set _abs_src = _base ~ "/" ~ _src %}
+{% set _alt = alt | default(value="") %}
+{% set _enc_src = _abs_src | urlencode_strict %}
+{% set _lens_url = "https://lens.google.com/uploadbyurl?url=" ~ _enc_src %}
+<span class="slideshow-img-wrap">
+  <a href="{{ _abs_src | safe }}" target="_blank" rel="noopener" title="元サイズで表示">
+    <img
+      src="{{ _abs_src | safe }}"
+      alt="{{ _alt }}"
+      {% if width %}width="{{ width }}"{% endif %}
+      class="slideshow-img"
+      data-slideshow="{{ _abs_src | safe }}"
+      data-alt="{{ _alt }}"
+      data-lens="{{ _lens_url | safe }}"
+      loading="lazy"
+      style="cursor:zoom-in;"
+    >
+  </a>
+  <span class="img-btn-row">
+    <button class="slideshow-btn" onclick="openSlideshow(this.closest('.slideshow-img-wrap').querySelector('img.slideshow-img'))" title="スライドショーで表示">▶ スライドショー</button>
+    <a class="slideshow-btn lens-btn" href="{{ _lens_url | safe }}" target="_blank" rel="noopener nofollow" referrerpolicy="no-referrer" title="Google レンズでこの画像を検索">これは何？</a>
+  </span>
+</span>
