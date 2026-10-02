@@ -33,6 +33,9 @@ theme = "ayu-dark"
 [extra]
 # Put all your custom variables here
 
+# Cloudflare R2 backet url
+r2_url = "https://pub-94489f37894141f2bd1905dcbfc1105f.r2.dev"
+
 admonition = true
 
 # Enable KaTex math formula support globally.
