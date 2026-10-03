@@ -54,8 +54,13 @@
   {% if page.extra.og_image %}
     {% if page.extra.og_image is starting_with("http") %}
       <meta property="og:image" content="{{ page.extra.og_image | safe }}">
-    {% else %}
+    {% elif page.extra.og_image is starting_with("/") %}
       <meta property="og:image" content="{{ get_url(path=page.extra.og_image) }}">
+    {% else %}
+      {% set r2_base = config.extra.r2_url | trim_end_matches(pat="/") %}
+      {% set page_path = page.path | trim_start_matches(pat="/") %}
+      {% set og_image_url = r2_base ~ "/" ~ page_path ~ page.extra.og_image %}
+      <meta property="og:image" content="{{ og_image_url | safe }}">
     {% endif %}
   {% elif config.extra.og_image %}
     {% if config.extra.og_image is starting_with("http") %}
