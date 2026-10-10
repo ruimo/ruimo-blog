@@ -4,7 +4,7 @@ title = "本門寺を散歩"
 [taxonomies]
 tags = ["散歩"]
 [extra]
-og_image = "/blog/2026-09-23/ogp.jpg"
+og_image = "ogp.jpg"
 +++
 
 ようやく涼しくなってきたので本門寺を散歩。

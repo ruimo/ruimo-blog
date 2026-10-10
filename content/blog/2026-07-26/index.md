@@ -4,7 +4,7 @@ title = "多摩川 水生植物園でスイレン"
 [taxonomies]
 tags = ["散歩"]
 [extra]
-og_image = "/blog/2026-07-26/ogp.jpg"
+og_image = "ogp.jpg"
 +++
 
 多摩川 水生植物園
@@ -13,24 +13,24 @@ og_image = "/blog/2026-07-26/ogp.jpg"
 
 朝7時に行ったけど既に日差しが強烈で暑い...
 
-{{ clickable_img(src="DSC02473.JPG", alt="")}}
-{{ clickable_img(src="DSC02475.JPG", alt="")}}
-{{ clickable_img(src="DSC02476.JPG", alt="")}}
-{{ clickable_img(src="DSC02477.JPG", alt="")}}
-{{ clickable_img(src="DSC02478.JPG", alt="")}}
-{{ clickable_img(src="DSC02479.JPG", alt="")}}
-{{ clickable_img(src="DSC02480.JPG", alt="")}}
-{{ clickable_img(src="DSC02481.JPG", alt="")}}
-{{ clickable_img(src="DSC02482.JPG", alt="")}}
-{{ clickable_img(src="DSC02483.JPG", alt="")}}
-{{ clickable_img(src="DSC02484.JPG", alt="")}}
-{{ clickable_img(src="DSC02485.JPG", alt="")}}
-{{ clickable_img(src="DSC02486.JPG", alt="")}}
-{{ clickable_img(src="DSC02487.JPG", alt="")}}
-{{ clickable_img(src="DSC02488.JPG", alt="")}}
-{{ clickable_img(src="DSC02490.JPG", alt="")}}
-{{ clickable_img(src="DSC02494.JPG", alt="")}}
-{{ clickable_img(src="DSC02496.JPG", alt="")}}
-{{ clickable_img(src="DSC02497.JPG", alt="")}}
-{{ clickable_img(src="DSC02498.JPG", alt="")}}
-{{ clickable_img(src="DSC02499.JPG", alt="")}}
+{{ r2_clickable_img(src="DSC02473.JPG", alt="")}}
+{{ r2_clickable_img(src="DSC02475.JPG", alt="")}}
+{{ r2_clickable_img(src="DSC02476.JPG", alt="")}}
+{{ r2_clickable_img(src="DSC02477.JPG", alt="")}}
+{{ r2_clickable_img(src="DSC02478.JPG", alt="")}}
+{{ r2_clickable_img(src="DSC02479.JPG", alt="")}}
+{{ r2_clickable_img(src="DSC02480.JPG", alt="")}}
+{{ r2_clickable_img(src="DSC02481.JPG", alt="")}}
+{{ r2_clickable_img(src="DSC02482.JPG", alt="")}}
+{{ r2_clickable_img(src="DSC02483.JPG", alt="")}}
+{{ r2_clickable_img(src="DSC02484.JPG", alt="")}}
+{{ r2_clickable_img(src="DSC02485.JPG", alt="")}}
+{{ r2_clickable_img(src="DSC02486.JPG", alt="")}}
+{{ r2_clickable_img(src="DSC02487.JPG", alt="")}}
+{{ r2_clickable_img(src="DSC02488.JPG", alt="")}}
+{{ r2_clickable_img(src="DSC02490.JPG", alt="")}}
+{{ r2_clickable_img(src="DSC02494.JPG", alt="")}}
+{{ r2_clickable_img(src="DSC02496.JPG", alt="")}}
+{{ r2_clickable_img(src="DSC02497.JPG", alt="")}}
+{{ r2_clickable_img(src="DSC02498.JPG", alt="")}}
+{{ r2_clickable_img(src="DSC02499.JPG", alt="")}}

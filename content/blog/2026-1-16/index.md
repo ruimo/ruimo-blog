@@ -2,16 +2,16 @@
 date ="2026-1-16"
 title = "電子ボリューム基板"
 [extra]
-og_image = "/blog/2026-1-16/ogp.jpg"
+og_image = "ogp.jpg"
 +++
 
 電子ボリューム基板のアナログ部が届いた。早速RCAジャックを当ててみる...
 
-{{ clickable_img(src="IMG_3062.JPG", alt="photo") }}は、入らないw
+{{ r2_clickable_img(src="IMG_3062.JPG", alt="photo") }}は、入らないw
 
-![図面](2026-01-16_17-21.png)図面では、この白い爪の間隔は21mmとなっているのだが、測ってみると、
+![図面](https://pub-94489f37894141f2bd1905dcbfc1105f.r2.dev/blog/2026-1-16/2026-01-16_17-21.png)図面では、この白い爪の間隔は21mmとなっているのだが、測ってみると、
 
-{{ clickable_img(src="IMG_3058.JPG", alt="photo") }}23mmですなw
+{{ r2_clickable_img(src="IMG_3058.JPG", alt="photo") }}23mmですなw
 
 とりあえず爪をニッパで切ってみると、問題無かったので今回の基板ではこれで行こう。
 EasyEDAのパーツデータは修正しておいた。
