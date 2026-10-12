@@ -4,14 +4,14 @@ title = "3Dスキャナで部品の3Dモデルを作る"
 [taxonomies]
 tags = ["DIY"]
 [extra]
-og_image = "/blog/3dscan/ogp.jpg"
+og_image = "ogp.jpg"
 +++
 
 [EasyEDAで自分用にコンポーネントを作り、3Dモデルも登録してケースも3Dプリント可能にする](https://www.ruimo.com/diy/easyeda/create-component/)では、AIとFreeCADを使って部品の3Dモデルを作ったが、3Dスキャナはどうだろうか。[Revopoint POP 4](https://www.revopoint3d.jp/products/pop4-wireless-hybrid-3d-scanner)を手に入れたので、試してみた。
 
 まずはRaspberry Pi Zero W
 
-![](IMG_3394.JPG)
+{{ r2_clickable_img(src="IMG_3394.JPG", alt="photo") }}
 
 {{ obj_viewer(src="raspberrypi.ply", title="3Dスキャン結果") }}
 
@@ -19,7 +19,7 @@ og_image = "/blog/3dscan/ogp.jpg"
 
 お次は金キラの端子。ナットは外してスキャンした。
 
-![](IMG_3395.JPG)
+{{ r2_clickable_img(src="IMG_3395.JPG", alt="photo") }}
 
 {{ obj_viewer(src="terminal.ply", title="3Dスキャン結果") }}
 
@@ -27,7 +27,7 @@ og_image = "/blog/3dscan/ogp.jpg"
 
 次はDCジャック。
 
-![](IMG_3396.JPG)
+{{ r2_clickable_img(src="IMG_3396.JPG", alt="photo") }}
 
 {{ obj_viewer(src="dcjack.ply", title="3Dスキャン結果") }}
 
@@ -35,7 +35,7 @@ og_image = "/blog/3dscan/ogp.jpg"
 
 次はFUSEホルダー
 
-![](IMG_3397.JPG)
+{{ r2_clickable_img(src="IMG_3397.JPG", alt="photo") }}
 
 これは、全然ダメだった。筐体の細くなっている部分が全くスキャンできなかった。スキャナの設定に「メタリック」と「黒色」があるので両方やってみたがだめ。見た感じ、光沢のある黒なのでその点が苦手なのかもしれない。
 
