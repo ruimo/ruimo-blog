@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+  <defs>
+    <style>
+      text {
+        font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+        fill: #18212b;
+      }
+      .title { font-size: 26px; font-weight: 700; }
+      .heading { font-size: 18px; font-weight: 700; }
+      .body { font-size: 15px; }
+      .small { font-size: 13px; }
+      .box { stroke-width: 2; rx: 12; }
+      .signal { fill: none; stroke: #d97706; stroke-width: 3; }
+      .flow { fill: none; stroke: #2563eb; stroke-width: 3; }
+      .copy { fill: none; stroke: #059669; stroke-width: 3; }
+    </style>
+
+    <marker id="arrow-orange" markerWidth="10" markerHeight="10"
+            refX="9" refY="3" orient="auto">
+      <path d="M0,0 L10,3 L0,6 Z" fill="#d97706"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="10"
+            refX="9" refY="3" orient="auto">
+      <path d="M0,0 L10,3 L0,6 Z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="10"
+            refX="9" refY="3" orient="auto">
+      <path d="M0,0 L10,3 L0,6 Z" fill="#059669"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="760" fill="#f8fafc"/>
+
+  <text x="600" y="44" text-anchor="middle" class="title">
+    40 kHz同期A/D変換とDMAデータ転送
+  </text>
+
+  <!-- PWM generator -->
+  <rect x="420" y="78" width="360" height="120"
+        fill="#fff7ed" stroke="#d97706" class="box"/>
+  <text x="600" y="108" text-anchor="middle" class="heading">
+    PWMによる共通トリガ生成
+  </text>
+  <text x="600" y="137" text-anchor="middle" class="body">
+    40 kHz（1秒間に40,000回）
+  </text>
+
+  <!-- Square wave -->
+  <path d="M505 169 h18 v-18 h28 v18 h28 v-18 h28 v18 h28 v-18 h28 v18 h28"
+        class="signal"/>
+  <text x="480" y="176" text-anchor="end" class="small">PB0出力</text>
+
+  <!-- Trigger branching -->
+  <path d="M600 198 V230 H300 V262" class="signal" marker-end="url(#arrow-orange)"/>
+  <path d="M600 198 V230 H900 V262" class="signal" marker-end="url(#arrow-orange)"/>
+  <circle cx="600" cy="230" r="6" fill="#d97706"/>
+
+  <text x="600" y="222" text-anchor="middle" class="small">
+    同一の矩形波を左右へ分配
+  </text>
+
+  <!-- Left MCU -->
+  <rect x="70" y="268" width="460" height="400"
+        fill="#eff6ff" stroke="#2563eb" class="box"/>
+  <text x="300" y="300" text-anchor="middle" class="heading">
+    左側 CH32V203
+  </text>
+
+  <rect x="145" y="320" width="310" height="58"
+        fill="#fff7ed" stroke="#d97706" class="box"/>
+  <text x="300" y="345" text-anchor="middle" class="body">PA11 外部トリガ入力</text>
+  <text x="300" y="365" text-anchor="middle" class="small">割り込みを介さず直接起動</text>
+
+  <path d="M300 378 V410" class="flow" marker-end="url(#arrow-blue)"/>
+
+  <rect x="145" y="414" width="310" height="58"
+        fill="#ffffff" stroke="#2563eb" class="box"/>
+  <text x="300" y="449" text-anchor="middle" class="heading">A/D変換</text>
+
+  <path d="M300 472 V504" class="flow" marker-end="url(#arrow-blue)"/>
+
+  <rect x="145" y="508" width="310" height="66"
+        fill="#ecfdf5" stroke="#059669" class="box"/>
+  <text x="300" y="535" text-anchor="middle" class="heading">DMA循環バッファ</text>
+  <text x="300" y="557" text-anchor="middle" class="small">CPUを使わず自動格納</text>
+
+  <path d="M300 574 V606" class="copy" marker-end="url(#arrow-green)"/>
+
+  <rect x="145" y="610" width="310" height="42"
+        fill="#f0fdf4" stroke="#059669" class="box"/>
+  <text x="300" y="636" text-anchor="middle" class="body">
+    CPUメインループ → リングバッファ
+  </text>
+
+  <!-- Right MCU -->
+  <rect x="670" y="268" width="460" height="400"
+        fill="#eff6ff" stroke="#2563eb" class="box"/>
+  <text x="900" y="300" text-anchor="middle" class="heading">
+    右側 CH32V203
+  </text>
+
+  <rect x="745" y="320" width="310" height="58"
+        fill="#fff7ed" stroke="#d97706" class="box"/>
+  <text x="900" y="345" text-anchor="middle" class="body">PA11 外部トリガ入力</text>
+  <text x="900" y="365" text-anchor="middle" class="small">割り込みを介さず直接起動</text>
+
+  <path d="M900 378 V410" class="flow" marker-end="url(#arrow-blue)"/>
+
+  <rect x="745" y="414" width="310" height="58"
+        fill="#ffffff" stroke="#2563eb" class="box"/>
+  <text x="900" y="449" text-anchor="middle" class="heading">A/D変換</text>
+
+  <path d="M900 472 V504" class="flow" marker-end="url(#arrow-blue)"/>
+
+  <rect x="745" y="508" width="310" height="66"
+        fill="#ecfdf5" stroke="#059669" class="box"/>
+  <text x="900" y="535" text-anchor="middle" class="heading">DMA循環バッファ</text>
+  <text x="900" y="557" text-anchor="middle" class="small">CPUを使わず自動格納</text>
+
+  <path d="M900 574 V606" class="copy" marker-end="url(#arrow-green)"/>
+
+  <rect x="745" y="610" width="310" height="42"
+        fill="#f0fdf4" stroke="#059669" class="box"/>
+  <text x="900" y="636" text-anchor="middle" class="body">
+    CPUメインループ → リングバッファ
+  </text>
+
+  <!-- Notes -->
+  <rect x="130" y="690" width="940" height="46"
+        fill="#fff1f2" stroke="#e11d48" class="box"/>
+  <text x="600" y="710" text-anchor="middle" class="small">
+    DMA循環バッファは1周すると古いデータを上書きするため、
+  </text>
+  <text x="600" y="728" text-anchor="middle" class="small">
+    CPUはメインループで監視し、上書き前にリングバッファへ転送する
+  </text>
+</svg>

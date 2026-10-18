@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="500" viewBox="0 0 960 500">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10"
+            refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
+    </marker>
+    <style>
+      .title { font: bold 24px sans-serif; fill: #0f172a; }
+      .heading { font: bold 20px sans-serif; fill: #0f172a; }
+      .text { font: 16px sans-serif; fill: #334155; }
+      .small { font: 14px sans-serif; fill: #475569; }
+      .label { font: bold 15px sans-serif; fill: #1e293b; }
+      .box { stroke-width: 2; rx: 14; }
+      .arrow { stroke: #334155; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="960" height="500" fill="#f8fafc"/>
+
+  <text x="480" y="45" text-anchor="middle" class="title">
+    スピーカー電力計 UI システム構成
+  </text>
+
+  <!-- Browser -->
+  <rect x="70" y="100" width="370" height="310"
+        class="box" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="255" y="135" text-anchor="middle" class="heading">ブラウザー</text>
+
+  <rect x="110" y="165" width="290" height="105"
+        class="box" fill="#ffffff" stroke="#38bdf8"/>
+  <text x="255" y="200" text-anchor="middle" class="label">Rust / egui UI</text>
+  <text x="255" y="230" text-anchor="middle" class="text">WebAssemblyとして実行</text>
+  <text x="255" y="252" text-anchor="middle" class="small">表示・操作・計測データの可視化</text>
+
+  <rect x="110" y="305" width="290" height="65"
+        class="box" fill="#f0f9ff" stroke="#7dd3fc"/>
+  <text x="255" y="333" text-anchor="middle" class="label">WebSocketクライアント</text>
+  <text x="255" y="355" text-anchor="middle" class="small">ESP32とのリアルタイム通信</text>
+
+  <!-- ESP32 -->
+  <rect x="540" y="100" width="350" height="310"
+        class="box" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="715" y="135" text-anchor="middle" class="heading">ESP32</text>
+
+  <rect x="580" y="165" width="270" height="90"
+        class="box" fill="#ffffff" stroke="#4ade80"/>
+  <text x="715" y="198" text-anchor="middle" class="label">Webサーバー / ストレージ</text>
+  <text x="715" y="226" text-anchor="middle" class="text">WebAssemblyを格納・配信</text>
+
+  <rect x="580" y="290" width="270" height="80"
+        class="box" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="715" y="320" text-anchor="middle" class="label">WebSocketサーバー</text>
+  <text x="715" y="347" text-anchor="middle" class="small">計測データ・制御情報の送受信</text>
+
+  <!-- HTTP request -->
+  <path d="M440 180 C475 150, 505 150, 540 180" class="arrow"/>
+  <text x="490" y="140" text-anchor="middle" class="small">HTTPアクセス</text>
+
+  <!-- WASM download -->
+  <path d="M540 230 C505 260, 475 260, 440 230" class="arrow"/>
+  <text x="490" y="285" text-anchor="middle" class="small">WASMをダウンロード</text>
+
+  <!-- WebSocket -->
+  <path d="M400 337 L540 337" stroke="#7c3aed" stroke-width="3"
+        fill="none" marker-end="url(#arrow)"/>
+  <path d="M540 357 L400 357" stroke="#7c3aed" stroke-width="3"
+        fill="none" marker-end="url(#arrow)"/>
+  <text x="470" y="325" text-anchor="middle" class="label">WebSocket</text>
+
+  <text x="480" y="460" text-anchor="middle" class="small">
+    UI実装：
+    <a href="https://github.com/ruimo/speakerWattMeter/tree/main/controller"
+       fill="#0369a1" text-decoration="underline">egui（Rust）</a>
+  </text>
+</svg>

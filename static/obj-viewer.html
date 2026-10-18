@@ -34,6 +34,8 @@
             color: #ff6b6b;
             font-size: 14px;
             display: none;
+            max-width: 80%;
+            text-align: center;
         }
     </style>
 </head>
@@ -52,6 +54,7 @@
     }
     </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/occt-import-js@0.0.23/dist/occt-import-js.js"></script>
     <script type="module">
         import * as THREE from 'three';
         import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -115,7 +118,7 @@
             object.scale.multiplyScalar(scale);
             object.position.sub(center.multiplyScalar(scale));
             object.traverse((child) => {
-                if (child instanceof THREE.Mesh) {
+                if (child instanceof THREE.Mesh && !child.userData.keepMaterial) {
                     // 頂点カラーがあればそちらを優先
                     const hasVertexColor = child.geometry.attributes.color != null;
                     child.material = new THREE.MeshPhongMaterial({
@@ -136,10 +139,60 @@
             console.error(err);
         }
 
-        // URLパラメータからモデルを読み込む（.ply / .obj 対応）
+        async function loadStep(path) {
+            try {
+                loadingEl.textContent = 'STEPデータを変換中...';
+                const [response, occt] = await Promise.all([
+                    fetch(path),
+                    occtimportjs()
+                ]);
+                if (!response.ok) {
+                    throw new Error(`モデルの取得に失敗しました (${response.status})`);
+                }
+
+                const content = new Uint8Array(await response.arrayBuffer());
+                const result = occt.ReadStepFile(content, null);
+                if (!result.success) {
+                    throw new Error('STEPデータを変換できませんでした');
+                }
+
+                const object = new THREE.Group();
+                for (const source of result.meshes) {
+                    const geometry = new THREE.BufferGeometry();
+                    geometry.setAttribute(
+                        'position',
+                        new THREE.Float32BufferAttribute(source.attributes.position.array, 3)
+                    );
+                    if (source.attributes.normal) {
+                        geometry.setAttribute(
+                            'normal',
+                            new THREE.Float32BufferAttribute(source.attributes.normal.array, 3)
+                        );
+                    } else {
+                        geometry.computeVertexNormals();
+                    }
+                    geometry.setIndex(source.index.array);
+
+                    const color = source.color ?? [0.53, 0.53, 0.53];
+                    const material = new THREE.MeshPhongMaterial({
+                        color: new THREE.Color(color[0], color[1], color[2]),
+                        side: THREE.DoubleSide
+                    });
+                    const mesh = new THREE.Mesh(geometry, material);
+                    mesh.name = source.name ?? '';
+                    mesh.userData.keepMaterial = true;
+                    object.add(mesh);
+                }
+                onLoaded(object);
+            } catch (err) {
+                onError(err);
+            }
+        }
+
+        // URLパラメータからモデルを読み込む（.ply / .obj / .step / .stp 対応）
         const modelPath = new URLSearchParams(window.location.search).get('model');
         if (modelPath) {
-            const ext = modelPath.split('.').pop().toLowerCase();
+            const ext = new URL(modelPath, window.location.href).pathname.split('.').pop().toLowerCase();
             if (ext === 'ply') {
                 new PLYLoader().load(
                     modelPath,
@@ -151,8 +204,12 @@
                     null,
                     onError
                 );
-            } else {
+            } else if (ext === 'obj') {
                 new OBJLoader().load(modelPath, onLoaded, null, onError);
+            } else if (ext === 'step' || ext === 'stp') {
+                loadStep(modelPath);
+            } else {
+                onError(new Error(`未対応のファイル形式です: ${ext}`));
             }
         } else {
             loadingEl.textContent = 'model パラメータがありません';

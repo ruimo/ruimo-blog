@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420">
+  <style>
+    text { font-family: sans-serif; fill: #222; }
+    .label { font-size: 16px; font-weight: bold; }
+    .note { font-size: 14px; }
+    .signal { fill: none; stroke: #1565c0; stroke-width: 3; }
+    .guide { stroke: #999; stroke-width: 1; stroke-dasharray: 5 5; }
+    .arrow { stroke: #d84315; stroke-width: 2; marker-end: url(#arrowhead); }
+    .window { fill: #fff3e0; stroke: #ef6c00; stroke-width: 2; }
+    .ready { fill: #e8f5e9; stroke: #2e7d32; stroke-width: 2; }
+  </style>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7"
+            refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#d84315"/>
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <text x="450" y="30" text-anchor="middle" font-size="20" font-weight="bold">
+    SPI転送開始タイミング
+  </text>
+
+  <!-- 時刻軸 -->
+  <line x1="160" y1="375" x2="850" y2="375"
+        stroke="#444" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="855" y="380" class="note">時間</text>
+
+  <!-- 信号名 -->
+  <text x="30" y="90" class="label">CS (Active Low)</text>
+  <text x="30" y="170" class="label">割り込み</text>
+  <text x="30" y="250" class="label">転送元バッファ</text>
+  <text x="30" y="330" class="label">SCLK</text>
+
+  <!-- CS -->
+  <polyline class="signal"
+            points="160,65 280,65 280,105 850,105"/>
+  <text x="170" y="58" class="note">非アサート</text>
+  <text x="760" y="98" class="note">アサート</text>
+
+  <!-- 割り込み -->
+  <polyline class="signal"
+            points="160,185 280,185 280,145 320,145 320,185 850,185"/>
+
+  <!-- バッファ準備 -->
+  <rect x="300" y="215" width="280" height="50" rx="6" class="window"/>
+  <text x="440" y="246" text-anchor="middle" class="note">
+    SPI転送データを準備
+  </text>
+
+  <rect x="580" y="215" width="270" height="50" rx="6" class="ready"/>
+  <text x="715" y="246" text-anchor="middle" class="note">
+    データ準備完了
+  </text>
+
+  <!-- SCLK -->
+  <polyline class="signal"
+            points="160,345 600,345
+                    600,305 630,305 630,345
+                    660,345 660,305 690,305 690,345
+                    720,345 720,305 750,305 750,345
+                    780,345 780,305 810,305 810,345
+                    850,345"/>
+
+  <!-- タイミングガイド -->
+  <line x1="280" y1="45" x2="280" y2="365" class="guide"/>
+  <line x1="600" y1="45" x2="600" y2="365" class="guide"/>
+
+  <text x="280" y="400" text-anchor="middle" class="note">CSアサート</text>
+  <text x="600" y="400" text-anchor="middle" class="note">SCLK開始</text>
+
+  <!-- 説明矢印 -->
+  <line x1="280" y1="115" x2="280" y2="140" class="arrow"/>
+  <text x="330" y="130" class="note" fill="#d84315">
+    CSアサートを契機に割り込み
+  </text>
+
+  <line x1="290" y1="285" x2="590" y2="285"
+        stroke="#ef6c00" stroke-width="2"
+        marker-end="url(#arrowhead)"/>
+  <text x="440" y="303" text-anchor="middle" class="note">
+    SCLK開始までに準備
+  </text>
+</svg>

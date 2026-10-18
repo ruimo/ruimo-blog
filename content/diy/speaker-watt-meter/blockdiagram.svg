@@ -1,0 +1,185 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L9,3 L0,6 Z" fill="#334155"/>
+    </marker>
+    <style>
+      .title { font: bold 25px sans-serif; fill: #0f172a; }
+      .heading { font: bold 18px sans-serif; fill: #0f172a; }
+      .text { font: 15px sans-serif; fill: #334155; }
+      .small { font: 13px sans-serif; fill: #475569; }
+      .box { stroke-width: 2; rx: 12; ry: 12; }
+      .line { fill: none; stroke: #334155; stroke-width: 2.5; marker-end: url(#arrow); }
+      .signal { fill: none; stroke: #2563eb; stroke-width: 3; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1200" height="620" fill="#f8fafc"/>
+  <text x="600" y="45" text-anchor="middle" class="title">
+    スピーカー電流・電圧 同時測定システム
+  </text>
+
+  <!-- アナログ部 -->
+  <rect x="35" y="85" width="440" height="475" rx="18"
+        fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+  <text x="55" y="120" class="heading">アナログ部</text>
+
+  <!-- スピーカー -->
+  <rect x="65" y="155" width="135" height="120" class="box"
+        fill="#ffffff" stroke="#3b82f6"/>
+  <path d="M95 190 L120 190 L150 168 L150 262 L120 240 L95 240 Z"
+        fill="#bfdbfe" stroke="#2563eb" stroke-width="2"/>
+  <path d="M160 192 Q185 215 160 238"
+        fill="none" stroke="#2563eb" stroke-width="3"/>
+  <text x="132" y="300" text-anchor="middle" class="heading">
+    スピーカー
+  </text>
+
+  <!-- 電流測定 -->
+  <rect x="260" y="145" width="180" height="125" class="box"
+        fill="#ffffff" stroke="#0284c7"/>
+  <text x="350" y="175" text-anchor="middle" class="heading">
+    電流測定
+  </text>
+  <text x="350" y="202" text-anchor="middle" class="text">
+    シャント抵抗
+  </text>
+  <text x="350" y="226" text-anchor="middle" class="text">
+    ＋ OPアンプ
+  </text>
+  <text x="350" y="250" text-anchor="middle" class="small">
+    差動増幅
+  </text>
+
+  <!-- 電圧測定 -->
+  <rect x="260" y="350" width="180" height="125" class="box"
+        fill="#ffffff" stroke="#0284c7"/>
+  <text x="350" y="380" text-anchor="middle" class="heading">
+    電圧測定
+  </text>
+  <text x="350" y="409" text-anchor="middle" class="text">
+    OPアンプ
+  </text>
+  <text x="350" y="433" text-anchor="middle" class="text">
+    差動増幅
+  </text>
+  <text x="350" y="457" text-anchor="middle" class="small">
+    スピーカー端子間電圧
+  </text>
+
+  <path d="M200 200 L260 200" class="signal"/>
+  <text x="230" y="188" text-anchor="middle" class="small">電流</text>
+
+  <path d="M200 245 L230 245 L230 412 L260 412" class="signal"/>
+  <text x="213" y="335" text-anchor="middle" class="small">電圧</text>
+
+  <!-- CH32V203 -->
+  <rect x="520" y="115" width="270" height="410" rx="18"
+        fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <text x="655" y="155" text-anchor="middle" class="heading">
+    CH32V203
+  </text>
+  <text x="655" y="180" text-anchor="middle" class="small">
+    測定・データ収集制御
+  </text>
+
+  <rect x="555" y="215" width="200" height="80" class="box"
+        fill="#ffffff" stroke="#16a34a"/>
+  <text x="655" y="247" text-anchor="middle" class="heading">
+    A/D変換器 1
+  </text>
+  <text x="655" y="274" text-anchor="middle" class="text">
+    スピーカー電流
+  </text>
+
+  <rect x="555" y="345" width="200" height="80" class="box"
+        fill="#ffffff" stroke="#16a34a"/>
+  <text x="655" y="377" text-anchor="middle" class="heading">
+    A/D変換器 2
+  </text>
+  <text x="655" y="404" text-anchor="middle" class="text">
+    スピーカー電圧
+  </text>
+
+  <path d="M655 295 L655 345"
+        stroke="#16a34a" stroke-width="4"/>
+  <rect x="570" y="305" width="170" height="30" rx="15"
+        fill="#dcfce7" stroke="#16a34a"/>
+  <text x="655" y="326" text-anchor="middle" class="small">
+    同時トリガー・同時サンプリング
+  </text>
+
+  <path d="M440 207 L490 207 L490 255 L555 255"
+        class="signal"/>
+  <text x="480" y="195" text-anchor="middle" class="small">
+    増幅電流信号
+  </text>
+
+  <path d="M440 412 L490 412 L490 385 L555 385"
+        class="signal"/>
+  <text x="480" y="440" text-anchor="middle" class="small">
+    増幅電圧信号
+  </text>
+
+  <!-- ESP32 -->
+  <rect x="840" y="180" width="155" height="245" rx="18"
+        fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+  <text x="918" y="225" text-anchor="middle" class="heading">
+    ESP32
+  </text>
+  <text x="918" y="260" text-anchor="middle" class="text">
+    測定データ集約
+  </text>
+
+  <line x1="865" y1="282" x2="970" y2="282"
+        stroke="#fdba74" stroke-width="2"/>
+
+  <text x="918" y="318" text-anchor="middle" class="text">
+    Wi-Fi通信
+  </text>
+  <text x="918" y="350" text-anchor="middle" class="text">
+    WebSocket
+  </text>
+  <text x="918" y="382" text-anchor="middle" class="small">
+    リアルタイム送信
+  </text>
+
+  <path d="M790 305 L840 305" class="line"/>
+  <text x="815" y="290" text-anchor="middle" class="small">
+    測定データ
+  </text>
+  <text x="815" y="333" text-anchor="middle" class="small">
+    SPI / UART等
+  </text>
+
+  <!-- PC -->
+  <rect x="1040" y="210" width="125" height="175" class="box"
+        fill="#faf5ff" stroke="#9333ea"/>
+
+  <rect x="1060" y="235" width="85" height="70" rx="5"
+        fill="#e9d5ff" stroke="#7e22ce" stroke-width="2"/>
+  <path d="M1102 305 L1102 326 M1077 326 L1127 326"
+        stroke="#7e22ce" stroke-width="3"/>
+
+  <text x="1102" y="355" text-anchor="middle" class="heading">
+    PC
+  </text>
+  <text x="1102" y="377" text-anchor="middle" class="small">
+    表示・記録・解析
+  </text>
+
+  <path d="M995 305 L1040 305" class="line"/>
+  <text x="1018" y="275" text-anchor="middle" class="small">
+    Wi-Fi
+  </text>
+  <text x="1018" y="292" text-anchor="middle" class="small">
+    WebSocket
+  </text>
+
+  <!-- 処理フロー -->
+  <rect x="130" y="580" width="940" height="28" rx="14"
+        fill="#e2e8f0"/>
+  <text x="600" y="600" text-anchor="middle" class="small">
+    電流・電圧を差動増幅 → 2系統のA/Dで同時測定 → ESP32へ集約 → WebSocketでPCへ送信
+  </text>
+</svg>

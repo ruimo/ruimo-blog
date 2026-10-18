@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="500" viewBox="0 0 960 500">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10"
+            refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
+    </marker>
+    <style>
+      .title { font: bold 24px sans-serif; fill: #0f172a; }
+      .heading { font: bold 20px sans-serif; fill: #0f172a; }
+      .text { font: 16px sans-serif; fill: #334155; }
+      .small { font: 14px sans-serif; fill: #475569; }
+      .label { font: bold 15px sans-serif; fill: #1e293b; }
+      .box { stroke-width: 2; }
+      .arrow {
+        stroke: #334155;
+        stroke-width: 2.5;
+        fill: none;
+        marker-end: url(#arrow);
+      }
+    </style>
+  </defs>
+
+  <rect width="960" height="500" fill="#f8fafc"/>
+
+  <text x="480" y="45" text-anchor="middle" class="title">
+    開発時のローカルアプリケーション構成
+  </text>
+
+  <!-- Development PC -->
+  <rect x="60" y="90" width="420" height="330" rx="14"
+        class="box" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="270" y="125" text-anchor="middle" class="heading">
+    開発用PC
+  </text>
+
+  <!-- Source code -->
+  <rect x="100" y="155" width="340" height="80" rx="12"
+        class="box" fill="#ffffff" stroke="#38bdf8"/>
+  <text x="270" y="187" text-anchor="middle" class="label">
+    共通のRust / eguiソースコード
+  </text>
+  <text x="270" y="213" text-anchor="middle" class="small">
+    UI・通信処理を共通化
+  </text>
+
+  <!-- Build -->
+  <path d="M270 235 L270 270" class="arrow"/>
+  <text x="285" y="258" class="small">ネイティブビルド</text>
+
+  <!-- Native application -->
+  <rect x="100" y="275" width="340" height="105" rx="12"
+        class="box" fill="#f0f9ff" stroke="#7dd3fc"/>
+  <text x="270" y="307" text-anchor="middle" class="label">
+    ローカルアプリケーション
+  </text>
+  <text x="270" y="334" text-anchor="middle" class="text">
+    WebAssemblyを使用せず直接実行
+  </text>
+  <text x="270" y="360" text-anchor="middle" class="small">
+    ESP32への書き込みは不要
+  </text>
+
+  <!-- ESP32 -->
+  <rect x="570" y="90" width="330" height="330" rx="14"
+        class="box" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="735" y="125" text-anchor="middle" class="heading">
+    ESP32
+  </text>
+
+  <rect x="610" y="170" width="250" height="90" rx="12"
+        class="box" fill="#ffffff" stroke="#4ade80"/>
+  <text x="735" y="204" text-anchor="middle" class="label">
+    計測・制御処理
+  </text>
+  <text x="735" y="232" text-anchor="middle" class="small">
+    センサー値の取得と機器制御
+  </text>
+
+  <rect x="610" y="290" width="250" height="80" rx="12"
+        class="box" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="735" y="321" text-anchor="middle" class="label">
+    WebSocketサーバー
+  </text>
+  <text x="735" y="348" text-anchor="middle" class="small">
+    計測データ・制御情報の送受信
+  </text>
+
+  <!-- WebSocket communication -->
+  <path d="M440 315 L610 315" stroke="#7c3aed"
+        stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+  <path d="M610 345 L440 345" stroke="#7c3aed"
+        stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+  <text x="525" y="298" text-anchor="middle" class="label">
+    WebSocket
+  </text>
+
+  <text x="480" y="465" text-anchor="middle" class="text">
+    ビルド方法の切り替えだけで、同じegui UIをローカルアプリケーションとして実行
+  </text>
+</svg>

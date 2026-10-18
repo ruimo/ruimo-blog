@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="1600"
+   height="790"
+   viewBox="0 0 1600 790"
+   role="img"
+   aria-labelledby="title desc"
+   version="1.1"
+   id="svg37"
+   sodipodi:docname="howtomesure.svg"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <sodipodi:namedview
+     id="namedview37"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.923"
+     inkscape:cx="800.052"
+     inkscape:cy="500"
+     inkscape:window-width="3840"
+     inkscape:window-height="2141"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g37" />
+  <title
+     id="title">スピーカーにかかる電力の測定方法</title>
+  <desc
+     id="desc">スピーカー両端の電圧と、直列シャント抵抗の電圧降下から求めた電流を使って、スピーカーの電力を計算する方法を示す回路図。</desc>
+  <defs
+     id="defs5">
+    <linearGradient
+       id="bg"
+       x1="0"
+       y1="0"
+       x2="1264.9111"
+       y2="1264.9111"
+       gradientTransform="scale(1.2649111,0.62365772)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#091521"
+         id="stop1" />
+      <stop
+         offset="1"
+         stop-color="#142f3e"
+         id="stop2" />
+    </linearGradient>
+    <linearGradient
+       id="panel"
+       x1="77.292595"
+       y1="286.90976"
+       x2="77.292595"
+       y2="1006.7458"
+       gradientTransform="scale(1.2808472,0.78073328)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#173747"
+         id="stop3" />
+      <stop
+         offset="1"
+         stop-color="#102936"
+         id="stop4" />
+    </linearGradient>
+    <filter
+       id="shadow"
+       x="-0.0010869565"
+       y="-0.0017857143"
+       width="1.0021739"
+       height="1.0035714">
+      <feDropShadow
+         dx="0"
+         dy="12"
+         stdDeviation="18"
+         flood-color="#000"
+         flood-opacity="0.28" />
+    </filter>
+    <marker
+       id="arrowYellow"
+       markerWidth="10"
+       markerHeight="10"
+       refX="8"
+       refY="5"
+       orient="auto">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#ffd166"
+         id="path4" />
+    </marker>
+    <marker
+       id="arrowCyan"
+       markerWidth="10"
+       markerHeight="10"
+       refX="8"
+       refY="5"
+       orient="auto">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#5ee7f7"
+         id="path5" />
+    </marker>
+    <style
+       id="style5">
+      .jp { font-family: &quot;Noto Sans JP&quot;, &quot;Yu Gothic&quot;, &quot;Hiragino Kaku Gothic ProN&quot;, sans-serif; }
+      .wire { fill: none; stroke: #d8edf2; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+      .muted { fill: #a9c2ca; }
+      .label { fill: #eefbff; font-weight: 700; }
+      .small { font-size: 24px; }
+    </style>
+  </defs>
+  <rect
+     width="1600"
+     height="788.87158"
+     fill="url(#bg)"
+     id="rect5"
+     style="fill:url(#bg);stroke-width:0.888184"
+     x="0"
+     y="0" />
+  <circle
+     cx="1420"
+     cy="100"
+     r="260"
+     fill="#5ee7f7"
+     opacity="0.045"
+     id="circle5" />
+  <g
+     class="jp"
+     id="g37">
+    <text
+       x="100"
+       y="105"
+       fill="#ffffff"
+       font-size="54px"
+       font-weight="800"
+       id="text6">スピーカーにかかる電力の測定</text>
+    <text
+       x="102"
+       y="153"
+       class="muted"
+       font-size="25px"
+       id="text7">電圧と電流を同時に測り瞬時値を乗算する</text>
+    <rect
+       x="100"
+       y="180"
+       width="1400"
+       height="4"
+       rx="2"
+       fill="#5ee7f7"
+       opacity="0.55"
+       id="rect7" />
+    <!-- Main circuit panel -->
+    <rect
+       x="100"
+       y="225"
+       width="920"
+       height="560"
+       rx="28"
+       fill="url(#panel)"
+       stroke="#285365"
+       stroke-width="2"
+       filter="url(#shadow)"
+       id="rect8"
+       style="fill:url(#panel)" />
+    <text
+       x="145"
+       y="285"
+       fill="#8be9f3"
+       font-size="24px"
+       font-weight="700"
+       letter-spacing="2"
+       id="text8">MEASUREMENT CIRCUIT</text>
+    <!-- Amplifier -->
+    <rect
+       x="155"
+       y="385"
+       width="190"
+       height="190"
+       rx="22"
+       fill="#0d202b"
+       stroke="#78909c"
+       stroke-width="3"
+       id="rect9" />
+    <path
+       d="m 218,482 c 15,-30 30,30 46,0 16,-30 31,30 47,0"
+       fill="none"
+       stroke="#ffd166"
+       stroke-width="7"
+       stroke-linecap="round"
+       id="path9" />
+    <text
+       x="250"
+       y="625"
+       text-anchor="middle"
+       class="label"
+       font-size="27px"
+       id="text9">アンプ出力</text>
+    <text
+       x="250"
+       y="658"
+       text-anchor="middle"
+       class="muted small"
+       id="text10">交流信号</text>
+    <!-- Circuit wires -->
+    <path
+       class="wire"
+       d="M 345,430 H 590"
+       id="path10" />
+    <path
+       class="wire"
+       d="M 345,530 H 455 V 700 H 610"
+       id="path11" />
+    <path
+       class="wire"
+       d="M 775,700 H 875 V 575"
+       id="path12" />
+    <circle
+       cx="590"
+       cy="430"
+       r="8"
+       fill="#d8edf2"
+       id="circle12" />
+    <circle
+       cx="875"
+       cy="575"
+       r="8"
+       fill="#d8edf2"
+       id="circle13" />
+    <circle
+       cx="610"
+       cy="700"
+       r="8"
+       fill="#d8edf2"
+       id="circle14" />
+    <circle
+       cx="775"
+       cy="700"
+       r="8"
+       fill="#d8edf2"
+       id="circle15" />
+    <!-- Speaker -->
+    <path
+       d="m 590,395 h 55 l 70,-50 v 220 l -70,-50 h -55 z"
+       fill="#10242e"
+       stroke="#f5fafd"
+       stroke-width="6"
+       stroke-linejoin="round"
+       id="path15" />
+    <path
+       d="m 750,405 q 65,50 0,100"
+       fill="none"
+       stroke="#5ee7f7"
+       stroke-width="8"
+       stroke-linecap="round"
+       id="path16" />
+    <path
+       d="m 784,372 q 106,83 0,166"
+       fill="none"
+       stroke="#5ee7f7"
+       stroke-width="6"
+       stroke-linecap="round"
+       opacity="0.65"
+       id="path17" />
+    <path
+       class="wire"
+       d="m 590,430 v -35 m 0,120 v 60 h 285"
+       id="path18" />
+    <text
+       x="494.47217"
+       y="485.63443"
+       text-anchor="middle"
+       class="label"
+       font-size="28px"
+       id="text18">スピーカー</text>
+    <!-- Voltage measurement -->
+    <path
+       d="m 560,385 v -50 h 335 v 50"
+       fill="none"
+       stroke="#5ee7f7"
+       stroke-width="4"
+       stroke-dasharray="10, 9"
+       id="path19" />
+    <circle
+       cx="727"
+       cy="335"
+       r="48"
+       fill="#0b202b"
+       stroke="#5ee7f7"
+       stroke-width="5"
+       id="circle19" />
+    <text
+       x="727"
+       y="348"
+       text-anchor="middle"
+       fill="#5ee7f7"
+       font-size="37px"
+       font-weight="800"
+       id="text19">V</text>
+    <text
+       x="727"
+       y="270"
+       text-anchor="middle"
+       fill="#5ee7f7"
+       font-size="25px"
+       font-weight="700"
+       id="text20">① 両端電圧 v(t)</text>
+    <path
+       d="m 560,385 v 45 m 335,-45 v 190"
+       fill="none"
+       stroke="#5ee7f7"
+       stroke-width="4"
+       id="path20" />
+    <!-- Shunt -->
+    <path
+       class="wire"
+       d="m 610,700 h 20 l 18,-24 30,48 30,-48 30,48 20,-24 h 17"
+       id="path21" />
+    <text
+       x="692"
+       y="754"
+       text-anchor="middle"
+       fill="#ffd166"
+       font-size="23px"
+       font-weight="700"
+       id="text21">シャント抵抗 R<tspan
+   baseline-shift="sub"
+   font-size="16px"
+   id="tspan21">shunt</tspan></text>
+    <!-- Shunt voltage measurement -->
+    <path
+       d="m 610,700 v -55 m 165,55 v -55"
+       fill="none"
+       stroke="#ffd166"
+       stroke-width="4"
+       stroke-dasharray="9, 8"
+       id="path22" />
+    <circle
+       cx="692"
+       cy="645"
+       r="43"
+       fill="#0b202b"
+       stroke="#ffd166"
+       stroke-width="5"
+       id="circle22" />
+    <text
+       x="692"
+       y="656"
+       text-anchor="middle"
+       fill="#ffd166"
+       font-size="29px"
+       font-weight="800"
+       id="text22">V<tspan
+   baseline-shift="sub"
+   font-size="17px"
+   id="tspan22">S</tspan></text>
+    <text
+       x="470.82684"
+       y="605.117"
+       fill="#ffd166"
+       font-size="19px"
+       font-weight="700"
+       id="text23">② 電圧降下 v<tspan
+   baseline-shift="sub"
+   font-size="13px"
+   id="tspan23">shunt</tspan>(t)</text>
+    <text
+       x="807.80029"
+       y="728.00055"
+       fill="#ffffff"
+       font-size="21px"
+       id="text25">i(t) = v<tspan
+   baseline-shift="sub"
+   font-size="14px"
+   id="tspan24">shunt</tspan>(t) / R<tspan
+   baseline-shift="sub"
+   font-size="14px"
+   id="tspan25">shunt</tspan></text>
+    <!-- Current arrow -->
+    <path
+       d="M 405,355 H 525"
+       fill="none"
+       stroke="#ffd166"
+       stroke-width="5"
+       marker-end="url(#arrowYellow)"
+       id="path25" />
+    <text
+       x="429.63858"
+       y="339.56006"
+       text-anchor="middle"
+       fill="#ffd166"
+       font-size="24px"
+       font-weight="700"
+       id="text26">電流 i(t)</text>
+    <!-- Calculation panel -->
+    <rect
+       x="1060"
+       y="225"
+       width="440"
+       height="560"
+       rx="28"
+       fill="#f4f8f7"
+       filter="url(#shadow)"
+       id="rect26" />
+    <rect
+       x="1060"
+       y="225"
+       width="440"
+       height="92"
+       rx="28"
+       fill="#5ee7f7"
+       id="rect27" />
+    <rect
+       x="1060"
+       y="285"
+       width="440"
+       height="32"
+       fill="#5ee7f7"
+       id="rect28" />
+    <text
+       x="1100"
+       y="282"
+       fill="#08202a"
+       font-size="27px"
+       font-weight="800"
+       id="text28">③ 電力を計算</text>
+    <text
+       x="1100"
+       y="380"
+       fill="#47616a"
+       font-size="22px"
+       font-weight="700"
+       id="text29">瞬時電力</text>
+    <text
+       x="1280"
+       y="442"
+       text-anchor="middle"
+       fill="#0a3440"
+       font-size="47px"
+       font-weight="800"
+       id="text30"
+       style="fill:#0a0b40;fill-opacity:1"><tspan
+         style="fill:#0a0b40;fill-opacity:1"
+         id="tspan38">p(t) = v(t) × i(t)</tspan></text>
+    <path
+       d="m 1100,480 h 360"
+       stroke="#c7d9dc"
+       stroke-width="2"
+       id="path30" />
+    <!-- Footer note -->
+  </g>
+  <metadata
+     id="metadata39">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>スピーカーにかかる電力の測定方法</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>

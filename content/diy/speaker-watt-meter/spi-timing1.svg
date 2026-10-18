@@ -1,0 +1,204 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="620" viewBox="0 0 1100 620">
+  <style>
+    text {
+      font-family: sans-serif;
+      fill: #222;
+    }
+    .title {
+      font-size: 22px;
+      font-weight: bold;
+    }
+    .label {
+      font-size: 15px;
+      font-weight: bold;
+    }
+    .note {
+      font-size: 13px;
+    }
+    .signal {
+      fill: none;
+      stroke: #1565c0;
+      stroke-width: 3;
+      stroke-linejoin: round;
+    }
+    .clock {
+      fill: none;
+      stroke: #2e7d32;
+      stroke-width: 2.5;
+    }
+    .guide {
+      stroke: #aaa;
+      stroke-width: 1;
+      stroke-dasharray: 5 5;
+    }
+    .irq {
+      stroke: #d84315;
+      stroke-width: 2;
+      marker-end: url(#arrow-red);
+    }
+    .cpu-left {
+      fill: #e3f2fd;
+      stroke: #1565c0;
+      stroke-width: 2;
+    }
+    .cpu-right {
+      fill: #f3e5f5;
+      stroke: #7b1fa2;
+      stroke-width: 2;
+    }
+    .dma-left {
+      fill: #bbdefb;
+      stroke: #1565c0;
+      stroke-width: 2;
+    }
+    .dma-right {
+      fill: #e1bee7;
+      stroke: #7b1fa2;
+      stroke-width: 2;
+    }
+  </style>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7"
+            refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#444"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="10" markerHeight="7"
+            refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#d84315"/>
+    </marker>
+  </defs>
+
+  <!-- 白背景 -->
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <text x="550" y="35" text-anchor="middle" class="title">
+    SPIデータのインターリーブ準備とDMA転送
+  </text>
+
+  <!-- ラベル -->
+  <text x="25" y="105" class="label">CS 左</text>
+  <text x="25" y="175" class="label">CS 右</text>
+  <text x="25" y="245" class="label">SCLK</text>
+  <text x="25" y="335" class="label">DMA転送</text>
+  <text x="25" y="430" class="label">CPU処理</text>
+
+  <!-- 区間背景 -->
+  <rect x="170" y="65" width="240" height="390" fill="#e3f2fd" opacity="0.25"/>
+  <rect x="410" y="65" width="240" height="390" fill="#f3e5f5" opacity="0.28"/>
+  <rect x="650" y="65" width="240" height="390" fill="#e3f2fd" opacity="0.25"/>
+
+  <!-- 区間境界 -->
+  <line x1="170" y1="60" x2="170" y2="480" class="guide"/>
+  <line x1="410" y1="60" x2="410" y2="480" class="guide"/>
+  <line x1="650" y1="60" x2="650" y2="480" class="guide"/>
+  <line x1="890" y1="60" x2="890" y2="480" class="guide"/>
+
+  <!-- CS 左: Active Low -->
+  <polyline class="signal"
+    points="110,85 170,85 170,125 410,125 410,85
+            650,85 650,125 890,125 890,85 1010,85"/>
+  <text x="115" y="78" class="note">High</text>
+  <text x="275" y="118" class="note">アサート</text>
+  <text x="750" y="118" class="note">アサート</text>
+
+  <!-- CS 右: Active Low -->
+  <polyline class="signal"
+    points="110,155 410,155 410,195 650,195 650,155 1010,155"/>
+  <text x="115" y="148" class="note">High</text>
+  <text x="515" y="188" class="note">アサート</text>
+
+  <!-- SCLK 左転送1 -->
+  <polyline class="clock"
+    points="110,260 185,260
+            185,225 205,225 205,260
+            225,260 225,225 245,225 245,260
+            265,260 265,225 285,225 285,260
+            305,260 305,225 325,225 325,260
+            345,260 345,225 365,225 365,260
+            395,260"/>
+
+  <!-- SCLK 右転送 -->
+  <polyline class="clock"
+    points="395,260
+            425,260 425,225 445,225 445,260
+            465,260 465,225 485,225 485,260
+            505,260 505,225 525,225 525,260
+            545,260 545,225 565,225 565,260
+            585,260 585,225 605,225 605,260
+            635,260"/>
+
+  <!-- SCLK 左転送2 -->
+  <polyline class="clock"
+    points="635,260
+            665,260 665,225 685,225 685,260
+            705,260 705,225 725,225 725,260
+            745,260 745,225 765,225 765,260
+            785,260 785,225 805,225 805,260
+            825,260 825,225 845,225 845,260
+            875,260 1010,260"/>
+
+  <!-- DMA転送 -->
+  <rect x="180" y="300" width="220" height="55" rx="6" class="dma-left"/>
+  <text x="290" y="323" text-anchor="middle" class="label">左チャネル DMA転送</text>
+  <text x="290" y="343" text-anchor="middle" class="note">CPU介在なし</text>
+
+  <rect x="420" y="300" width="220" height="55" rx="6" class="dma-right"/>
+  <text x="530" y="323" text-anchor="middle" class="label">右チャネル DMA転送</text>
+  <text x="530" y="343" text-anchor="middle" class="note">CPU介在なし</text>
+
+  <rect x="660" y="300" width="220" height="55" rx="6" class="dma-left"/>
+  <text x="770" y="323" text-anchor="middle" class="label">左チャネル DMA転送</text>
+  <text x="770" y="343" text-anchor="middle" class="note">CPU介在なし</text>
+
+  <!-- CSデアサートによる割り込み -->
+  <line x1="410" y1="130" x2="410" y2="382" class="irq"/>
+  <text x="418" y="285" class="note" fill="#d84315">
+    左CSデアサート割り込み
+  </text>
+
+  <line x1="650" y1="200" x2="650" y2="382" class="irq"/>
+  <text x="658" y="285" class="note" fill="#d84315">
+    右CSデアサート割り込み
+  </text>
+
+  <!-- CPUによる次回データ準備 -->
+  <rect x="425" y="390" width="205" height="65" rx="6" class="cpu-left"/>
+  <text x="527" y="416" text-anchor="middle" class="label">
+    次回の左データを準備
+  </text>
+  <text x="527" y="439" text-anchor="middle" class="note">
+    右チャネル転送中に実行
+  </text>
+
+  <rect x="665" y="390" width="205" height="65" rx="6" class="cpu-right"/>
+  <text x="767" y="416" text-anchor="middle" class="label">
+    次回の右データを準備
+  </text>
+  <text x="767" y="439" text-anchor="middle" class="note">
+    左チャネル転送中に実行
+  </text>
+
+  <!-- 転送区間 -->
+  <text x="290" y="500" text-anchor="middle" class="label" fill="#1565c0">
+    左チャネル転送時間
+  </text>
+  <text x="530" y="500" text-anchor="middle" class="label" fill="#7b1fa2">
+    右チャネル転送時間
+  </text>
+  <text x="770" y="500" text-anchor="middle" class="label" fill="#1565c0">
+    左チャネル転送時間
+  </text>
+
+  <!-- 時間軸 -->
+  <line x1="110" y1="535" x2="1010" y2="535"
+        stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="1015" y="540" class="note">時間</text>
+
+  <!-- 説明 -->
+  <rect x="150" y="560" width="800" height="40" rx="6"
+        fill="#fff8e1" stroke="#f9a825"/>
+  <text x="550" y="585" text-anchor="middle" class="note">
+    各チャネルは、反対チャネルのDMA転送時間を利用して次回のSPI転送データを準備する
+  </text>
+</svg>
