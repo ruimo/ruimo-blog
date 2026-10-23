@@ -101,7 +101,7 @@ SettingsでFeaturesでDiscussionsをチェックして、Set up discussionsを�
 
 docs/templates/partials/comments.htmlを作る。この時、```  <!-- Insert generated snippet here -->```の部分に上記のsnippetをペーストする
 
-    {% if page.meta.comments %}
+{% raw %}    {% if page.meta.comments %}
       <h2 id="__comments">{{ lang.t("meta.comments") }}</h2>
     <script src="https://giscus.app/client.js"
             data-repo="ruimo/ruimo-blog"
@@ -146,7 +146,7 @@ docs/templates/partials/comments.htmlを作る。この時、```  <!-- Insert ge
           })
         })
       </script>
-    {% endif %}
+    {% endif %}{% endraw %}
 
 これでコメント入力欄が付く。
 
@@ -172,7 +172,7 @@ pluginがあるのでmkdocsに以下のように指定するだけ。
 
 pluginがあるものの、どうもうまく動かなかったのでテンプレートで作ってしまった。docs/templates/main.htmlを作る(生成AIに聞きながらコピペしただけなので、細かいところ間違っているかも)。
 
-    {% extends "base.html" %}
+{% raw %}    {% extends "base.html" %}
     
     {% block extrahead %}
       &#123;&#123; super() }}
@@ -200,7 +200,7 @@ pluginがあるものの、どうもうまく動かなかったのでテンプ�
       <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ config.site_name }}{% endif %}" />
       <meta property="og:type" content="website" />
       <meta name="twitter:card" content="summary_large_image" />
-    {% endblock %}
+    {% endblock %}{% endraw %}
 
 あとは記事の中で以下のようにimage:を付ければ、それをOGPとして拾ってくれる。外部イメージならこのようにURLで、内部画像ならパスを書けば良い。
 

@@ -15,16 +15,16 @@ og_image = "/blog/sagami-park-01/ogp.jpg"
 
 ![](https://www.kanagawa-park.or.jp/sagamihara/map/map4.jpg)[園内マップはこちら](https://www.kanagawa-park.or.jp/sagamihara/map.html)。<br>公園管理事務所のあたりから、反時計回りに進んでいった。
 
-{{ clickable_img(src="DSC02093.JPG", alt="") }}みんなの花壇はユリがいっぱいだった。
+{{ <clickable_img src="DSC02093.JPG" alt="" page={page} config={config} /> }}みんなの花壇はユリがいっぱいだった。
 
-{{ clickable_img(src="DSC02096.JPG", alt="") }}ヨーロッパの町並を模しているらしい。
+{{ <clickable_img src="DSC02096.JPG" alt="" page={page} config={config} /> }}ヨーロッパの町並を模しているらしい。
 
-{{ clickable_img(src="DSC02095.JPG", alt="") }}ヨーロッパというか、ゼルダBotWにこういうの無かったっけ(東の宿場町跡？)。錆びた盾とか落ちてそう。
+{{ <clickable_img src="DSC02095.JPG" alt="" page={page} config={config} /> }}ヨーロッパというか、ゼルダBotWにこういうの無かったっけ(東の宿場町跡？)。錆びた盾とか落ちてそう。
 
-{{ clickable_img(src="DSC02098.JPG", alt="") }}中央広場。
-{{ clickable_img(src="DSC02104.JPG", alt="") }}しばらく噴水が続く。
-{{ clickable_img(src="DSC02105.JPG", alt="") }}奥に見えるのが、サカタのタネグリーンハウスなので、そこを目指す。その奥は展望台。
-{{ clickable_img(src="DSC02108.JPG", alt="") }}
-{{ clickable_img(src="DSC02109.JPG", alt="") }}
-{{ clickable_img(src="DSC02111.JPG", alt="") }}
-{{ clickable_img(src="DSC02114.JPG", alt="") }}
+{{ <clickable_img src="DSC02098.JPG" alt="" page={page} config={config} /> }}中央広場。
+{{ <clickable_img src="DSC02104.JPG" alt="" page={page} config={config} /> }}しばらく噴水が続く。
+{{ <clickable_img src="DSC02105.JPG" alt="" page={page} config={config} /> }}奥に見えるのが、サカタのタネグリーンハウスなので、そこを目指す。その奥は展望台。
+{{ <clickable_img src="DSC02108.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02109.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02111.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02114.JPG" alt="" page={page} config={config} /> }}

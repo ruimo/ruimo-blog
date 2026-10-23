@@ -32,13 +32,13 @@ og_image = "ogp.jpg"
 
 データシートを見て、ガイド通りパスコンを入れた。出力には470Ωの負荷をかけている。
 
-{{ r2_img(src="schematic-akizuki.png") }}
+{{ <r2_img src="schematic-akizuki.png" page={page} config={config} /> }}
 
 ### 入力のノイズ
 
 まず入力側のノイズを確認しておく。今回は9VのACアダプターの出力を5Vの三端子レギュレータに通したものを使用している。ここのノイズをオシロスコープで見てみた。
 
-{{ r2_img(src="input.png") }}
+{{ <r2_img src="input.png" page={page} config={config} /> }}
 
 Vppで5-6mVくらいか。周波数は数100kHzくらいで、可聴周波数を超えているので聴感上は問題無さそう。
 
@@ -46,11 +46,11 @@ Vppで5-6mVくらいか。周波数は数100kHzくらいで、可聴周波数を
 
 次に出力側のノイズを見てみる。まず+15V側。
 
-{{ r2_img(src="akizuki15Plus.png") }}
+{{ <r2_img src="akizuki15Plus.png" page={page} config={config} /> }}
 
 次に-15V側。
 
-{{ r2_img(src="akizuki15Minus.png") }}
+{{ <r2_img src="akizuki15Minus.png" page={page} config={config} /> }}
 
 どちらもVppで2-3mV以内に収まっており良好だ。周波数は1MHzくらいで。こちらも可聴周波数を超えているので聴感上は問題無さそう。
 
@@ -62,17 +62,17 @@ Vppで5-6mVくらいか。周波数は数100kHzくらいで、可聴周波数を
 
 こちらはモジュール型になっていて中にパスコンが入っているので省略した。
 
-{{ r2_img(src="schematic-sanhayato.png") }}
+{{ <r2_img src="schematic-sanhayato.png" page={page} config={config} /> }}
 
 ### 出力のノイズ
 
 +15V側。
 
-{{ r2_img(src="sanhayatoPlus.png") }}
+{{ <r2_img src="sanhayatoPlus.png" page={page} config={config} /> }}
 
 -15V側。
 
-{{ r2_img(src="sanhayatoMinus.png") }}
+{{ <r2_img src="sanhayatoMinus.png" page={page} config={config} /> }}
 
 「超低ノイズ」とあったので期待したが、こちらはVppで6mVくらいかな。まぁそれでも良好と言えるだろう。こちらも周波数は1MHzくらいだ。
 

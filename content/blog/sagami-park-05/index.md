@@ -13,30 +13,30 @@ og_image = "/blog/sagami-park-05/ogp.jpg"
 
 正確にはここは相模原公園ではなく、相模原麻溝公園のようだ。
 
-{{ clickable_img(src="https://www.ruimo.com/blog/sagami-park-01/DSC02105.JPG", alt="")}}
+{{ <clickable_img src="https://www.ruimo.com/blog/sagami-park-01/DSC02105.JPG" alt="" page={page} config={config} /> }}
 噴水から見えていたタワーが気になっていたので向かってみる。
 
-{{ clickable_img(src="DSC02199.JPG", alt="")}}
+{{ <clickable_img src="DSC02199.JPG" alt="" page={page} config={config} /> }}
 途中にまたゼルダっぽい場所が。風を送ると何かが起きそう。
 
-{{ clickable_img(src="DSC02201.JPG", alt="")}}
+{{ <clickable_img src="DSC02201.JPG" alt="" page={page} config={config} /> }}
 タワーの近くまで来たが、遠目に見て人影が無かったので中には入れないのかもと思っていた。近くまで行くと工事中の掲示があって、やっぱりかと思ったものの入口はこちらとの表示があり、あっさり入れた。エレベータは、高度表示。展望台は30メートル強。
 
-{{ clickable_img(src="DSC02202.JPG", alt="")}}
-{{ clickable_img(src="DSC02203.JPG", alt="")}}
-{{ clickable_img(src="DSC02204.JPG", alt="")}}
-{{ clickable_img(src="DSC02205.JPG", alt="")}}
-{{ clickable_img(src="DSC02206.JPG", alt="")}}
-{{ clickable_img(src="DSC02207.JPG", alt="")}}
-{{ clickable_img(src="DSC02208.JPG", alt="")}}
+{{ <clickable_img src="DSC02202.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02203.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02204.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02205.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02206.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02207.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02208.JPG" alt="" page={page} config={config} /> }}
 帰りのバス停留所(女子美術大)の方角まで歩く。
 
-{{ clickable_img(src="DSC02211.JPG", alt="")}}
-{{ clickable_img(src="DSC02214.JPG", alt="")}}
-{{ clickable_img(src="DSC02215.JPG", alt="")}}
-{{ clickable_img(src="DSC02217.JPG", alt="")}}
-{{ clickable_img(src="DSC02221.JPG", alt="")}}
+{{ <clickable_img src="DSC02211.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02214.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02215.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02217.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02221.JPG" alt="" page={page} config={config} /> }}
 なんか不思議な形の花。
 
-{{ clickable_img(src="DSC02222.JPG", alt="")}}
+{{ <clickable_img src="DSC02222.JPG" alt="" page={page} config={config} /> }}
 色違い。

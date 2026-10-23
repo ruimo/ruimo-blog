@@ -11,31 +11,31 @@ og_image = "ogp.jpg"
 
 まずはRaspberry Pi Zero W
 
-{{ r2_clickable_img(src="IMG_3394.JPG", alt="photo") }}
+{{ <r2_clickable_img src="IMG_3394.JPG" alt="photo" page={page} config={config} /> }}
 
-{{ obj_viewer(src="raspberrypi.ply", title="3Dスキャン結果") }}
+{{ <obj_viewer src="raspberrypi.ply" title="3Dスキャン結果" page={page} config={config} /> }}
 
 おぉ、これは結構良いかも。3Dスキャナは光沢面や黒いところに弱いと言われているが、POP 4は青色レーザーが使えるので結構な精度でスキャンできている。穴位置やコネクタ位置が良く分かるので、これを使えばケースを正確に設計できそうだ。
 
 お次は金キラの端子。ナットは外してスキャンした。
 
-{{ r2_clickable_img(src="IMG_3395.JPG", alt="photo") }}
+{{ <r2_clickable_img src="IMG_3395.JPG" alt="photo" page={page} config={config} /> }}
 
-{{ obj_viewer(src="terminal.ply", title="3Dスキャン結果") }}
+{{ <obj_viewer src="terminal.ply" title="3Dスキャン結果" page={page} config={config} /> }}
 
 間の部分が抜けてしまったが、ケースの設計の寸法合わせとしては十分だろう。
 
 次はDCジャック。
 
-{{ r2_clickable_img(src="IMG_3396.JPG", alt="photo") }}
+{{ <r2_clickable_img src="IMG_3396.JPG" alt="photo" page={page} config={config} /> }}
 
-{{ obj_viewer(src="dcjack.ply", title="3Dスキャン結果") }}
+{{ <obj_viewer src="dcjack.ply" title="3Dスキャン結果" page={page} config={config} /> }}
 
 端子部分にノイズが乗っているが、寸法合わせとしては十分そう。写真を見ると分かるように穴は正円ではなくて面取りされているのだが、その部分もスキャンされている。
 
 次はFUSEホルダー
 
-{{ r2_clickable_img(src="IMG_3397.JPG", alt="photo") }}
+{{ <r2_clickable_img src="IMG_3397.JPG" alt="photo" page={page} config={config} /> }}
 
 これは、全然ダメだった。筐体の細くなっている部分が全くスキャンできなかった。スキャナの設定に「メタリック」と「黒色」があるので両方やってみたがだめ。見た感じ、光沢のある黒なのでその点が苦手なのかもしれない。
 
@@ -43,7 +43,7 @@ og_image = "ogp.jpg"
 
 ![](https://www.aitendo.com/data/aitendo/product/20180311_225e83.png)
 
-{{ obj_viewer(src="rca.ply", title="3Dスキャン結果") }}
+{{ <obj_viewer src="rca.ply" title="3Dスキャン結果" page={page} config={config} /> }}
 
 結構苦しい。まぁ使えなくは無いかなという感じか。白いプラスチックの部分も割とスキャンしにくいようだ。
 

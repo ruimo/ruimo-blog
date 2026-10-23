@@ -1,12 +1,12 @@
 <header
   id="site-header"
-  class="{% if config.extra.style.header_blur %}blur-header{% else %}header{% endif %} fixed top-0 z-40 mx-auto min-h-[3.5rem] w-full"
+  class="{% if config?.extra?.style?.header_blur %}blur-header{% else %}header{% endif %} fixed top-0 z-40 mx-auto min-h-[3.5rem] w-full"
 >
   <div class="mx-auto w-full max-w-4xl p-3 lg:flex lg:justify-between">
     <div class="flex justify-between">
       <div class="flex items-center">
         <a class="text-2xl font-semibold" href="{{ get_url(path=``) }}">
-          <img style='max-width: 30%; display: inline-block;' src="{{ get_url(path=`images/logo.gif`) }}">&nbsp;{{ config.title }}
+          <img style='max-width: 30%; display: inline-block;' src="{{ get_url(path=`images/logo.gif`) }}">&nbsp;{{ config?.title }}
         </a>
         <div
           class="btn-dark ml-4 h-6 w-6 shrink-0 cursor-pointer text-[0px] [background:url(./icons/theme.svg)_left_center/cover_no-repeat] dark:[background-position:right] dark:invert"
@@ -28,7 +28,7 @@
           />
         </a>
       </div>
-      {% if config.extra.menu %}
+      {% if config?.extra?.menu %}
       <div
         class="btn-menu relative z-50 flex h-8 w-8 shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
         role="button"
@@ -96,16 +96,16 @@
         }, { passive: true });
       })();
     </script>
-    {% if config.extra.menu %}
+    {% if config?.extra?.menu %}
     <nav class="flex w-full items-center lg:w-auto">
       <ul
         class="nav-wrapper flex w-full flex-col py-2 lg:w-auto lg:flex-row lg:self-center lg:py-0"
       >
-        {% for menu in config.extra.menu %}
+        {% for menu in config?.extra?.menu %}
         <li>
           <a
             class="primary-link flex items-center justify-center gap-1.5 py-2 text-center text-lg font-medium lg:px-3 lg:py-0"
-            href="{{ menu.url | replace(from=`$BASE_URL`, to=config.base_url) | safe }}"
+            href="{{ menu.url | replace(from=`$BASE_URL`, to=config?.base_url) | safe }}"
             {% if menu.icon | default(value="") == "search" %}aria-label="{{ menu.name }}" title="{{ menu.name }}"{% endif %}
             >{% if menu.icon | default(value="") == "search" %}<svg
               class="h-4 w-4"
@@ -126,7 +126,7 @@
         {% endfor %}
       </ul>
       <!-- Header Nav inject -->
-      {% include "injects/header_nav.html" ignore missing %}
+      {% include "injects/header_nav.html" %}
     </nav>
     {% endif %}
   </div>

@@ -18,25 +18,25 @@ GODOX RING72
 
 電池の消費がものすごい。単三も使えるようにはなっているのだけど、撮影の度にon/offしても20分くらいしかもたない感じ。専用のリチウムイオン電池でないと無理かも。
 
-{{ clickable_img(src="DSC01103.JPG", alt="photo") }}
-{{ clickable_img(src="DSC01104.JPG", alt="photo") }}
-{{ clickable_img(src="DSC01105.JPG", alt="photo") }}
-{{ clickable_img(src="DSC01106.JPG", alt="photo") }}
-{{ clickable_img(src="DSC01108.JPG", alt="photo") }}
-{{ clickable_img(src="DSC01109.JPG", alt="photo") }}
-{{ clickable_img(src="DSC01110.JPG", alt="photo") }}
-{{ clickable_img(src="DSC01113.JPG", alt="photo") }}
-{{ clickable_img(src="DSC01115.JPG", alt="photo") }}
-{{ clickable_img(src="DSC01116.JPG", alt="photo") }}
-{{ clickable_img(src="DSC01117.JPG", alt="photo") }}
-{{ clickable_img(src="DSC01118.JPG", alt="photo") }}
-{{ clickable_img(src="DSC01121.JPG", alt="photo") }}
-{{ clickable_img(src="DSC01122.JPG", alt="photo") }}
-{{ clickable_img(src="DSC01123.JPG", alt="photo") }}
-{{ clickable_img(src="DSC01125.JPG", alt="photo") }}
-{{ clickable_img(src="DSC01128.JPG", alt="photo") }}
-{{ clickable_img(src="DSC01129.JPG", alt="photo") }}
-{{ clickable_img(src="DSC01139.JPG", alt="photo") }}
+{{ <clickable_img src="DSC01103.JPG" alt="photo" page={page} config={config} /> }}
+{{ <clickable_img src="DSC01104.JPG" alt="photo" page={page} config={config} /> }}
+{{ <clickable_img src="DSC01105.JPG" alt="photo" page={page} config={config} /> }}
+{{ <clickable_img src="DSC01106.JPG" alt="photo" page={page} config={config} /> }}
+{{ <clickable_img src="DSC01108.JPG" alt="photo" page={page} config={config} /> }}
+{{ <clickable_img src="DSC01109.JPG" alt="photo" page={page} config={config} /> }}
+{{ <clickable_img src="DSC01110.JPG" alt="photo" page={page} config={config} /> }}
+{{ <clickable_img src="DSC01113.JPG" alt="photo" page={page} config={config} /> }}
+{{ <clickable_img src="DSC01115.JPG" alt="photo" page={page} config={config} /> }}
+{{ <clickable_img src="DSC01116.JPG" alt="photo" page={page} config={config} /> }}
+{{ <clickable_img src="DSC01117.JPG" alt="photo" page={page} config={config} /> }}
+{{ <clickable_img src="DSC01118.JPG" alt="photo" page={page} config={config} /> }}
+{{ <clickable_img src="DSC01121.JPG" alt="photo" page={page} config={config} /> }}
+{{ <clickable_img src="DSC01122.JPG" alt="photo" page={page} config={config} /> }}
+{{ <clickable_img src="DSC01123.JPG" alt="photo" page={page} config={config} /> }}
+{{ <clickable_img src="DSC01125.JPG" alt="photo" page={page} config={config} /> }}
+{{ <clickable_img src="DSC01128.JPG" alt="photo" page={page} config={config} /> }}
+{{ <clickable_img src="DSC01129.JPG" alt="photo" page={page} config={config} /> }}
+{{ <clickable_img src="DSC01139.JPG" alt="photo" page={page} config={config} /> }}
 
-{{ clickable_img(src="DSC01140.JPG", alt="photo") }}
+{{ <clickable_img src="DSC01140.JPG" alt="photo" page={page} config={config} /> }}
 こちらは出入口にあったナデシコ

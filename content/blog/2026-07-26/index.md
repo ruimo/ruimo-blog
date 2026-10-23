@@ -13,24 +13,24 @@ og_image = "ogp.jpg"
 
 朝7時に行ったけど既に日差しが強烈で暑い...
 
-{{ r2_clickable_img(src="DSC02473.JPG", alt="")}}
-{{ r2_clickable_img(src="DSC02475.JPG", alt="")}}
-{{ r2_clickable_img(src="DSC02476.JPG", alt="")}}
-{{ r2_clickable_img(src="DSC02477.JPG", alt="")}}
-{{ r2_clickable_img(src="DSC02478.JPG", alt="")}}
-{{ r2_clickable_img(src="DSC02479.JPG", alt="")}}
-{{ r2_clickable_img(src="DSC02480.JPG", alt="")}}
-{{ r2_clickable_img(src="DSC02481.JPG", alt="")}}
-{{ r2_clickable_img(src="DSC02482.JPG", alt="")}}
-{{ r2_clickable_img(src="DSC02483.JPG", alt="")}}
-{{ r2_clickable_img(src="DSC02484.JPG", alt="")}}
-{{ r2_clickable_img(src="DSC02485.JPG", alt="")}}
-{{ r2_clickable_img(src="DSC02486.JPG", alt="")}}
-{{ r2_clickable_img(src="DSC02487.JPG", alt="")}}
-{{ r2_clickable_img(src="DSC02488.JPG", alt="")}}
-{{ r2_clickable_img(src="DSC02490.JPG", alt="")}}
-{{ r2_clickable_img(src="DSC02494.JPG", alt="")}}
-{{ r2_clickable_img(src="DSC02496.JPG", alt="")}}
-{{ r2_clickable_img(src="DSC02497.JPG", alt="")}}
-{{ r2_clickable_img(src="DSC02498.JPG", alt="")}}
-{{ r2_clickable_img(src="DSC02499.JPG", alt="")}}
+{{ <r2_clickable_img src="DSC02473.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC02475.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC02476.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC02477.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC02478.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC02479.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC02480.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC02481.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC02482.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC02483.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC02484.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC02485.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC02486.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC02487.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC02488.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC02490.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC02494.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC02496.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC02497.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC02498.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC02499.JPG" alt="" page={page} config={config} /> }}

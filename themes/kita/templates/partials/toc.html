@@ -1,4 +1,4 @@
-{% if page.toc %}<!---->
+{% if page?.toc %}<!---->
 <div class="block-bg mb-12 flex rounded-lg p-2 text-lg">
   <details>
     <summary class="cursor-pointer py-1 pl-4">
@@ -6,7 +6,7 @@
     </summary>
     <div class="px-2">
       <ul>
-        {% for h1 in page.toc %}
+        {% for h1 in page?.toc %}
         <li>
           <a class="no-underline hover:underline" href="{{ h1.permalink | safe }}"
             >{{ h1.title }}</a

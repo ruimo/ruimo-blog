@@ -13,13 +13,13 @@ tags = ["グルメ"]
 
 おしゃれなカフェ。料理もコーヒーも美味。難点は駅から遠いところ。車か自転車で行く感じ。
 
-{{ clickable_img(src="DSC01368.JPG", alt="photo") }}
+{{ <clickable_img src="DSC01368.JPG" alt="photo" page={page} config={config} /> }}
 
-{{ clickable_img(src="DSC01369.JPG", alt="photo") }}
+{{ <clickable_img src="DSC01369.JPG" alt="photo" page={page} config={config} /> }}
 
-{{ clickable_img(src="DSC01371.JPG", alt="photo") }}
+{{ <clickable_img src="DSC01371.JPG" alt="photo" page={page} config={config} /> }}
 
-{{ clickable_img(src="DSC01375.JPG", alt="photo") }}
+{{ <clickable_img src="DSC01375.JPG" alt="photo" page={page} config={config} /> }}
 
 
 

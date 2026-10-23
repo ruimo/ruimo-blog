@@ -11,10 +11,10 @@ og_image = "/blog/precapture/ogp.jpg"
 
 α7VはAI AFで、猫を検出して瞳にピントを合わせてくれるので、あとはフレーミングに気をつけること。秒間30コマを実現できるのはSony製レンズでも限られているので、対応レンズを使うこと。被写体ブレを防ぐためにISOを十分上げること(シャッター速度が1/1000くらい欲しい)、くらいか。
 
-{{ clickable_img(src="DSC00497.JPG", alt="跳び猫") }}
-{{ clickable_img(src="DSC00498.JPG", alt="跳び猫") }}
-{{ clickable_img(src="DSC00568.JPG", alt="跳び猫") }}
-{{ clickable_img(src="DSC00570.JPG", alt="跳び猫") }}
+{{ <clickable_img src="DSC00497.JPG" alt="跳び猫" page={page} config={config} /> }}
+{{ <clickable_img src="DSC00498.JPG" alt="跳び猫" page={page} config={config} /> }}
+{{ <clickable_img src="DSC00568.JPG" alt="跳び猫" page={page} config={config} /> }}
+{{ <clickable_img src="DSC00570.JPG" alt="跳び猫" page={page} config={config} /> }}
 
 うちの環境だとISO 12800くらいにしないと、被写体ブレが目立ってしまう。レンズはFE 50mm F2.5 G SEL50F25Gを使用。マウントアダプターMC-11でEF50mm F1.4が動かなかったので急遽買ったものだ。F2.5にしてはお高目だなぁとは思うが、秒間30コマを実現するためには仕方ない。
 

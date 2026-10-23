@@ -50,7 +50,7 @@ CH32V203で取得したデータは[ESP32](https://akizukidenshi.com/goodsaffix/
 
 ## アナログ部
 
-回路図を以下に示す。{{ r2_clickable_img(src="analogSchematics.png", alt="")}}
+回路図を以下に示す。{{ <r2_clickable_img src="analogSchematics.png" alt="" page={page} config={config} /> }}
 
 アナログ部は、5V電源で動作するオペアンプを使って差動増幅回路を構成した。
 
@@ -68,7 +68,7 @@ SPI経由でマイコンからゲインを変更できるため、今回のよ�
 
 ## デジタル部
 
-回路図を以下に示す。{{ r2_clickable_img(src="digitalSchematics.png", alt="")}}
+回路図を以下に示す。{{ <r2_clickable_img src="digitalSchematics.png" alt="" page={page} config={config} /> }}
 
 ### A/D変換
 
@@ -182,7 +182,7 @@ CH32V203とESP32のプログラムは、どちらもRustで実装した。その
 
 ## ケース
 
-{{ obj_viewer(src="all-case.obj", title="ケース（マウスでドラッグ可能）") }}
+{{ <obj_viewer src="all-case.obj" title="ケース（マウスでドラッグ可能）" page={page} config={config} /> }}
 
 基板は3Dモデルをエクスポートし、その他の主要部品は3Dスキャナーでスキャンした。これらを基に[FreeCAD](https://www.freecad.org/index.php)でケースを設計した。製造は[メルカリの3Dプリント代行](https://jp.mercari.com/search?keyword=3d%E3%83%97%E3%83%AA%E3%83%B3%E3%83%88%E4%BB%A3%E8%A1%8C)へ依頼し、PETGで印刷してもらった。送料を含めて1,600円だった。3Dプリントなら穴の位置がぴたりと決まるので気持ちがよい。
 
@@ -212,7 +212,7 @@ CH32V203とESP32のプログラムは、どちらもRustで実装した。その
 
 測定には、ブルックナーの交響曲第3番第1楽章を使用した。
 
-{{ r2_clickable_img(src="watt.png", alt="測定結果の画面")}}
+{{ <r2_clickable_img src="watt.png" alt="測定結果の画面" page={page} config={config} /> }}
 
 画面左上には、測定中の最大瞬時電力が表示されている。第1楽章の終了時点で、左チャネルに63.42Wが記録されていることが分かる。
 

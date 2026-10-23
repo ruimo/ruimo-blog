@@ -11,42 +11,42 @@ og_image = "/blog/kawasakicitygreencenter/ogp.jpg"
 
 温室もあり、良く手入れされていて良いところだった。
 
-{{ clickable_img(src="DSC02277.JPG", alt="")}}
-{{ clickable_img(src="DSC02278.JPG", alt="")}}
-{{ clickable_img(src="DSC02279.JPG", alt="")}}
-{{ clickable_img(src="DSC02283.JPG", alt="")}}
-{{ clickable_img(src="DSC02284.JPG", alt="")}}
-{{ clickable_img(src="DSC02286.JPG", alt="")}}
-{{ clickable_img(src="DSC02287.JPG", alt="")}}
-{{ clickable_img(src="DSC02289.JPG", alt="")}}
-{{ clickable_img(src="DSC02290.JPG", alt="")}}
-{{ clickable_img(src="DSC02291.JPG", alt="")}}
-{{ clickable_img(src="DSC02292.JPG", alt="")}}
-{{ clickable_img(src="DSC02294.JPG", alt="")}}
-{{ clickable_img(src="DSC02295.JPG", alt="")}}
-{{ clickable_img(src="DSC02296.JPG", alt="")}}
-{{ clickable_img(src="DSC02297.JPG", alt="")}}
-{{ clickable_img(src="DSC02298.JPG", alt="")}}
-{{ clickable_img(src="DSC02303.JPG", alt="")}}
-{{ clickable_img(src="DSC02307.JPG", alt="")}}
-{{ clickable_img(src="DSC02309.JPG", alt="")}}
-{{ clickable_img(src="DSC02310.JPG", alt="")}}
-{{ clickable_img(src="DSC02311.JPG", alt="")}}
-{{ clickable_img(src="DSC02314.JPG", alt="")}}
-{{ clickable_img(src="DSC02315.JPG", alt="")}}
-{{ clickable_img(src="DSC02318.JPG", alt="")}}
-{{ clickable_img(src="DSC02319.JPG", alt="")}}
-{{ clickable_img(src="DSC02320.JPG", alt="")}}
-{{ clickable_img(src="DSC02322.JPG", alt="")}}
-{{ clickable_img(src="DSC02325.JPG", alt="")}}
-{{ clickable_img(src="DSC02326.JPG", alt="")}}
-{{ clickable_img(src="DSC02327.JPG", alt="")}}
-{{ clickable_img(src="DSC02328.JPG", alt="")}}
-{{ clickable_img(src="DSC02329.JPG", alt="")}}
-{{ clickable_img(src="DSC02330.JPG", alt="")}}
-{{ clickable_img(src="DSC02331.JPG", alt="")}}
-{{ clickable_img(src="DSC02332.JPG", alt="")}}
-{{ clickable_img(src="DSC02335.JPG", alt="")}}
-{{ clickable_img(src="DSC02336.JPG", alt="")}}
-{{ clickable_img(src="DSC02338.JPG", alt="")}}
-{{ clickable_img(src="DSC02339.JPG", alt="")}}
+{{ <clickable_img src="DSC02277.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02278.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02279.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02283.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02284.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02286.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02287.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02289.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02290.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02291.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02292.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02294.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02295.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02296.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02297.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02298.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02303.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02307.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02309.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02310.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02311.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02314.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02315.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02318.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02319.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02320.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02322.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02325.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02326.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02327.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02328.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02329.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02330.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02331.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02332.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02335.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02336.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02338.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02339.JPG" alt="" page={page} config={config} /> }}

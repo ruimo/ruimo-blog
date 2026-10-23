@@ -1,8 +1,8 @@
-{% extends "index.html" %}<!---->
+{% extends "index.html" %}
 {% block main %}
 <article data-pagefind-ignore>
   <header class="mb-16">
-    <h1 class="my-0! pb-2.5">{{ section.title }}</h1>
+    <h1 class="my-0! pb-2.5">{{ section?.title }}</h1>
   </header>
 
   <link href="{{ get_url(path='pagefind/pagefind-ui.css') }}" rel="stylesheet" />

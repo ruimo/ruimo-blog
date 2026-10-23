@@ -9,11 +9,11 @@ og_image = "ogp.jpg"
 
 新顔がいっぱい。スノードロップ、ネモフィラ、ムスカリ、チューリップ、ヒヤシンス、ルピナス
 
-{{ r2_clickable_img(src="DSC01421.JPG", alt="photo") }}
-{{ r2_clickable_img(src="DSC01426.JPG", alt="photo") }}
-{{ r2_clickable_img(src="DSC01427.JPG", alt="photo") }}
-{{ r2_clickable_img(src="DSC01435.JPG", alt="photo") }}
-{{ r2_clickable_img(src="DSC01440.JPG", alt="photo") }}
-{{ r2_clickable_img(src="DSC01444.JPG", alt="photo") }}
-{{ r2_clickable_img(src="DSC01447.JPG", alt="photo") }}
-{{ r2_clickable_img(src="DSC01448.JPG", alt="photo") }}
+{{ <r2_clickable_img src="DSC01421.JPG" alt="photo" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01426.JPG" alt="photo" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01427.JPG" alt="photo" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01435.JPG" alt="photo" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01440.JPG" alt="photo" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01444.JPG" alt="photo" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01447.JPG" alt="photo" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01448.JPG" alt="photo" page={page} config={config} /> }}

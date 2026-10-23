@@ -11,49 +11,49 @@ og_image = "/blog/aitendo-2026-02-10/ogp.jpg"
 
 お店はマンションの2Fで入口はこんな感じ。
 
-{{ r2_clickable_img(src="IMG_3127.JPG", alt="photo") }}
+{{ <r2_clickable_img src="IMG_3127.JPG" alt="photo" page={page} config={config} /> }}
 
 階段を登っていくと、お店の外まで部品が並んでいる。昔のアキバのパーツショップのようだ。
 
-{{ r2_clickable_img(src="IMG_3128.JPG", alt="photo") }}
+{{ <r2_clickable_img src="IMG_3128.JPG" alt="photo" page={page} config={config} /> }}
 
 [お別れセールの告知](https://www.aitendo.com/news#whatnew_data288)はあったものの、その内容が分からなかったが、詰め放題セールというのが開催されていた。
 
-{{ r2_clickable_img(src="IMG_3129.JPG", alt="photo") }}
+{{ <r2_clickable_img src="IMG_3129.JPG" alt="photo" page={page} config={config} /> }}
 
 この箱に詰められるだけ詰めて199円!
 
-{{ r2_clickable_img(src="IMG_3130.JPG", alt="photo") }}
+{{ <r2_clickable_img src="IMG_3130.JPG" alt="photo" page={page} config={config} /> }}
 
 というわけで童心に帰って詰め詰めしてきた。
 
-{{ r2_clickable_img(src="IMG_3132.JPG", alt="photo") }}
+{{ <r2_clickable_img src="IMG_3132.JPG" alt="photo" page={page} config={config} /> }}
 
 戦利品。これで199円は破格ですね。良い思い出にもなった。ありがとうaitendoさん。
 
-{{ r2_clickable_img(src="IMG_3133.JPG", alt="photo") }}
+{{ <r2_clickable_img src="IMG_3133.JPG" alt="photo" page={page} config={config} /> }}
 
 P.S. そういえば、おまけももらっていたのだった。
 
 ゲルマニウムダイオードか、1チップラジオ(？)。多分1チップラジオは[これ](https://www.aitendo.com/product/1525)かな。ゲルマニウムダイオードの方をもらった。
 
-{{ r2_clickable_img(src="IMG_3136.JPG", alt="photo") }}
+{{ <r2_clickable_img src="IMG_3136.JPG" alt="photo" page={page} config={config} /> }}
 
 万能テスターで測ったら0.3VくらいVfがあって結構高いなと思ったけど、
 
-{{ r2_clickable_img(src="IMG_3134.JPG", alt="photo") }}
+{{ <r2_clickable_img src="IMG_3134.JPG" alt="photo" page={page} config={config} /> }}
 
 SANWAのテスターで測ったら、0.1V強だった。かかる電圧でVfが変化するのかな。
 
-{{ r2_clickable_img(src="IMG_3135.JPG", alt="photo") }}
+{{ <r2_clickable_img src="IMG_3135.JPG" alt="photo" page={page} config={config} /> }}
 
 そういえば、これ以前、実はゲルマニウムダイオードじゃなくてショットキーバリアダイオードだったみたいなオチだったような気もする。
 
 追記:
 Analog Discovery用のトランジスタ・テスターを買ったので測定してみた。
 
-{{ r2_clickable_img(src="IMG_3150.JPG", alt="photo") }}
+{{ <r2_clickable_img src="IMG_3150.JPG" alt="photo" page={page} config={config} /> }}
 
-{{ r2_clickable_img(src="2026-02-20_17-50.png", alt="photo") }}
+{{ <r2_clickable_img src="2026-02-20_17-50.png" alt="photo" page={page} config={config} /> }}
 
 SANWAのテスターだと、0.6mAくらいで測定したVfのようだ。

@@ -15,9 +15,9 @@ SPI接続のデバイスの制御をMCU、例えばCH32VシリーズとかESP32�
 
 まずUSBに接続してlsusbで確認してみる。
 
-{% shell() %}
+{% <shell> %}
 $ lsusb
-{% end %}
+{% </shell> %}
 ```
 ...
 Bus 001 Device 027: ID 0403:6014 Future Technology Devices International, Ltd FT232H Single HS USB-UART/FIFO IC
@@ -32,18 +32,18 @@ SUBSYSTEM=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6014", MODE="0666"
 
 udevを反映する。
 
-{% shell() %}
+{% <shell> %}
 $ sudo udevadm control --reload-rules
-{% end %}
-{% shell() %}
+{% </shell> %}
+{% <shell> %}
 $ sudo udevadm trigger
-{% end %}
+{% </shell> %}
 
 カーネルに掴まれていないか確認する。
 
-{% shell() %}
+{% <shell> %}
 $ usb-devices | grep -E -A 4 "Vendor=0403 ProdID=6014"
-{% end %}
+{% </shell> %}
 
 ```
 P:  Vendor=0403 ProdID=6014 Rev=09.00
@@ -55,29 +55,29 @@ I:  If#= 0 Alt= 0 #EPs= 2 Cls=ff(vend.) Sub=ff Prot=ff Driver=(none)
 
 Driver=(none)になればOK。FTDI用のライブラリをインストールしておく。
 
-{% shell() %}
+{% <shell> %}
 $ sudo apt install libftdi1-dev
-{% end %}
+{% </shell> %}
 
 ## Rustのクレート作成
 
 これで準備ができたのでRustでコードを書く。クレートを作ってライブラリを追加する。
 
-{% shell() %}
+{% <shell> %}
 $ cargo new ft232h
-{% end %}
-{% shell() %}
+{% </shell> %}
+{% <shell> %}
 $ cd ft232h
-{% end %}
-{% shell() %}
+{% </shell> %}
+{% <shell> %}
 $ cargo add ftdi-embedded-hal
-{% end %}
-{% shell() %}
+{% </shell> %}
+{% <shell> %}
 $ cargo add embedded-hal
-{% end %}
-{% shell() %}
+{% </shell> %}
+{% <shell> %}
 $ cargo add ftdi
-{% end %}
+{% </shell> %}
 
 私が試した時点での`Cargo.tmol`はこんな感じ。
 
@@ -126,9 +126,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 実行。
 
-{% shell() %}
+{% <shell> %}
 $ cargo run --bin blink
-{% end %}
+{% </shell> %}
 
 <video width="640px" src="output.mp4" controls width="100%">
   お使いのブラウザは動画再生に対応していません。
@@ -182,9 +182,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 実行。
 
-{% shell() %}
+{% <shell> %}
 $ cargo run --bin spi_cs
-{% end %}
+{% </shell> %}
 
 コードに書かれている通り接続は以下のようになる。
 

@@ -11,28 +11,28 @@ og_image = "ogp.jpg"
 
 まだ5月だけど養源寺のあじさいが、すっかり満開。ついでに池上梅園の方にも足を伸ばしてみた。
 
-{{ r2_clickable_img(src="DSC01862.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01864.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01868.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01871.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01872.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01873.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01874.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01876.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01878.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01879.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01881.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01883.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01886.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01887.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01888.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01890.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01892.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01893.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01895.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01899.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01901.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01904.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01905.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01908.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01910.JPG", alt="") }}
+{{ <r2_clickable_img src="DSC01862.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01864.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01868.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01871.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01872.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01873.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01874.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01876.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01878.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01879.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01881.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01883.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01886.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01887.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01888.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01890.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01892.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01893.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01895.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01899.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01901.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01904.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01905.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01908.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01910.JPG" alt="" page={page} config={config} /> }}

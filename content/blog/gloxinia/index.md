@@ -9,7 +9,7 @@ og_image = "/blog/gloxinia/ogp.jpg"
 
 一重のグロキシニア、昔はいたるところで売られていた。赤に白のフチが付いているのが好きで購入し、何年か冬越しに成功していたのだが、最後には枯らせてしまった。最近探してみたら、八重のものしか見かけなくなってしまい残念に思っていたのだが、メルカリで見かけて捕獲。今度は枯らさないようにしなければ。
 
-{{ clickable_img(src="DSC02276.JPG", alt="")}}
-{{ clickable_img(src="DSC02342.JPG", alt="")}}
+{{ <clickable_img src="DSC02276.JPG" alt="" page={page} config={config} /> }}
+{{ <clickable_img src="DSC02342.JPG" alt="" page={page} config={config} /> }}
 
 強烈な赤で、あいかわらずカメラ泣かせである。

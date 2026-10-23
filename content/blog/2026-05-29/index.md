@@ -11,34 +11,34 @@ og_image = "ogp.jpg"
 
 蒸し暑い。すっかり夏。下丸子公園の方が、色々なあじさいの品種があるようだ。
 
-{{ r2_clickable_img(src="DSC01914.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01915.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01916.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01918.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01919.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01920.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01921.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01923.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01924.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01925.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01928.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01929.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01930.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01931.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01935.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01937.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01938.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01939.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01942.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01944.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01945.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01946.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01948.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01949.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01953.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01954.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01955.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01957.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01961.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01962.JPG", alt="") }}
-{{ r2_clickable_img(src="DSC01963.JPG", alt="") }}
+{{ <r2_clickable_img src="DSC01914.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01915.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01916.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01918.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01919.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01920.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01921.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01923.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01924.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01925.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01928.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01929.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01930.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01931.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01935.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01937.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01938.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01939.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01942.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01944.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01945.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01946.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01948.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01949.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01953.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01954.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01955.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01957.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01961.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01962.JPG" alt="" page={page} config={config} /> }}
+{{ <r2_clickable_img src="DSC01963.JPG" alt="" page={page} config={config} /> }}

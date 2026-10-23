@@ -69,7 +69,7 @@ anyhow = "1"
 
 あと、雑に要望を伝えても全然思った通りにならないので、自分で1つ1つロジックを考えてみると当初考えていたより描画のロジックが複雑だった。特に行の折り返しの処理。最初は仕様を書いて伝えてみたが、それより実例を示す方がAIも理解が進む感じだったので、こんな風に指示した。
 
-{% quote() %}
+{% <quote> %}
 - 最初に入力文字列内の\nを調べて行数を調べます。\nが無ければ1行です。
 - "ABCDEFGHIJKLM\nN"を6mmテープに印字するとしましょう。行数は2です。
 - まず"ABCDEFGHIJKLM"をフォントメトリクスに従い1行描画します。行数の2とテープ幅からフォントサイズを決めます
@@ -85,7 +85,7 @@ anyhow = "1"
 - この時に"KLMN"もテープ長さ範囲に入り切らなければあふれた部分は3行目に押し出します。この時6mmテープであれば最大2行しかないので溢れた部分は捨てますが、9mmテープなら3行印字可能なため、新たに最初のステップに戻り3行印字としてやり直します。    
 
 このロジックをテストできるように1つの関数にまとめて実装してください。
-{% end %}
+{% </quote> %}
 
 このあたり、自分も仕様書を読むより実例やサンプルを示してもらった方が話が速いのでAIも同じってところか。
 
@@ -101,9 +101,9 @@ anyhow = "1"
 
 今の実装を見たら、フォントにはたまたま私のPCに入っていたnotoフォントが絶対パス指定されていてイマイチだったので、[BIZ UDPゴシック](https://fonts.google.com/specimen/BIZ+UDPGothic)をアプリ内に埋め込んで使うことにした。[ライセンス](https://fonts.google.com/specimen/BIZ+UDPGothic/license)に以下のように書かれているので大丈夫そう。組み込み機器なんかでも使えそうだ。良い時代になりましたな。
 
-{% quote() %}
+{% <quote> %}
 Original or Modified Versions of the Font Software may be bundled, redistributed and/or sold with any software, provided that each copy contains the above copyright notice and this license. These can be included either as stand-alone text files, human-readable headers or in the appropriate machine-readable metadata fields within text or binary files as long as those fields can be easily viewed by the user.
-{% end %}
+{% </quote> %}
 
 <br>
 
@@ -111,17 +111,17 @@ Original or Modified Versions of the Font Software may be bundled, redistributed
 
 AIにGitHub actionsを構成してもらって[バイナリ](https://github.com/ruimo/tpsr3700/releases)をビルドしたので、CLIで利用可能だ。
 
-{% shell() %}
+{% <shell> %}
 $ tpsr3700 "TEPRA on Linux"
-{% end %}
+{% </shell> %}
 
 ![](onlinux.JPG)
 
 CLIで一発なので簡単。もうスマホすら不要だ。
 
-{% shell() %}
+{% <shell> %}
 $ tpsr3700 "TEPRA on Linux\n改行もできるよ。"
-{% end %}
+{% </shell> %}
 
 ![](2lines.JPG)
 
@@ -131,9 +131,9 @@ $ tpsr3700 "TEPRA on Linux\n改行もできるよ。"
 
 Macでも動きそうか聞いてみたところ「cupsに掴まれるのを防ぐコードは、Macでは不要なので、そこを条件コンパイルにすれば良いです」とのこと。半信半疑で試したら動いてしまった...
 
-{% shell() %}
+{% <shell> %}
 $ tpsr3700 "TEPRA on Mac"
-{% end %}
+{% </shell> %}
 
 ![](onmac.JPG)
 

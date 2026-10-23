@@ -1,4 +1,3 @@
-{% import "macros.html" as macros %}
 <!doctype html>
 <html class="not-ready lg:text-base" lang="{{ lang }}">
   {% include "partials/head.html" %}
@@ -6,7 +5,7 @@
     {% include "partials/header.html" %}
 
     <!-- Body Start inject -->
-    {% include "injects/body_start.html" ignore missing %}
+    {% include "injects/body_start.html" %}
 
     <main
       class="prose prose-neutral dark:prose-invert prose-pre:rounded-lg prose-img:rounded-lg relative mx-auto min-h-[calc(100vh-9rem)] max-w-3xl px-4 pt-24 pb-16 break-words lg:pt-32"
@@ -26,6 +25,6 @@
     {% include "partials/footer.html" %}
 
     <!-- Body End inject -->
-    {% include "injects/body_end.html" ignore missing %}
+    {% include "injects/body_end.html" %}
   </body>
 </html>
