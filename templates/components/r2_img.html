@@ -1,0 +1,18 @@
+{% component r2_img(src, page, config, alt="", width=0) %}
+{% set _base = config?.extra?.r2_url | trim_end(pat="/") %}
+{% if src is starting_with(pat="/") %}
+  {% set _src = src | trim_start(pat="/") %}
+{% else %}
+  {% set _page_path = page?.path | trim_start(pat="/") %}
+  {% set _src = _page_path ~ src %}
+{% endif %}
+{% set markup %}
+<img
+  src="{{ _base }}/{{ _src }}"
+  alt="{{ alt | default(value='') }}"
+  {% if width %}width="{{ width }}"{% endif %}
+  loading="lazy"
+>
+{% endset %}
+{{ markup | replace(from="\n", to="") | safe }}
+{% endcomponent r2_img %}

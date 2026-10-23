@@ -1,0 +1,7 @@
+{% component quote() %}
+<div class="custom-note">
+    <div class="note-body">
+        {{ body | markdown | safe }}
+    </div>
+</div>
+{% endcomponent quote %}

@@ -1,0 +1,24 @@
+{% component obj_viewer(src, page, config, title="", height="400") %}
+{% set _base = config?.extra?.r2_url | trim_end(pat="/") %}
+{% if src is starting_with(pat="/") %}
+  {% set _src = src | trim_start(pat="/") %}
+{% else %}
+  {% set _page_path = page?.path | trim_start(pat="/") %}
+  {% set _src = _page_path ~ src %}
+{% endif %}
+{% set _model_url = _base ~ "/" ~ _src %}
+{% set markup %}
+<div class="obj-viewer-wrap">
+  {% if title %}<p class="obj-viewer-title">{{ title }}</p>{% endif %}
+  <iframe
+    src="{{ _base }}/obj-viewer.html?model={{ _model_url | urlencode_strict }}"
+    width="100%"
+    height="{{ height | default(value="400") }}"
+    style="border:none; border-radius:6px; display:block;"
+    loading="lazy"
+    title="{{ title or src }}"
+  ></iframe>
+</div>
+{% endset %}
+{{ markup | replace(from="\n", to="") | safe }}
+{% endcomponent obj_viewer %}
