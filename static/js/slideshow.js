@@ -303,7 +303,7 @@
     var idx = images.findIndex(function (im) { return im.src === src; });
     show(idx >= 0 ? idx : 0);
     document.getElementById('ss-modal').classList.add('ss-open');
-    document.getElementById('ss-modal').classList.remove('ss-controls-hidden');
+    document.getElementById('ss-modal').classList.add('ss-controls-hidden');
     positionProgress();
     document.getElementById('ss-screen-status').textContent = '';
     document.body.classList.add('ss-active');
