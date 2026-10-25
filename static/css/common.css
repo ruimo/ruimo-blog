@@ -192,6 +192,13 @@ a.slideshow-btn:hover {
 #ss-modal.ss-open {
     display: flex;
 }
+body.ss-active {
+    overflow: hidden;
+}
+#ss-modal:fullscreen,
+#ss-modal {
+    background: #000;
+}
 #ss-overlay {
     position: fixed;
     inset: 0;
@@ -203,20 +210,25 @@ a.slideshow-btn:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 92vw;
-    max-height: 92vh;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    box-sizing: border-box;
+    padding: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
 }
 #ss-img {
-    max-width: 88vw;
-    max-height: 78vh;
+    width: 100%;
+    flex: 1 1 0;
+    min-height: 0;
+    max-width: 100%;
     object-fit: contain;
     border-radius: 4px;
     display: block;
     cursor: pointer;
 }
 #ss-progress-wrap {
-    width: 88vw;
-    max-width: 88vw;
+    width: 100%;
+    flex-shrink: 0;
     height: 3px;
     background: rgba(255,255,255,0.15);
     border-radius: 2px;
@@ -230,6 +242,10 @@ a.slideshow-btn:hover {
     border-radius: 2px;
 }
 #ss-caption {
+    max-width: 100%;
+    max-height: 3em;
+    overflow: auto;
+    flex-shrink: 0;
     color: #e0e0e0;
     font-size: 0.88em;
     margin-top: 8px;
@@ -238,6 +254,9 @@ a.slideshow-btn:hover {
 }
 #ss-footer {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-shrink: 0;
     align-items: center;
     gap: 12px;
     margin-top: 4px;
@@ -285,15 +304,72 @@ a.slideshow-btn:hover {
 }
 #ss-close {
     position: absolute;
-    top: -36px;
-    right: 0;
-    background: none;
+    top: max(8px, env(safe-area-inset-top));
+    right: max(8px, env(safe-area-inset-right));
+    background: rgba(0,0,0,0.6);
     border: none;
     color: #fff;
     font-size: 1.6em;
     cursor: pointer;
     line-height: 1;
     padding: 2px 6px;
+}
+#ss-fullscreen, #ss-pause, #ss-controls-hide {
+    background: #333;
+    border: 1px solid #777;
+    border-radius: 4px;
+    color: #fff;
+    padding: 3px 10px;
+    cursor: pointer;
+}
+#ss-screen-status {
+    color: #ccc;
+    font-size: 0.78em;
+}
+#ss-controls-show {
+    display: none;
+    position: absolute;
+    right: max(8px, env(safe-area-inset-right));
+    bottom: max(8px, env(safe-area-inset-bottom));
+    border: 0;
+    border-radius: 4px;
+    background: rgba(0,0,0,0.35);
+    color: #fff;
+    font-size: 20px;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+}
+#ss-modal.ss-controls-hidden #ss-footer,
+#ss-modal.ss-controls-hidden #ss-caption,
+#ss-modal.ss-controls-hidden #ss-close,
+#ss-modal.ss-controls-hidden #ss-prev,
+#ss-modal.ss-controls-hidden #ss-next {
+    display: none;
+}
+#ss-modal.ss-controls-hidden #ss-controls-show {
+    display: block;
+}
+#ss-modal.ss-controls-hidden #ss-box {
+    padding: 0;
+}
+#ss-modal #ss-progress-wrap {
+    position: absolute;
+    left: 5%;
+    bottom: var(--ss-progress-offset, 2px);
+    width: 90%;
+    height: 3px;
+    margin: 0;
+    pointer-events: none;
+}
+#ss-modal.ss-progress-vertical #ss-progress-wrap {
+    left: calc(100% - var(--ss-progress-offset, 2px));
+    top: 5%;
+    bottom: auto;
+    width: var(--ss-progress-length);
+    /* バー全体を回転し、進行中のwidthアニメーションを維持する。 */
+    transform-origin: top left;
+    transform: rotate(90deg);
 }
 #ss-prev, #ss-next {
     position: fixed;

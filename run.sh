@@ -1,9 +1,10 @@
 #!/bin/sh
 set -eu
 
-HOST=0.0.0.0
-PORT=2000
-BASE_URL="http://$HOST:$PORT"
+HOST="${HOST:-0.0.0.0}"
+PORT="${PORT:-2000}"
+# Bind address and browser-visible URL are different (0.0.0.0 is not a destination).
+BASE_URL="${BASE_URL:-http://localhost:$PORT}"
 PAGEFIND_STAMP="public/.pagefind-stamp"
 
 build_pagefind() {
@@ -40,4 +41,4 @@ build_pagefind
 watch_pagefind &
 WATCH_PID=$!
 trap 'kill "$WATCH_PID" 2>/dev/null || true' INT TERM EXIT
-zola serve --interface "$HOST" --port "$PORT" --force --store-html
+zola serve --interface "$HOST" --port "$PORT" --base-url "$BASE_URL" --no-port-append --force --store-html

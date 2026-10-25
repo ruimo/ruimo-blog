@@ -7,14 +7,19 @@
     modal.innerHTML = [
       '<div id="ss-overlay"></div>',
       '<div id="ss-box">',
+      '  <button id="ss-controls-show" type="button" title="操作を表示" aria-label="操作を表示">⋯</button>',
       '  <button id="ss-close" title="閉じる">✕</button>',
       '  <button id="ss-prev" title="前の画像">&#10094;</button>',
-      '  <img id="ss-img" src="" alt="">',
+      '  <img id="ss-img" src="" alt="" title="クリックで一時停止／再開">',
       '  <div id="ss-progress-wrap"><div id="ss-progress-bar"></div></div>',
       '  <div id="ss-caption"></div>',
       '  <div id="ss-footer">',
       '    <div id="ss-counter"></div>',
       '    <div id="ss-remaining"></div>',
+      '    <button id="ss-pause" type="button" aria-pressed="false">一時停止</button>',
+      '    <button id="ss-controls-hide" type="button">操作を隠す</button>',
+      '    <button id="ss-fullscreen" type="button">全画面</button>',
+      '    <span id="ss-screen-status" role="status"></span>',
       '    <label id="ss-interval-label"><input id="ss-interval" type="number" min="1" max="99" value="5">秒</label>',
       '    <a id="ss-lens" href="#" target="_blank" rel="noopener nofollow" referrerpolicy="no-referrer" title="Google レンズでこの画像を検索">これは何？</a>',
       '  </div>',
@@ -27,8 +32,44 @@
     document.getElementById('ss-close').addEventListener('click', closeSlideshow);
     document.getElementById('ss-prev').addEventListener('click', function () { move(-1); });
     document.getElementById('ss-next').addEventListener('click', function () { move(1);  });
-    // 画像クリックで次へ
-    document.getElementById('ss-img').addEventListener('click', function () { move(1); });
+    document.getElementById('ss-controls-hide').addEventListener('click', function () {
+      modal.classList.add('ss-controls-hidden');
+      positionProgress();
+      document.getElementById('ss-controls-show').focus();
+    });
+    document.getElementById('ss-controls-show').addEventListener('click', function () {
+      modal.classList.remove('ss-controls-hidden');
+      positionProgress();
+      document.getElementById('ss-controls-hide').focus();
+    });
+    window.addEventListener('resize', positionProgress);
+    if (window.ResizeObserver) {
+      new ResizeObserver(positionProgress).observe(document.getElementById('ss-img'));
+    }
+    // 操作非表示中は、最初のタップを操作の再表示だけに使う。
+    modal.addEventListener('click', function (e) {
+      if (!modal.classList.contains('ss-controls-hidden')) return;
+      e.preventDefault();
+      e.stopPropagation();
+      modal.classList.remove('ss-controls-hidden');
+      positionProgress();
+      document.getElementById('ss-controls-hide').focus();
+    }, true);
+    document.getElementById('ss-fullscreen').addEventListener('click', function () {
+      var request = modal.requestFullscreen || modal.webkitRequestFullscreen;
+      if (!request) {
+        document.getElementById('ss-screen-status').textContent = 'SpaceWalkerではアプリ側の全画面を使用してください';
+        return;
+      }
+      try {
+        Promise.resolve(request.call(modal)).catch(fullscreenFailed);
+      } catch (e) {
+        fullscreenFailed();
+      }
+    });
+    // 画像クリックで自動送りを一時停止／再開
+    document.getElementById('ss-img').addEventListener('click', togglePause);
+    document.getElementById('ss-pause').addEventListener('click', togglePause);
     // 秒数変更時にcookieへ保存
     document.getElementById('ss-interval').addEventListener('change', function () {
       var v = parseInt(this.value, 10);
@@ -40,6 +81,7 @@
       e.stopPropagation();
       resetTimer();
       stopRemaining();
+      setPaused(true);
     });
 
     document.addEventListener('keydown', function (e) {
@@ -54,6 +96,54 @@
   var current = 0;
   var autoTimer = null;
   var remainTimer = null;  // 残り秒数更新用
+  var paused = false;
+
+  // object-fit: contain で描画される画像の外側の余白を比較する。
+  function positionProgress() {
+    var modal = document.getElementById('ss-modal');
+    if (!modal || !modal.classList.contains('ss-open')) return;
+    var img = document.getElementById('ss-img');
+    if (!img.naturalWidth || !img.naturalHeight) return;
+    var rect = document.getElementById('ss-box').getBoundingClientRect();
+    if (!modal.classList.contains('ss-controls-hidden')) rect = img.getBoundingClientRect();
+    var scale = Math.min(rect.width / img.naturalWidth, rect.height / img.naturalHeight);
+    var gapX = Math.max(0, (rect.width - img.naturalWidth * scale) / 2);
+    var gapY = Math.max(0, (rect.height - img.naturalHeight * scale) / 2);
+    var vertical = gapX > gapY;
+    modal.classList.toggle('ss-progress-vertical', vertical);
+    // 余白の中央に配置。余白がない場合は画面端に重ねる。
+    modal.style.setProperty('--ss-progress-offset', Math.max(2, (vertical ? gapX : gapY) / 2) + 'px');
+    modal.style.setProperty('--ss-progress-length', rect.height * 0.9 + 'px');
+  }
+
+  function setPaused(value) {
+    paused = value;
+    var button = document.getElementById('ss-pause');
+    button.textContent = paused ? '再開' : '一時停止';
+    button.setAttribute('aria-pressed', String(paused));
+  }
+
+  function scheduleAdvance(delay) {
+    if (paused) return;
+    startProgress(delay);
+    startRemaining(delay);
+    autoTimer = setTimeout(function () { move(1); }, delay);
+  }
+
+  function togglePause() {
+    resetTimer();
+    stopRemaining();
+    setPaused(!paused);
+    // 再開時は設定された秒数を最初から数える。
+    if (!paused) {
+      var img = document.getElementById('ss-img');
+      if (img.complete && img.naturalWidth > 0) scheduleAdvance(getInterval());
+    }
+  }
+
+  function fullscreenFailed() {
+    document.getElementById('ss-screen-status').textContent = '全画面にできませんでした。アプリ側の全画面をお試しください';
+  }
 
   // Google レンズ用URL。テンプレートが付与した data-lens を優先し、
   // 無ければ現在のページを基準に絶対URL化して組み立てる
@@ -151,11 +241,10 @@
     ssImg.onload = null;
     var setAt = Date.now();
     ssImg.onload = function () {
+      positionProgress();
       var elapsed = Date.now() - setAt;
       var delay = Math.max(0, getInterval() - elapsed);
-      startProgress(delay);
-      startRemaining(delay);
-      autoTimer = setTimeout(function () { move(1); }, delay);
+      scheduleAdvance(delay);
     };
     ssImg.src = images[current].src;
     ssImg.alt = images[current].alt;
@@ -182,6 +271,13 @@
   }
 
   function closeSlideshow() {
+    var modal = document.getElementById('ss-modal');
+    if ((document.fullscreenElement || document.webkitFullscreenElement) === modal) {
+      var exit = document.exitFullscreen || document.webkitExitFullscreen;
+      if (exit) {
+        try { Promise.resolve(exit.call(document)).catch(function () {}); } catch (e) {}
+      }
+    }
     clearTimeout(autoTimer);
     clearInterval(remainTimer);
     autoTimer = null;
@@ -190,6 +286,8 @@
     stopRemaining();
     document.getElementById('ss-modal').classList.remove('ss-open');
     document.getElementById('ss-img').src = '';
+    document.getElementById('ss-img').onload = null;
+    document.body.classList.remove('ss-active');
   }
 
   // グローバルに公開（clickable_img.html の onclick から呼ぶ）
@@ -200,9 +298,14 @@
     if (el) el.value = loadIntervalFromCookie();
     collectImages();
     if (images.length === 0) return;
+    setPaused(false);
     var src = triggerImg.getAttribute('data-slideshow') || triggerImg.src;
     var idx = images.findIndex(function (im) { return im.src === src; });
     show(idx >= 0 ? idx : 0);
     document.getElementById('ss-modal').classList.add('ss-open');
+    document.getElementById('ss-modal').classList.remove('ss-controls-hidden');
+    positionProgress();
+    document.getElementById('ss-screen-status').textContent = '';
+    document.body.classList.add('ss-active');
   };
 })();
