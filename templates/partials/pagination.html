@@ -1,0 +1,37 @@
+<nav class="pagination not-prose" aria-label="ページ切り替え" data-pagefind-ignore>
+  <p class="pagination-status">{{ paginator.current_index }} / {{ paginator.number_pagers }} ページ</p>
+  <div class="pagination-links">
+    {% if paginator.previous %}
+    <a href="{{ paginator.first }}" aria-label="先頭ページ">« 先頭</a>
+    <a href="{{ paginator.previous }}" rel="prev">← 前へ</a>
+    {% else %}
+    <span aria-disabled="true">« 先頭</span>
+    <span aria-disabled="true">← 前へ</span>
+    {% endif %}
+
+    {% for index in range(start=1, end=paginator.number_pagers + 1) %}
+      {% if paginator.number_pagers <= 7 or index == 1 or index == paginator.number_pagers or (index >= paginator.current_index - 2 and index <= paginator.current_index + 2) %}
+        {% if index == paginator.current_index %}
+        <span aria-current="page" aria-label="{{ index }}ページ目（現在のページ）">{{ index }}</span>
+        {% else %}
+          {% if index == 1 %}
+            {% set page_url = paginator.first %}
+          {% else %}
+            {% set page_url = paginator.base_url ~ index ~ "/" %}
+          {% endif %}
+        <a href="{{ page_url }}" aria-label="{{ index }}ページ目">{{ index }}</a>
+        {% endif %}
+      {% elif (index == 2 and paginator.current_index > 4) or (index == paginator.number_pagers - 1 and paginator.current_index < paginator.number_pagers - 3) %}
+      <span class="pagination-gap" aria-hidden="true">…</span>
+      {% endif %}
+    {% endfor %}
+
+    {% if paginator.next %}
+    <a href="{{ paginator.next }}" rel="next">次へ →</a>
+    <a href="{{ paginator.last }}" aria-label="最終ページ">末尾 »</a>
+    {% else %}
+    <span aria-disabled="true">次へ →</span>
+    <span aria-disabled="true">末尾 »</span>
+    {% endif %}
+  </div>
+</nav>
