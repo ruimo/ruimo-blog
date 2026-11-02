@@ -129,4 +129,4 @@ PPSモードを使えば3.3Vも指定できるわけだが、電圧を指定す�
 
 また、20Vの場合にI2C制御するマイコンの電源にレギュレータで3.3Vを供給する場合、最近の3端子レギュレータは耐圧が低いものが少なからずあるので注意が必要だ(昔は35Vくらいあったものだが)。
 
-<a href="https://akizukidenshi.com/catalog/g/g111299/"><img src="https://akizukidenshi.com/img/goods/L/111299.jpg"><br>秋月で売っているNJM2845DL1-33(3.3V 800mA)は、12.3Vまでしか許容されていない</a>ので20Vを与えると破損するだろう。
+<a href="https://akizukidenshi.com/catalog/g/g111299/"><img src="https://akizukidenshi.com/img/goods/L/111299.jpg"><br>秋月で売っているNJM2845DL1-33(3.3V 800mA)は、12.3Vまでしか許容されていない</a>ので20Vを与えると破損するだろう(まぁ自作機器で12Vを超える電圧が必要になることは、まず無いのだが)。
