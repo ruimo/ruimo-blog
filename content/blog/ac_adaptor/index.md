@@ -92,7 +92,7 @@ TYPE-Cコネクタを探すと、無数に異なる形状のものが出てく�
 <img width="480px" src="https://grabcad.com/screenshots/pics/3a0c7d1a5d6ddc5eb0280e4c05d5c317/original.png"><br>
 GrabCadで探すと、3Dモデルも見つかる</a>。
 
-ピン間が狭くて半田付けはDCジャックに比べると大変だ。自作する時にユニバーサル基板しか選択肢が無かった時は、2.54mmピッチ変換する基板を使っていた。
+ピン間が狭くて半田付けはDCジャックに比べると大変だ。自作する時にユニバーサル基板しか選択肢が無かった時は、2.54mmピッチに変換する基板を使っていた。
 
 <a href="https://akizukidenshi.com/catalog/g/g115426/"><img width="480px" src="https://akizukidenshi.com/img/goods/L/115426.jpg"></a>
 
@@ -129,4 +129,4 @@ PPSモードを使えば3.3Vも指定できるわけだが、電圧を指定す�
 
 また、20Vの場合にI2C制御するマイコンの電源にレギュレータで3.3Vを供給する場合、最近の3端子レギュレータは耐圧が低いものが少なからずあるので注意が必要だ(昔は35Vくらいあったものだが)。
 
-<a href="https://akizukidenshi.com/catalog/g/g111299/"><img src="https://akizukidenshi.com/img/goods/L/111299.jpg"><br>このあたりは、12.3Vまでしか許容されていない</a>ので20Vを与えると破損するだろう。
+<a href="https://akizukidenshi.com/catalog/g/g111299/"><img src="https://akizukidenshi.com/img/goods/L/111299.jpg"><br>秋月で売っているNJM2845DL1-33(3.3V 800mA)は、12.3Vまでしか許容されていない</a>ので20Vを与えると破損するだろう。
