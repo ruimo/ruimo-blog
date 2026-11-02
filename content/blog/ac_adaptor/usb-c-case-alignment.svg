@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="460" viewBox="0 0 880 460" role="img" aria-labelledby="title desc">
+  <title id="title">TYPE-Cコネクタとケースの穴位置を合わせる</title>
+  <desc id="desc">ケースの内側から側面を見た模式図。手加工では基板に直付けされたTYPE-Cコネクタと穴の位置がずれやすい。3Dモデルを使って基板の固定位置と開口部を一緒に設計し、ケースを3Dプリントすれば位置を合わせやすい。</desc>
+  <defs>
+    <style>
+      text { font-family: sans-serif; fill: #243447; }
+      .heading { font-size: 22px; font-weight: bold; }
+      .label { font-size: 18px; }
+      .small { font-size: 15px; }
+      .leader { fill: none; stroke: #56738b; stroke-width: 1.5; }
+    </style>
+  </defs>
+  <rect width="880" height="460" rx="16" fill="#fff"/>
+  <rect x="20" y="20" width="410" height="420" rx="12" fill="#fff4ef"/>
+  <rect x="450" y="20" width="410" height="420" rx="12" fill="#eef8f1"/>
+  <text x="42" y="57" class="heading">手加工：穴位置を合わせにくい</text>
+  <text x="472" y="57" class="heading">3Dモデルで位置を合わせて設計</text>
+  <text x="42" y="85" class="small">ケース内側から見た模式図</text>
+  <text x="472" y="85" class="small">基板・コネクタをCAD上に配置</text>
+
+  <!-- ケース側面を透視し、穴と基板上のコネクタの位置を比較する -->
+  <g fill="#fff" fill-opacity="0.7" stroke="#8a9baa" stroke-width="3">
+    <rect x="65" y="135" width="320" height="175" rx="8"/>
+    <rect x="495" y="135" width="320" height="175" rx="8"/>
+  </g>
+  <g fill="#a8d5b5" stroke="#338359" stroke-width="2">
+    <rect x="95" y="262" width="260" height="10" rx="2"/>
+    <rect x="525" y="262" width="260" height="10" rx="2"/>
+  </g>
+  <g fill="#dbe3eb" stroke="#56738b" stroke-width="2">
+    <rect x="120" y="273" width="16" height="35" rx="2"/>
+    <rect x="314" y="273" width="16" height="35" rx="2"/>
+    <rect x="550" y="273" width="16" height="35" rx="2"/>
+    <rect x="744" y="273" width="16" height="35" rx="2"/>
+  </g>
+  <!-- 破線がケースの開口部、灰色が基板に直付けのコネクタ -->
+  <rect x="192" y="199" width="102" height="42" rx="21" fill="none" stroke="#c56b43" stroke-width="3" stroke-dasharray="7 4"/>
+  <rect x="167" y="224" width="96" height="36" rx="18" fill="#bdc9d4" stroke="#56738b" stroke-width="2"/>
+  <rect x="176" y="232" width="78" height="20" rx="10" fill="#243447"/>
+  <path d="M206 242H244" stroke="#bdc9d4" stroke-width="4"/>
+  <text x="91" y="180" class="label">開けた穴</text>
+  <path d="M178 176 222 199" class="leader"/>
+  <path d="M278 246 315 225" class="leader"/>
+  <text x="296" y="216" class="small" fill="#c56b43">ずれ</text>
+
+  <rect x="592" y="220" width="106" height="44" rx="22" fill="none" stroke="#338359" stroke-width="3" stroke-dasharray="7 4"/>
+  <rect x="597" y="224" width="96" height="36" rx="18" fill="#bdc9d4" stroke="#56738b" stroke-width="2"/>
+  <rect x="606" y="232" width="78" height="20" rx="10" fill="#243447"/>
+  <path d="M636 242H674" stroke="#bdc9d4" stroke-width="4"/>
+  <text x="537" y="180" class="label">開口部を同じ位置に設計</text>
+  <path d="M645 188V216" class="leader"/>
+  <text x="106" y="343" class="small">基板</text>
+  <path d="M125 326V276" class="leader"/>
+  <text x="187" y="343" class="small">TYPE-Cコネクタ</text>
+  <path d="M264 326 238 264" class="leader"/>
+  <text x="530" y="343" class="small">基板の固定位置も一緒に設計</text>
+  <path d="M753 326V311" class="leader"/>
+  <text x="225" y="387" text-anchor="middle" class="label">実物を測って穴開け・調整</text>
+  <text x="655" y="387" text-anchor="middle" class="label">位置を揃えたケースを3Dプリント</text>
+  <text x="440" y="424" text-anchor="middle" class="small">破線：ケースの穴　／　灰色：コネクタ　※開口部には適切なクリアランスを設ける</text>
+</svg>
